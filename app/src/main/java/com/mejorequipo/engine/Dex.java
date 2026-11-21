@@ -64,6 +64,7 @@ public final class Dex {
         public int[] types;
         public int[] base = new int[6];
         public String[] abilities;
+        public boolean canEvolve;
 
         public boolean hasType(int t) {
             for (int x : types) if (x == t) return true;
@@ -104,6 +105,7 @@ public final class Dex {
             String[] bs = f[3].split(",");
             for (int i = 0; i < 6; i++) s.base[i] = Integer.parseInt(bs[i]);
             s.abilities = f[4].split("\\|");
+            s.canEvolve = f.length > 5 && f[5].equals("1");
             d.species.put(s.id, s);
             String key = java.util.Arrays.toString(s.types);
             if (seen.add(key)) d.typeCombos.add(s.types);

@@ -14,6 +14,14 @@ Fake Out, redirección, Trick Room/Tailwind, setup, prioridad…), sinergias de 
 físico/especial, objetos repetidos, tipos apilados y naturalezas que no encajan con los movimientos.
 Modo **Singles** o **Dobles (VGC)**, número de equipos y opción de variar los equipos (mínimo 2 Pokémon distintos).
 
+## Objetos (Randomlocke)
+Para cada Pokémon del equipo recomienda un objeto, explica por qué y de dónde sale. Las cantidades son reales:
+- Objetos disponibles = los de tu **mochila** (`mochila.txt` en la misma carpeta, ej. `Restos x2`, `2x Vidasfera`,
+  `Pañuelo Elegido`; vale español o inglés) **+** los que llevan equipados los Pokémon de tu `main`.
+- Nunca se asigna el mismo objeto más veces de las que tienes. Si hay que quitárselo a otro Pokémon te dice a quién
+  (priorizando los que no van en el equipo).
+- Ejemplo en `sample/mochila.txt`. El `equipos_generados.txt` ya incluye los objetos recomendados.
+
 ## Formato del main
 Un archivo `main.txt` (o `main`) con sets de Showdown separados por línea en blanco. Ejemplo en `sample/main.txt`.
 

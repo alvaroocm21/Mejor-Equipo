@@ -30,6 +30,8 @@ public class RunTest {
             System.out.println("Caja aleatoria: " + box.size());
         }
         TeamBuilder.Options o = new TeamBuilder.Options();
+        String bagPath = System.getProperty("bag");
+        if (bagPath != null) o.bag = ItemAdvisor.parseBag(new String(Files.readAllBytes(Paths.get(bagPath)), StandardCharsets.UTF_8));
         o.doubles = a.length > 2 && a[2].equals("dobles");
         long t0 = System.currentTimeMillis();
         List<TeamBuilder.TeamResult> res = TeamBuilder.build(dex, box, o);
@@ -39,7 +41,7 @@ public class RunTest {
             System.out.printf("%n#%d  %.1f  (miembros %.1f, def %.1f, cob %.1f, roles %.1f, sin %.1f)%n", i++, r.score,
                     r.sMembers, r.sDef, r.sCov, r.sRoles, r.sSyn);
             for (TeamBuilder.MemberInfo m : r.info)
-                System.out.println("  - " + m.poke.shortLine() + "  [" + m.role + "] " + m.notes);
+                System.out.println("  - " + m.poke.shortLine() + "  [" + m.role + "] " + m.notes + "\n      OBJ: " + m.recItem + " | " + m.recWhy + " | " + m.recSource);
             for (String s : r.good) System.out.println("  + " + s);
             for (String s : r.bad) System.out.println("  ! " + s);
         }

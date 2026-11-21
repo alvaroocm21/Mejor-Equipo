@@ -20,12 +20,27 @@ public final class TeamBuilder {
         public int nTeams = 5;
         /** Mínimo de Pokémon distintos entre dos equipos de la lista (1 = ranking puro). */
         public int minDiff = 2;
+        /** Mochila: id canónico de objeto -> cantidad (se suma a los que llevan los Pokémon del main). */
+        public Map<String, Integer> bag = new HashMap<>();
     }
 
     public static final class MemberInfo {
         public PokeSet poke;
         public String role;
         public List<String> notes;
+        /** Objeto recomendado (vacío = ninguno útil disponible). */
+        public String recItem = "", recEn = "", recWhy = "", recSource = "";
+        public boolean recChanged;
+
+        /** Set en formato Showdown con el objeto recomendado. */
+        public String showdown() {
+            if (recEn.isEmpty()) return poke.raw;
+            String[] lines = poke.raw.split("\n", 2);
+            String first = lines[0];
+            int at = first.indexOf(" @ ");
+            if (at >= 0) first = first.substring(0, at);
+            return first + " @ " + recEn + (lines.length > 1 ? "\n" + lines[1] : "");
+        }
     }
 
     public static final class TeamResult {
@@ -37,7 +52,7 @@ public final class TeamBuilder {
 
         public String showdownText() {
             StringBuilder b = new StringBuilder();
-            for (MemberInfo m : info) b.append(m.poke.raw).append("\n\n");
+            for (MemberInfo m : info) b.append(m.showdown()).append("\n\n");
             return b.toString().trim() + "\n";
         }
     }
@@ -49,6 +64,7 @@ public final class TeamBuilder {
     private final int n;
     private final boolean D;
     private final int combos;
+    private Options opt;
 
     private TeamBuilder(Dex dex, List<PokeSet> box, boolean doubles) {
         this.dex = dex;
@@ -68,6 +84,7 @@ public final class TeamBuilder {
 
     // ---------------------------------------------------------------- búsqueda
     private List<TeamResult> run(Options o) {
+        this.opt = o;
         int k = Math.min(6, n);
         boolean[][] conflict = new boolean[n][n];
         for (int i = 0; i < n; i++)
@@ -414,14 +431,6 @@ public final class TeamBuilder {
         }
         if (tc[1] > 0 && tc[2] > 0 && tc[4] > 0) s += 1.5;      // núcleo Fuego-Agua-Planta
         if (tc[14] > 0 && tc[16] > 0 && tc[17] > 0) s += 1;     // Dragón-Acero-Hada
-        // objetos repetidos
-        Set<String> items = new HashSet<>();
-        int dup = 0;
-        for (int i = 0; i < len; i++) {
-            String it = Dex.toId(pr[idx[i]].p.item);
-            if (!it.isEmpty() && !items.add(it)) dup++;
-        }
-        s -= (D ? 6 : 1) * dup;
         int choice = cnt(idx, len, CHOICE);
         if (choice > 3) s -= 2 * (choice - 3);
         return s;
@@ -515,13 +524,8 @@ public final class TeamBuilder {
         if (phys >= 1 && spec >= 1) r.good.add("Ataque mixto: " + phys + " físico(s) y " + spec + " especial(es).");
         else if (phys + spec >= 3) r.bad.add("Todos tus atacantes son del mismo tipo de daño (" + (phys > 0 ? "físico" : "especial") + "): fácil de contrarrestar.");
 
-        // duplicados
-        Set<String> items = new HashSet<>(), dups = new HashSet<>();
-        for (int x : idx) {
-            String it = pr[x].p.item;
-            if (!it.isEmpty() && !items.add(Dex.toId(it))) dups.add(it);
-        }
-        if (!dups.isEmpty()) r.bad.add("Objetos repetidos: " + join(new ArrayList<>(dups)) + (D ? " (no vale en VGC)." : "."));
+        // objetos
+        recommendItems(r, idx);
         int[] tc = new int[18];
         for (int x : idx) for (int t : pr[x].sp.types) tc[t]++;
         List<String> stack = new ArrayList<>();
@@ -535,6 +539,99 @@ public final class TeamBuilder {
         r.sRoles = roles(idx, k);
         r.sSyn = synergy(idx, k);
         return r;
+    }
+
+    // ---------------------------------------------------------------- objetos
+    private void recommendItems(TeamResult r, int[] idx) {
+        int k = idx.length;
+        // cantidades disponibles: mochila + objetos que llevan los Pokémon del main
+        Map<String, Integer> total = new HashMap<>();
+        Map<String, List<Integer>> holders = new HashMap<>();
+        for (Map.Entry<String, Integer> e : opt.bag.entrySet()) total.put(e.getKey(), e.getValue());
+        for (int i = 0; i < n; i++) {
+            String it = ItemAdvisor.canon(pr[i].p.item);
+            if (it.isEmpty()) continue;
+            total.merge(it, 1, Integer::sum);
+            if (!holders.containsKey(it)) holders.put(it, new ArrayList<>());
+            holders.get(it).add(i);
+        }
+        List<List<ItemAdvisor.Cand>> cands = new ArrayList<>();
+        List<double[]> triples = new ArrayList<>(); // {miembro, índice cand, valor}
+        for (int m = 0; m < k; m++) {
+            List<ItemAdvisor.Cand> c = ItemAdvisor.candidates(dex, pr[idx[m]]);
+            cands.add(c);
+            for (int j = 0; j < c.size(); j++)
+                if (total.containsKey(c.get(j).id)) triples.add(new double[]{m, j, c.get(j).value});
+        }
+        Collections.sort(triples, (a, b) -> Double.compare(b[2], a[2]));
+        int[] chosen = new int[k];
+        Arrays.fill(chosen, -1);
+        Map<String, Integer> used = new HashMap<>();
+        for (double[] t : triples) {
+            int m = (int) t[0];
+            if (chosen[m] >= 0 || t[2] < 2.5) continue;
+            String id = cands.get(m).get((int) t[1]).id;
+            int u = used.containsKey(id) ? used.get(id) : 0;
+            if (u >= total.get(id)) continue;
+            used.put(id, u + 1);
+            chosen[m] = (int) t[1];
+        }
+        // origen de cada objeto: lo que ya lleva > mochila > Pokémon del banquillo > compañero que lo suelta
+        Set<Integer> inTeam = new HashSet<>();
+        for (int x : idx) inTeam.add(x);
+        Map<String, Integer> bagLeft = new HashMap<>(opt.bag);
+        Set<Integer> takenFrom = new HashSet<>();
+        String[] source = new String[k];
+        boolean[] keeps = new boolean[k];
+        for (int m = 0; m < k; m++) {
+            if (chosen[m] < 0) continue;
+            String id = cands.get(m).get(chosen[m]).id;
+            if (id.equals(ItemAdvisor.canon(pr[idx[m]].p.item))) { keeps[m] = true; source[m] = "ya lo lleva"; }
+        }
+        for (int m = 0; m < k; m++) {
+            if (chosen[m] < 0 || keeps[m]) continue;
+            String id = cands.get(m).get(chosen[m]).id;
+            int left = bagLeft.containsKey(id) ? bagLeft.get(id) : 0;
+            if (left > 0) { bagLeft.put(id, left - 1); source[m] = "de la mochila"; continue; }
+            String src = null;
+            List<Integer> hs = holders.containsKey(id) ? holders.get(id) : new ArrayList<Integer>();
+            for (int h : hs) if (!inTeam.contains(h) && !takenFrom.contains(h)) {
+                takenFrom.add(h);
+                src = "quítaselo a " + pr[h].sp.name + " (no va en este equipo)";
+                break;
+            }
+            if (src == null) for (int h : hs) {
+                if (takenFrom.contains(h) || !inTeam.contains(h)) continue;
+                int hm = -1;
+                for (int q = 0; q < k; q++) if (idx[q] == h) hm = q;
+                if (hm >= 0 && hm != m && !keeps[hm]) {
+                    takenFrom.add(h);
+                    src = "quítaselo a " + pr[h].sp.name + " (de este equipo)";
+                    break;
+                }
+            }
+            source[m] = src != null ? src : "disponible";
+        }
+        for (int m = 0; m < k; m++) {
+            MemberInfo mi = r.info.get(m);
+            Profile f = pr[idx[m]];
+            String curRaw = f.p.item;
+            if (chosen[m] >= 0) {
+                ItemAdvisor.Cand c = cands.get(m).get(chosen[m]);
+                mi.recItem = ItemAdvisor.ITEMS.get(c.id).display();
+                mi.recEn = ItemAdvisor.enName(c.id, c.id);
+                mi.recWhy = c.why;
+                mi.recSource = source[m];
+                mi.recChanged = !keeps[m];
+            } else if (!curRaw.isEmpty() && !ItemAdvisor.ITEMS.containsKey(ItemAdvisor.canon(curRaw))) {
+                mi.recItem = curRaw;
+                mi.recEn = curRaw;
+                mi.recWhy = "mantiene el que ya lleva (no tengo datos para valorarlo).";
+                mi.recSource = "ya lo lleva";
+            } else {
+                mi.recWhy = "no tienes ningún objeto útil disponible para él.";
+            }
+        }
     }
 
     private double defScore(int[] idx, int len) {

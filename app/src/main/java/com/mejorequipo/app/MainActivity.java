@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mejorequipo.engine.Dex;
+import com.mejorequipo.engine.ItemAdvisor;
 import com.mejorequipo.engine.PokeSet;
 import com.mejorequipo.engine.ShowdownParser;
 import com.mejorequipo.engine.TeamBuilder;
@@ -35,6 +36,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -237,7 +239,15 @@ public class MainActivity extends Activity {
         long modified;
     }
 
+    private FoundFile bagFile;
+
+    private static boolean isBagName(String l) {
+        return l.equals("mochila.txt") || l.equals("mochila") || l.equals("bag.txt") || l.equals("bag")
+                || l.equals("objetos.txt") || l.equals("items.txt");
+    }
+
     private FoundFile findMain(Uri tree, List<String> seen) {
+        bagFile = null;
         String treeId = DocumentsContract.getTreeDocumentId(tree);
         Uri children = DocumentsContract.buildChildDocumentsUriUsingTree(tree, treeId);
         FoundFile exact = null, prefix = null, anyTxt = null;
@@ -254,6 +264,7 @@ public class MainActivity extends Activity {
                 f.name = name;
                 f.modified = c.isNull(3) ? 0 : c.getLong(3);
                 String l = name.toLowerCase();
+                if (isBagName(l)) { bagFile = f; continue; }
                 if (l.equals("main.txt") || l.equals("main")) exact = exact == null ? f : exact;
                 else if (l.startsWith("main.") || l.startsWith("main ")) prefix = prefix == null ? f : prefix;
                 else if (l.endsWith(".txt") && !l.equals(OUT_NAME)) anyTxt = anyTxt == null ? f : anyTxt;
@@ -353,10 +364,17 @@ public class MainActivity extends Activity {
                         o.doubles = dbl;
                         o.nTeams = n;
                         o.minDiff = var ? 2 : 1;
+                        int bagCount = 0;
+                        if (bagFile != null) {
+                            o.bag = ItemAdvisor.parseBag(readAll(bagFile.uri));
+                            for (int q : o.bag.values()) bagCount += q;
+                        }
                         teams = TeamBuilder.build(d, box, o);
                         String when = f.modified > 0 ? " · modificado " + DateUtils.getRelativeTimeSpanString(
                                 f.modified, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) : "";
-                        msg = "✔ " + f.name + " · " + count + " Pokémon" + when;
+                        msg = "✔ " + f.name + " · " + count + " Pokémon" + when + "\n"
+                                + (bagFile != null ? "🎒 " + bagFile.name + " · " + bagCount + " objetos"
+                                : "🎒 Sin mochila.txt: solo uso los objetos que llevan tus Pokémon");
                         writeResults(tree, formatAll(teams));
                     }
                 }
@@ -447,6 +465,17 @@ public class MainActivity extends Activity {
             for (String s : p.moveNames) mv.append(mv.length() > 0 ? " / " : "").append(s);
             row.addView(text(mv.toString(), 12, MUTED, false));
             row.addView(text(m.role, 12, GOOD, false));
+            if (!m.recItem.isEmpty()) {
+                TextView it = text("🎒 " + m.recItem + (m.recChanged ? "  ← cambio" : ""), 13, TXT, true);
+                it.setPadding(0, dp(4), 0, 0);
+                row.addView(it);
+                row.addView(text("Por qué: " + m.recWhy, 12, MUTED, false));
+                row.addView(text("Origen: " + m.recSource, 12, m.recChanged ? BAD : MUTED, false));
+            } else {
+                TextView it = text("🎒 Sin objeto: " + m.recWhy, 12, MUTED, false);
+                it.setPadding(0, dp(4), 0, 0);
+                row.addView(it);
+            }
             card.addView(row);
         }
 
