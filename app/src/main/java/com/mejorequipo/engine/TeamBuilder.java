@@ -283,9 +283,9 @@ public final class TeamBuilder {
                 else if (m < 1) { r++; if (m == 0) im++; }
             }
             int net = w - r;
-            if (net >= 2) pen += 1.0 + 0.5 * (net - 2);
-            else if (net == 1) pen += 0.4;
-            if (w >= 1 && r == 0) pen += 0.5;
+            if (net >= 2) pen += 1.5 + 0.75 * (net - 2);
+            else if (net == 1) pen += 0.5;
+            if (w >= 1 && r == 0) pen += 0.7;
             pen += 0.4 * quad;
             if (r >= 2) bonus += 0.1;
             if (im >= 1) bonus += 0.1;
@@ -404,11 +404,14 @@ public final class TeamBuilder {
             }
         }
         double frac = total == 0 ? 1 : covered / (double) total;
-        double s = 4 + 6 * frac;
+        double s = 4 + 8 * frac;
         // tipos repetidos
         int[] tc = new int[18];
         for (int i = 0; i < len; i++) for (int t : pr[idx[i]].sp.types) tc[t]++;
-        for (int t = 0; t < 18; t++) if (tc[t] > 2) s -= 1.5 * (tc[t] - 2);
+        for (int t = 0; t < 18; t++) {
+            if (tc[t] == 2) s -= 1;
+            else if (tc[t] > 2) s -= 1 + 3 * (tc[t] - 2);
+        }
         if (tc[1] > 0 && tc[2] > 0 && tc[4] > 0) s += 1.5;      // núcleo Fuego-Agua-Planta
         if (tc[14] > 0 && tc[16] > 0 && tc[17] > 0) s += 1;     // Dragón-Acero-Hada
         // objetos repetidos
@@ -543,8 +546,8 @@ public final class TeamBuilder {
                 if (m > 1) { w++; if (m >= 4) quad++; } else if (m < 1) { r++; if (m == 0) im++; }
             }
             int net = w - r;
-            if (net >= 2) pen += 1.0 + 0.5 * (net - 2); else if (net == 1) pen += 0.4;
-            if (w >= 1 && r == 0) pen += 0.5;
+            if (net >= 2) pen += 1.5 + 0.75 * (net - 2); else if (net == 1) pen += 0.5;
+            if (w >= 1 && r == 0) pen += 0.7;
             pen += 0.4 * quad;
             if (r >= 2) bonus += 0.1;
             if (im >= 1) bonus += 0.1;
