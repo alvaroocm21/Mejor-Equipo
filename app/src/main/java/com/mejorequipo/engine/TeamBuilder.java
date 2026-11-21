@@ -33,6 +33,8 @@ public final class TeamBuilder {
         /** Objeto recomendado (vacío = ninguno útil disponible). */
         public String recItem = "", recEn = "", recWhy = "", recSource = "";
         public boolean recChanged;
+        /** Stats base útiles (0-100) y qué ataque usa: 0 ninguno, 1 Atq, 2 AtE, 3 ambos. */
+        public int usefulBase, usedAtk;
 
         /** Set en formato Showdown con el objeto recomendado. */
         public String showdown() {
@@ -462,6 +464,8 @@ public final class TeamBuilder {
             mi.poke = pr[idx[i]].p;
             mi.role = pr[idx[i]].roleLabel;
             mi.notes = pr[idx[i]].notes;
+            mi.usefulBase = pr[idx[i]].usefulBase;
+            mi.usedAtk = pr[idx[i]].usedAtk;
             r.info.add(mi);
         }
         // defensas

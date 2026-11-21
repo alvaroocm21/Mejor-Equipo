@@ -162,13 +162,15 @@ final class Ui {
     static final class StatBars extends View {
         private static final String[] LABELS = {"PS", "Atq", "Def", "AtE", "DeE", "Vel"};
         private final int[] base;
+        private final boolean[] used;
         private final Paint bar = new Paint(Paint.ANTI_ALIAS_FLAG), tp = new Paint(Paint.ANTI_ALIAS_FLAG);
         private final RectF r = new RectF();
         private final float d;
 
-        StatBars(Context c, int[] base) {
+        StatBars(Context c, int[] base, boolean[] used) {
             super(c);
             this.base = base;
+            this.used = used;
             d = c.getResources().getDisplayMetrics().density;
             tp.setTextAlign(Paint.Align.CENTER);
             tp.setTextSize(9 * d);
@@ -185,10 +187,10 @@ final class Ui {
             for (int i = 0; i < 6; i++) {
                 float cx = colW * i + colW / 2, bw = colW * 0.42f;
                 float frac = Math.min(1f, base[i] / 160f);
-                bar.setColor(base[i] >= 100 ? 0xFF6EE7A0 : base[i] >= 70 ? 0xFFFFD166 : 0xFFFF8A5B);
+                bar.setColor(!used[i] ? 0xFF3A3E4C : base[i] >= 100 ? 0xFF6EE7A0 : base[i] >= 70 ? 0xFFFFD166 : 0xFFFF8A5B);
                 r.set(cx - bw / 2, bottom - (bottom - top) * frac, cx + bw / 2, bottom);
                 c.drawRoundRect(r, 3 * d, 3 * d, bar);
-                tp.setColor(0xFFECEFF4);
+                tp.setColor(used[i] ? 0xFFECEFF4 : 0xFF6B7080);
                 tp.setFakeBoldText(true);
                 c.drawText(String.valueOf(base[i]), cx, r.top - 2 * d, tp);
                 tp.setColor(0xFF9AA3B2);

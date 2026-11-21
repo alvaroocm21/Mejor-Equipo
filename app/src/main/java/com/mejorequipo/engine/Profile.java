@@ -28,6 +28,9 @@ final class Profile {
     final float[] def = new float[18];
     float[] cov;
     double off, bulk, speed, util, score, baseTotal;
+    /** Qué stat ofensivo usa de verdad: 0 ninguno, 1 Ataque, 2 Ataque Esp., 3 ambos. */
+    int usedAtk;
+    int usefulBase;
     boolean physAttacker, specAttacker;
     int nPhys, nSpec;
     long roles;
@@ -160,9 +163,21 @@ final class Profile {
         double spe = p.stats[5] * 100.0 / p.level;
         if (it.equals("choicescarf")) spe *= 1.5;
         f.speed = 0.5 * Math.min(1, spe / 350.0) + 0.5 * Math.min(1, f.sp.base[5] / 130.0);
-        int bst = 0;
-        for (int b : f.sp.base) bst += b;
-        f.baseTotal = Math.max(0, Math.min(1, (bst - 300) / 300.0)); // 300 -> 0, 600+ -> 1
+        // Stats base ÚTILES: solo cuenta el ataque que de verdad usa (no se suman Atq y AtE).
+        int[] bs = f.sp.base;
+        f.usedAtk = (f.nPhys > 0 ? 1 : 0) | (f.nSpec > 0 ? 2 : 0);
+        double offBase;
+        if (f.usedAtk == 3) offBase = (bs[1] * f.nPhys + bs[3] * f.nSpec) / (double) (f.nPhys + f.nSpec);
+        else if (f.usedAtk == 1) offBase = bs[1];
+        else if (f.usedAtk == 2) offBase = bs[3];
+        else offBase = 0;
+        double bulkBase = bs[0] + 2.0 * bs[2] * bs[4] / Math.max(1, bs[2] + bs[4]); // la defensa floja pesa más
+        double offPart = Math.min(1, offBase / 130.0), bulkPart = Math.min(1, bulkBase / 280.0),
+                spePart = Math.min(1, bs[5] / 120.0);
+        boolean attacker = f.off >= 0.45;
+        f.baseTotal = attacker ? 0.45 * offPart + 0.30 * bulkPart + 0.25 * spePart
+                : 0.15 * offPart + 0.65 * bulkPart + 0.20 * spePart;
+        f.usefulBase = (int) Math.round(f.baseTotal * 100);
 
         // ----- roles por objeto/habilidad -----
         if (it.startsWith("choice")) f.roles |= CHOICE;
@@ -364,8 +379,6 @@ final class Profile {
                 if (sp.hasType(moveType(m, p))) stab = true;
             }
         }
-        int bst = 0;
-        for (int b : sp.base) bst += b;
         String bases = "Ataque base " + sp.base[1] + ", At. Esp. base " + sp.base[3];
         if (nPhys >= 2 && sp.base[3] >= sp.base[1] + 25) {
             naturePenalty += 0.08;
@@ -374,8 +387,8 @@ final class Profile {
             naturePenalty += 0.08;
             notes.add("Usa sobre todo ataques especiales pero rinde más con físicos (" + bases + ").");
         }
-        if (sp.canEvolve) notes.add("Puede evolucionar: sus stats base actuales suman " + bst + " y mejorarán al evolucionar.");
-        else if (bst < 400) notes.add("Stats base bajos (total " + bst + "): le costará en combates fuertes.");
+        if (sp.canEvolve) notes.add("Puede evolucionar: sus stats base mejorarán al evolucionar.");
+        else if (baseTotal < 0.45) notes.add("Stats base útiles bajos (" + usefulBase + "/100): le costará en combates fuertes.");
         if (p.moveIds.size() < 4) notes.add("Solo tiene " + p.moveIds.size() + " movimientos definidos.");
         if (dmg > 0 && !stab && off >= 0.2) notes.add("Ningún ataque con STAB (mismo tipo).");
     }

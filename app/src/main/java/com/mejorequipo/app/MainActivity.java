@@ -663,12 +663,14 @@ public class MainActivity extends Activity {
         }
         right.addView(types);
         right.addView(text(m.role + " · " + Es.ability(p.ability) + " · " + Es.nature(p.nature), 11, MUTED, false));
-        int bst = 0;
-        for (int b : p.species.base) bst += b;
-        TextView bt = text("Estadísticas base · total " + bst, 10, MUTED, true);
+        boolean[] used = {true, (m.usedAtk & 1) != 0, true, (m.usedAtk & 2) != 0, true, true};
+        String ign = m.usedAtk == 1 ? "AtE " + p.species.base[3] + " no cuenta: solo usa ataques físicos"
+                : m.usedAtk == 2 ? "Atq " + p.species.base[1] + " no cuenta: solo usa ataques especiales"
+                : m.usedAtk == 0 ? "No usa ataques de daño: Atq y AtE no cuentan" : "Usa ataques físicos y especiales";
+        TextView bt = text("Stats base útiles: " + m.usefulBase + "/100 · " + ign, 10, MUTED, true);
         bt.setPadding(0, dp(6), 0, 0);
         right.addView(bt);
-        right.addView(new Ui.StatBars(this, p.species.base), new LinearLayout.LayoutParams(-1, -2));
+        right.addView(new Ui.StatBars(this, p.species.base, used), new LinearLayout.LayoutParams(-1, -2));
 
         // objeto recomendado
         LinearLayout itemRow = new LinearLayout(this);
