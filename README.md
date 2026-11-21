@@ -1,0 +1,26 @@
+# Mejor Equipo
+
+App Android que lee el archivo **main** (formato exportación de Pokémon Showdown) de una carpeta que tú eliges
+y construye los mejores equipos de 6 con tus Pokémon, ordenados de mejor a peor.
+
+- **APK listo para instalar:** `dist/MejorEquipo.apk` (Android 7.0+; activa "instalar apps desconocidas").
+- Al abrir la app **se vuelve a leer el main** de la carpeta y se recalculan los equipos.
+- También escribe `equipos_generados.txt` en esa misma carpeta con todos los equipos (pegables en Showdown).
+
+## Qué valora
+Tipos (debilidades/resistencias, con habilidades como Levitate, Flash Fire, Intimidate…), cobertura ofensiva real de
+tus movimientos, stats calculados con tus EVs/IVs/naturaleza/nivel, roles (hazards, pivotes, control de velocidad,
+Fake Out, redirección, Trick Room/Tailwind, setup, prioridad…), sinergias de clima/terreno, equilibrio
+físico/especial, objetos repetidos, tipos apilados y naturalezas que no encajan con los movimientos.
+Modo **Singles** o **Dobles (VGC)**, número de equipos y opción de variar los equipos (mínimo 2 Pokémon distintos).
+
+## Formato del main
+Un archivo `main.txt` (o `main`) con sets de Showdown separados por línea en blanco. Ejemplo en `sample/main.txt`.
+
+## Desarrollo
+```
+./gradlew assembleRelease           # APK en app/build/outputs/apk/release/
+node tools/build-data.js <ruta a pokemon-showdown/dist/data>   # regenera assets/*.tsv
+javac -d /tmp/eo app/src/main/java/com/mejorequipo/engine/*.java engine-test/RunTest.java
+java -cp /tmp/eo RunTest app/src/main/assets sample/main.txt [dobles]
+```

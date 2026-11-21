@@ -1,0 +1,864 @@
+absorb	Absorb	Grass	S	20	100	0	normal	
+accelerock	Accelerock	Rock	P	40	100	1	normal	ct
+acid	Acid	Poison	S	40	100	0	allAdjacentFoes	
+acidarmor	Acid Armor	Poison	S	0	0	0	self	
+acidspray	Acid Spray	Poison	S	40	100	0	normal	
+acrobatics	Acrobatics	Flying	P	55	100	0	any	ct
+acupressure	Acupressure	Normal	S	0	0	0	adjacentAllyOrSelf	
+aerialace	Aerial Ace	Flying	P	60	0	0	any	ct
+aeroblast	Aeroblast	Flying	S	100	95	0	any	
+afteryou	After You	Normal	S	0	0	0	normal	
+agility	Agility	Psychic	S	0	0	0	self	
+aircutter	Air Cutter	Flying	S	60	95	0	allAdjacentFoes	
+airslash	Air Slash	Flying	S	75	95	0	any	
+alluringvoice	Alluring Voice	Fairy	S	80	100	0	normal	
+allyswitch	Ally Switch	Psychic	S	0	0	2	self	
+amnesia	Amnesia	Psychic	S	0	0	0	self	
+anchorshot	Anchor Shot	Steel	P	80	100	0	normal	ct
+ancientpower	Ancient Power	Rock	S	60	100	0	normal	
+appleacid	Apple Acid	Grass	S	80	100	0	normal	
+aquacutter	Aqua Cutter	Water	P	70	100	0	normal	
+aquajet	Aqua Jet	Water	P	40	100	1	normal	ct
+aquaring	Aqua Ring	Water	S	0	0	0	self	
+aquastep	Aqua Step	Water	P	80	100	0	normal	ct
+aquatail	Aqua Tail	Water	P	90	90	0	normal	ct
+armorcannon	Armor Cannon	Fire	S	120	100	0	normal	
+armthrust	Arm Thrust	Fighting	P	15	100	0	normal	mh,ct
+aromatherapy	Aromatherapy	Grass	S	0	0	0	allyTeam	
+aromaticmist	Aromatic Mist	Fairy	S	0	0	0	adjacentAlly	
+assist	Assist	Normal	S	0	0	0	self	
+assurance	Assurance	Dark	P	60	100	0	normal	ct
+astonish	Astonish	Ghost	P	30	100	0	normal	ct
+astralbarrage	Astral Barrage	Ghost	S	120	100	0	allAdjacentFoes	
+attackorder	Attack Order	Bug	P	90	100	0	normal	
+attract	Attract	Normal	S	0	100	0	normal	
+aurasphere	Aura Sphere	Fighting	S	80	0	0	any	
+aurawheel	Aura Wheel	Electric	P	110	100	0	normal	
+aurorabeam	Aurora Beam	Ice	S	65	100	0	normal	
+auroraveil	Aurora Veil	Ice	S	0	0	0	allySide	
+autotomize	Autotomize	Steel	S	0	0	0	self	
+avalanche	Avalanche	Ice	P	60	100	-4	normal	ct
+axekick	Axe Kick	Fighting	P	120	90	0	normal	ct
+babydolleyes	Baby-Doll Eyes	Fairy	S	0	100	1	normal	
+baddybad	Baddy Bad	Dark	S	80	95	0	normal	
+banefulbunker	Baneful Bunker	Poison	S	0	0	4	self	
+barbbarrage	Barb Barrage	Poison	P	60	100	0	normal	
+barrage	Barrage	Normal	P	15	85	0	normal	mh
+barrier	Barrier	Psychic	S	0	0	0	self	
+batonpass	Baton Pass	Normal	S	0	0	0	self	sw
+beakblast	Beak Blast	Flying	P	100	100	-3	normal	
+beatup	Beat Up	Dark	P	0	100	0	normal	
+behemothbash	Behemoth Bash	Steel	P	100	100	0	normal	ct
+behemothblade	Behemoth Blade	Steel	P	100	100	0	normal	ct
+belch	Belch	Poison	S	120	90	0	normal	
+bellydrum	Belly Drum	Normal	S	0	0	0	self	
+bestow	Bestow	Normal	S	0	0	0	normal	
+bide	Bide	Normal	P	0	0	1	self	ct
+bind	Bind	Normal	P	15	85	0	normal	ct
+bite	Bite	Dark	P	60	100	0	normal	ct
+bitterblade	Bitter Blade	Fire	P	90	100	0	normal	ct
+bittermalice	Bitter Malice	Ghost	S	75	100	0	normal	
+blastburn	Blast Burn	Fire	S	150	90	0	normal	
+blazekick	Blaze Kick	Fire	P	85	90	0	normal	ct
+blazingtorque	Blazing Torque	Fire	P	80	100	0	normal	
+bleakwindstorm	Bleakwind Storm	Flying	S	100	80	0	allAdjacentFoes	
+blizzard	Blizzard	Ice	S	110	70	0	allAdjacentFoes	
+block	Block	Normal	S	0	0	0	normal	
+bloodmoon	Blood Moon	Normal	S	140	100	0	normal	
+blueflare	Blue Flare	Fire	S	130	85	0	normal	
+bodypress	Body Press	Fighting	P	80	100	0	normal	ct
+bodyslam	Body Slam	Normal	P	85	100	0	normal	ct
+boltbeak	Bolt Beak	Electric	P	85	100	0	normal	ct
+boltstrike	Bolt Strike	Electric	P	130	85	0	normal	ct
+boneclub	Bone Club	Ground	P	65	85	0	normal	
+bonemerang	Bonemerang	Ground	P	50	90	0	normal	mh
+bonerush	Bone Rush	Ground	P	25	90	0	normal	mh
+boomburst	Boomburst	Normal	S	140	100	0	allAdjacent	
+bounce	Bounce	Flying	P	85	85	0	any	ct
+bouncybubble	Bouncy Bubble	Water	S	60	100	0	normal	
+branchpoke	Branch Poke	Grass	P	40	100	0	normal	ct
+bravebird	Brave Bird	Flying	P	120	100	0	any	ct
+breakingswipe	Breaking Swipe	Dragon	P	60	100	0	allAdjacentFoes	ct
+brickbreak	Brick Break	Fighting	P	75	100	0	normal	ct
+brine	Brine	Water	S	65	100	0	normal	
+brutalswing	Brutal Swing	Dark	P	60	100	0	allAdjacent	ct
+bubble	Bubble	Water	S	40	100	0	allAdjacentFoes	
+bubblebeam	Bubble Beam	Water	S	65	100	0	normal	
+bugbite	Bug Bite	Bug	P	60	100	0	normal	ct
+bugbuzz	Bug Buzz	Bug	S	90	100	0	normal	
+bulkup	Bulk Up	Fighting	S	0	0	0	self	
+bulldoze	Bulldoze	Ground	P	60	100	0	allAdjacent	
+bulletpunch	Bullet Punch	Steel	P	40	100	1	normal	ct
+bulletseed	Bullet Seed	Grass	P	25	100	0	normal	mh
+burningbulwark	Burning Bulwark	Fire	S	0	0	4	self	
+burningjealousy	Burning Jealousy	Fire	S	70	100	0	allAdjacentFoes	
+burnup	Burn Up	Fire	S	130	100	0	normal	
+buzzybuzz	Buzzy Buzz	Electric	S	60	100	0	normal	
+calmmind	Calm Mind	Psychic	S	0	0	0	self	
+camouflage	Camouflage	Normal	S	0	0	0	self	
+captivate	Captivate	Normal	S	0	100	0	allAdjacentFoes	
+ceaselessedge	Ceaseless Edge	Dark	P	65	90	0	normal	ct
+celebrate	Celebrate	Normal	S	0	0	0	self	
+charge	Charge	Electric	S	0	0	0	self	
+chargebeam	Charge Beam	Electric	S	50	90	0	normal	
+charm	Charm	Fairy	S	0	100	0	normal	
+chatter	Chatter	Flying	S	65	100	0	any	
+chillingwater	Chilling Water	Water	S	50	100	0	normal	
+chillyreception	Chilly Reception	Ice	S	0	0	0	all	sw
+chipaway	Chip Away	Normal	P	70	100	0	normal	ct
+chloroblast	Chloroblast	Grass	S	150	95	0	normal	
+circlethrow	Circle Throw	Fighting	P	60	90	-6	normal	ct
+clamp	Clamp	Water	P	35	85	0	normal	ct
+clangingscales	Clanging Scales	Dragon	S	110	100	0	allAdjacentFoes	
+clangoroussoul	Clangorous Soul	Dragon	S	0	100	0	self	
+clearsmog	Clear Smog	Poison	S	50	0	0	normal	
+closecombat	Close Combat	Fighting	P	120	100	0	normal	ct
+coaching	Coaching	Fighting	S	0	0	0	adjacentAlly	
+coil	Coil	Poison	S	0	0	0	self	
+collisioncourse	Collision Course	Fighting	P	100	100	0	normal	ct
+combattorque	Combat Torque	Fighting	P	100	100	0	normal	
+cometpunch	Comet Punch	Normal	P	18	85	0	normal	mh,ct
+comeuppance	Comeuppance	Dark	P	0	100	0	scripted	ct
+confide	Confide	Normal	S	0	0	0	normal	
+confuseray	Confuse Ray	Ghost	S	0	100	0	normal	
+confusion	Confusion	Psychic	S	50	100	0	normal	
+constrict	Constrict	Normal	P	10	100	0	normal	ct
+conversion	Conversion	Normal	S	0	0	0	self	
+conversion2	Conversion 2	Normal	S	0	0	0	normal	
+copycat	Copycat	Normal	S	0	0	0	self	
+coreenforcer	Core Enforcer	Dragon	S	100	100	0	allAdjacentFoes	
+corrosivegas	Corrosive Gas	Poison	S	0	100	0	allAdjacent	
+cosmicpower	Cosmic Power	Psychic	S	0	0	0	self	
+cottonguard	Cotton Guard	Grass	S	0	0	0	self	
+cottonspore	Cotton Spore	Grass	S	0	100	0	allAdjacentFoes	
+counter	Counter	Fighting	P	0	100	-5	scripted	ct
+courtchange	Court Change	Normal	S	0	100	0	all	
+covet	Covet	Normal	P	60	100	0	normal	ct
+crabhammer	Crabhammer	Water	P	100	90	0	normal	ct
+craftyshield	Crafty Shield	Fairy	S	0	0	3	allySide	
+crosschop	Cross Chop	Fighting	P	100	80	0	normal	ct
+crosspoison	Cross Poison	Poison	P	70	100	0	normal	ct
+crunch	Crunch	Dark	P	80	100	0	normal	ct
+crushclaw	Crush Claw	Normal	P	75	95	0	normal	ct
+crushgrip	Crush Grip	Normal	P	0	100	0	normal	ct
+curse	Curse	Ghost	S	0	0	0	normal	
+cut	Cut	Normal	P	50	95	0	normal	ct
+darkestlariat	Darkest Lariat	Dark	P	85	100	0	normal	ct
+darkpulse	Dark Pulse	Dark	S	80	100	0	any	
+darkvoid	Dark Void	Dark	S	0	50	0	allAdjacentFoes	
+dazzlinggleam	Dazzling Gleam	Fairy	S	80	100	0	allAdjacentFoes	
+decorate	Decorate	Fairy	S	0	0	0	normal	
+defendorder	Defend Order	Bug	S	0	0	0	self	
+defensecurl	Defense Curl	Normal	S	0	0	0	self	
+defog	Defog	Flying	S	0	0	0	normal	
+destinybond	Destiny Bond	Ghost	S	0	0	0	self	
+detect	Detect	Fighting	S	0	0	4	self	
+diamondstorm	Diamond Storm	Rock	P	100	95	0	allAdjacentFoes	
+dig	Dig	Ground	P	80	100	0	normal	ct
+direclaw	Dire Claw	Poison	P	80	100	0	normal	ct
+disable	Disable	Normal	S	0	100	0	normal	
+disarmingvoice	Disarming Voice	Fairy	S	40	0	0	allAdjacentFoes	
+discharge	Discharge	Electric	S	80	100	0	allAdjacent	
+dive	Dive	Water	P	80	100	0	normal	ct
+dizzypunch	Dizzy Punch	Normal	P	70	100	0	normal	ct
+doodle	Doodle	Normal	S	0	100	0	adjacentFoe	
+doomdesire	Doom Desire	Steel	S	140	100	0	normal	
+doubleedge	Double-Edge	Normal	P	120	100	0	normal	ct
+doublehit	Double Hit	Normal	P	35	90	0	normal	mh,ct
+doubleironbash	Double Iron Bash	Steel	P	60	100	0	normal	mh,ct
+doublekick	Double Kick	Fighting	P	30	100	0	normal	mh,ct
+doubleshock	Double Shock	Electric	P	120	100	0	normal	ct
+doubleslap	Double Slap	Normal	P	15	85	0	normal	mh,ct
+doubleteam	Double Team	Normal	S	0	0	0	self	
+dracometeor	Draco Meteor	Dragon	S	130	90	0	normal	
+dragonascent	Dragon Ascent	Flying	P	120	100	0	any	ct
+dragonbreath	Dragon Breath	Dragon	S	60	100	0	normal	
+dragoncheer	Dragon Cheer	Dragon	S	0	0	0	adjacentAlly	
+dragonclaw	Dragon Claw	Dragon	P	80	100	0	normal	ct
+dragondance	Dragon Dance	Dragon	S	0	0	0	self	
+dragondarts	Dragon Darts	Dragon	P	50	100	0	normal	mh
+dragonenergy	Dragon Energy	Dragon	S	150	100	0	allAdjacentFoes	
+dragonhammer	Dragon Hammer	Dragon	P	90	100	0	normal	ct
+dragonpulse	Dragon Pulse	Dragon	S	85	100	0	any	
+dragonrage	Dragon Rage	Dragon	S	0	100	0	normal	fx
+dragonrush	Dragon Rush	Dragon	P	100	75	0	normal	ct
+dragontail	Dragon Tail	Dragon	P	60	90	-6	normal	ct
+drainingkiss	Draining Kiss	Fairy	S	50	100	0	normal	ct
+drainpunch	Drain Punch	Fighting	P	75	100	0	normal	ct
+dreameater	Dream Eater	Psychic	S	100	100	0	normal	
+drillpeck	Drill Peck	Flying	P	80	100	0	any	ct
+drillrun	Drill Run	Ground	P	80	95	0	normal	ct
+drumbeating	Drum Beating	Grass	P	80	100	0	normal	
+dualchop	Dual Chop	Dragon	P	40	90	0	normal	mh,ct
+dualwingbeat	Dual Wingbeat	Flying	P	40	90	0	normal	mh,ct
+dynamaxcannon	Dynamax Cannon	Dragon	S	100	100	0	normal	
+dynamicpunch	Dynamic Punch	Fighting	P	100	50	0	normal	ct
+earthpower	Earth Power	Ground	S	90	100	0	normal	
+earthquake	Earthquake	Ground	P	100	100	0	allAdjacent	
+echoedvoice	Echoed Voice	Normal	S	40	100	0	normal	
+eerieimpulse	Eerie Impulse	Electric	S	0	100	0	normal	
+eeriespell	Eerie Spell	Psychic	S	80	100	0	normal	
+eggbomb	Egg Bomb	Normal	P	100	75	0	normal	
+electricterrain	Electric Terrain	Electric	S	0	0	0	all	
+electrify	Electrify	Electric	S	0	0	0	normal	
+electroball	Electro Ball	Electric	S	0	100	0	normal	
+electrodrift	Electro Drift	Electric	S	100	100	0	normal	ct
+electroshot	Electro Shot	Electric	S	130	100	0	normal	
+electroweb	Electroweb	Electric	S	55	95	0	allAdjacentFoes	
+embargo	Embargo	Dark	S	0	100	0	normal	
+ember	Ember	Fire	S	40	100	0	normal	
+encore	Encore	Normal	S	0	100	0	normal	
+endeavor	Endeavor	Normal	P	0	100	0	normal	ct
+endure	Endure	Normal	S	0	0	4	self	
+energyball	Energy Ball	Grass	S	90	100	0	normal	
+entrainment	Entrainment	Normal	S	0	100	0	normal	
+eruption	Eruption	Fire	S	150	100	0	allAdjacentFoes	
+esperwing	Esper Wing	Psychic	S	80	100	0	normal	
+eternabeam	Eternabeam	Dragon	S	160	90	0	normal	
+expandingforce	Expanding Force	Psychic	S	80	100	0	normal	
+explosion	Explosion	Normal	P	250	100	0	allAdjacent	
+extrasensory	Extrasensory	Psychic	S	80	100	0	normal	
+extremespeed	Extreme Speed	Normal	P	80	100	2	normal	ct
+facade	Facade	Normal	P	70	100	0	normal	ct
+fairylock	Fairy Lock	Fairy	S	0	0	0	all	
+fairywind	Fairy Wind	Fairy	S	40	100	0	normal	
+fakeout	Fake Out	Normal	P	40	100	3	normal	ct
+faketears	Fake Tears	Dark	S	0	100	0	normal	
+falsesurrender	False Surrender	Dark	P	80	0	0	normal	ct
+falseswipe	False Swipe	Normal	P	40	100	0	normal	ct
+featherdance	Feather Dance	Flying	S	0	100	0	normal	
+feint	Feint	Normal	P	30	100	2	normal	
+feintattack	Feint Attack	Dark	P	60	0	0	normal	ct
+fellstinger	Fell Stinger	Bug	P	50	100	0	normal	ct
+ficklebeam	Fickle Beam	Dragon	S	80	100	0	normal	
+fierydance	Fiery Dance	Fire	S	80	100	0	normal	
+fierywrath	Fiery Wrath	Dark	S	90	100	0	allAdjacentFoes	
+filletaway	Fillet Away	Normal	S	0	0	0	self	
+finalgambit	Final Gambit	Fighting	S	0	100	0	normal	
+fireblast	Fire Blast	Fire	S	110	85	0	normal	
+firefang	Fire Fang	Fire	P	65	95	0	normal	ct
+firelash	Fire Lash	Fire	P	80	100	0	normal	ct
+firepledge	Fire Pledge	Fire	S	80	100	0	normal	
+firepunch	Fire Punch	Fire	P	75	100	0	normal	ct
+firespin	Fire Spin	Fire	S	35	85	0	normal	
+firstimpression	First Impression	Bug	P	90	100	2	normal	ct
+fishiousrend	Fishious Rend	Water	P	85	100	0	normal	ct
+fissure	Fissure	Ground	P	0	30	0	normal	ko
+flail	Flail	Normal	P	0	100	0	normal	ct
+flameburst	Flame Burst	Fire	S	70	100	0	normal	
+flamecharge	Flame Charge	Fire	P	50	100	0	normal	ct
+flamethrower	Flamethrower	Fire	S	90	100	0	normal	
+flamewheel	Flame Wheel	Fire	P	60	100	0	normal	ct
+flareblitz	Flare Blitz	Fire	P	120	100	0	normal	ct
+flash	Flash	Normal	S	0	100	0	normal	
+flashcannon	Flash Cannon	Steel	S	80	100	0	normal	
+flatter	Flatter	Dark	S	0	100	0	normal	
+fleurcannon	Fleur Cannon	Fairy	S	130	90	0	normal	
+fling	Fling	Dark	P	0	100	0	normal	
+flipturn	Flip Turn	Water	P	60	100	0	normal	sw,ct
+floatyfall	Floaty Fall	Flying	P	90	95	0	normal	ct
+floralhealing	Floral Healing	Fairy	S	0	0	0	normal	
+flowershield	Flower Shield	Fairy	S	0	0	0	all	
+flowertrick	Flower Trick	Grass	P	70	0	0	normal	
+fly	Fly	Flying	P	90	95	0	any	ct
+flyingpress	Flying Press	Fighting	P	100	95	0	any	ct
+focusblast	Focus Blast	Fighting	S	120	70	0	normal	
+focusenergy	Focus Energy	Normal	S	0	0	0	self	
+focuspunch	Focus Punch	Fighting	P	150	100	-3	normal	ct
+followme	Follow Me	Normal	S	0	0	2	self	
+forcepalm	Force Palm	Fighting	P	60	100	0	normal	ct
+foresight	Foresight	Normal	S	0	0	0	normal	
+forestscurse	Forest's Curse	Grass	S	0	100	0	normal	
+foulplay	Foul Play	Dark	P	95	100	0	normal	ct
+freezedry	Freeze-Dry	Ice	S	70	100	0	normal	
+freezeshock	Freeze Shock	Ice	P	140	90	0	normal	
+freezingglare	Freezing Glare	Psychic	S	90	100	0	normal	
+freezyfrost	Freezy Frost	Ice	S	100	90	0	normal	
+frenzyplant	Frenzy Plant	Grass	S	150	90	0	normal	
+frostbreath	Frost Breath	Ice	S	60	90	0	normal	
+frustration	Frustration	Normal	P	0	100	0	normal	ct
+furyattack	Fury Attack	Normal	P	15	85	0	normal	mh,ct
+furycutter	Fury Cutter	Bug	P	40	95	0	normal	ct
+furyswipes	Fury Swipes	Normal	P	18	80	0	normal	mh,ct
+fusionbolt	Fusion Bolt	Electric	P	100	100	0	normal	
+fusionflare	Fusion Flare	Fire	S	100	100	0	normal	
+futuresight	Future Sight	Psychic	S	120	100	0	normal	
+gastroacid	Gastro Acid	Poison	S	0	100	0	normal	
+geargrind	Gear Grind	Steel	P	50	85	0	normal	mh,ct
+gearup	Gear Up	Steel	S	0	0	0	allySide	
+geomancy	Geomancy	Fairy	S	0	0	0	self	
+gigadrain	Giga Drain	Grass	S	75	100	0	normal	
+gigaimpact	Giga Impact	Normal	P	150	90	0	normal	ct
+gigatonhammer	Gigaton Hammer	Steel	P	160	100	0	normal	
+glaciallance	Glacial Lance	Ice	P	120	100	0	allAdjacentFoes	
+glaciate	Glaciate	Ice	S	65	95	0	allAdjacentFoes	
+glaiverush	Glaive Rush	Dragon	P	120	100	0	normal	ct
+glare	Glare	Normal	S	0	100	0	normal	
+glitzyglow	Glitzy Glow	Psychic	S	80	95	0	normal	
+grassknot	Grass Knot	Grass	S	0	100	0	normal	ct
+grasspledge	Grass Pledge	Grass	S	80	100	0	normal	
+grasswhistle	Grass Whistle	Grass	S	0	55	0	normal	
+grassyglide	Grassy Glide	Grass	P	55	100	0	normal	ct
+grassyterrain	Grassy Terrain	Grass	S	0	0	0	all	
+gravapple	Grav Apple	Grass	P	80	100	0	normal	
+gravity	Gravity	Psychic	S	0	0	0	all	
+growl	Growl	Normal	S	0	100	0	allAdjacentFoes	
+growth	Growth	Normal	S	0	0	0	self	
+grudge	Grudge	Ghost	S	0	0	0	self	
+guardsplit	Guard Split	Psychic	S	0	0	0	normal	
+guardswap	Guard Swap	Psychic	S	0	0	0	normal	
+guillotine	Guillotine	Normal	P	0	30	0	normal	ko,ct
+gunkshot	Gunk Shot	Poison	P	120	80	0	normal	
+gust	Gust	Flying	S	40	100	0	any	
+gyroball	Gyro Ball	Steel	P	0	100	0	normal	ct
+hail	Hail	Ice	S	0	0	0	all	
+hammerarm	Hammer Arm	Fighting	P	100	90	0	normal	ct
+happyhour	Happy Hour	Normal	S	0	0	0	allySide	
+harden	Harden	Normal	S	0	0	0	self	
+hardpress	Hard Press	Steel	P	0	100	0	normal	ct
+haze	Haze	Ice	S	0	0	0	all	
+headbutt	Headbutt	Normal	P	70	100	0	normal	ct
+headcharge	Head Charge	Normal	P	120	100	0	normal	ct
+headlongrush	Headlong Rush	Ground	P	120	100	0	normal	ct
+headsmash	Head Smash	Rock	P	150	80	0	normal	ct
+healbell	Heal Bell	Normal	S	0	0	0	allyTeam	
+healblock	Heal Block	Psychic	S	0	100	0	allAdjacentFoes	
+healingwish	Healing Wish	Psychic	S	0	0	0	self	
+healorder	Heal Order	Bug	S	0	0	0	self	
+healpulse	Heal Pulse	Psychic	S	0	0	0	any	
+heartstamp	Heart Stamp	Psychic	P	60	100	0	normal	ct
+heartswap	Heart Swap	Psychic	S	0	0	0	normal	
+heatcrash	Heat Crash	Fire	P	0	100	0	normal	ct
+heatwave	Heat Wave	Fire	S	95	90	0	allAdjacentFoes	
+heavyslam	Heavy Slam	Steel	P	0	100	0	normal	ct
+helpinghand	Helping Hand	Normal	S	0	0	5	adjacentAlly	
+hex	Hex	Ghost	S	65	100	0	normal	
+hiddenpower	Hidden Power	Normal	S	60	100	0	normal	
+hiddenpowerbug	Hidden Power Bug	Bug	S	60	100	0	normal	
+hiddenpowerdark	Hidden Power Dark	Dark	S	60	100	0	normal	
+hiddenpowerdragon	Hidden Power Dragon	Dragon	S	60	100	0	normal	
+hiddenpowerelectric	Hidden Power Electric	Electric	S	60	100	0	normal	
+hiddenpowerfighting	Hidden Power Fighting	Fighting	S	60	100	0	normal	
+hiddenpowerfire	Hidden Power Fire	Fire	S	60	100	0	normal	
+hiddenpowerflying	Hidden Power Flying	Flying	S	60	100	0	normal	
+hiddenpowerghost	Hidden Power Ghost	Ghost	S	60	100	0	normal	
+hiddenpowergrass	Hidden Power Grass	Grass	S	60	100	0	normal	
+hiddenpowerground	Hidden Power Ground	Ground	S	60	100	0	normal	
+hiddenpowerice	Hidden Power Ice	Ice	S	60	100	0	normal	
+hiddenpowerpoison	Hidden Power Poison	Poison	S	60	100	0	normal	
+hiddenpowerpsychic	Hidden Power Psychic	Psychic	S	60	100	0	normal	
+hiddenpowerrock	Hidden Power Rock	Rock	S	60	100	0	normal	
+hiddenpowersteel	Hidden Power Steel	Steel	S	60	100	0	normal	
+hiddenpowerwater	Hidden Power Water	Water	S	60	100	0	normal	
+highhorsepower	High Horsepower	Ground	P	95	95	0	normal	ct
+highjumpkick	High Jump Kick	Fighting	P	130	90	0	normal	ct
+holdback	Hold Back	Normal	P	40	100	0	normal	ct
+holdhands	Hold Hands	Normal	S	0	0	0	adjacentAlly	
+honeclaws	Hone Claws	Dark	S	0	0	0	self	
+hornattack	Horn Attack	Normal	P	65	100	0	normal	ct
+horndrill	Horn Drill	Normal	P	0	30	0	normal	ko,ct
+hornleech	Horn Leech	Grass	P	75	100	0	normal	ct
+howl	Howl	Normal	S	0	0	0	allies	
+hurricane	Hurricane	Flying	S	110	70	0	any	
+hydrocannon	Hydro Cannon	Water	S	150	90	0	normal	
+hydropump	Hydro Pump	Water	S	110	80	0	normal	
+hydrosteam	Hydro Steam	Water	S	80	100	0	normal	
+hyperbeam	Hyper Beam	Normal	S	150	90	0	normal	
+hyperdrill	Hyper Drill	Normal	P	100	100	0	normal	ct
+hyperfang	Hyper Fang	Normal	P	80	90	0	normal	ct
+hyperspacefury	Hyperspace Fury	Dark	P	100	0	0	normal	
+hyperspacehole	Hyperspace Hole	Psychic	S	80	0	0	normal	
+hypervoice	Hyper Voice	Normal	S	90	100	0	allAdjacentFoes	
+hypnosis	Hypnosis	Psychic	S	0	60	0	normal	
+iceball	Ice Ball	Ice	P	30	90	0	normal	ct
+icebeam	Ice Beam	Ice	S	90	100	0	normal	
+iceburn	Ice Burn	Ice	S	140	90	0	normal	
+icefang	Ice Fang	Ice	P	65	95	0	normal	ct
+icehammer	Ice Hammer	Ice	P	100	90	0	normal	ct
+icepunch	Ice Punch	Ice	P	75	100	0	normal	ct
+iceshard	Ice Shard	Ice	P	40	100	1	normal	
+icespinner	Ice Spinner	Ice	P	80	100	0	normal	ct
+iciclecrash	Icicle Crash	Ice	P	85	90	0	normal	
+iciclespear	Icicle Spear	Ice	P	25	100	0	normal	mh
+icywind	Icy Wind	Ice	S	55	95	0	allAdjacentFoes	
+imprison	Imprison	Psychic	S	0	0	0	self	
+incinerate	Incinerate	Fire	S	60	100	0	allAdjacentFoes	
+infernalparade	Infernal Parade	Ghost	S	60	100	0	normal	
+inferno	Inferno	Fire	S	100	50	0	normal	
+infestation	Infestation	Bug	S	20	100	0	normal	ct
+ingrain	Ingrain	Grass	S	0	0	0	self	
+instruct	Instruct	Psychic	S	0	0	0	normal	
+iondeluge	Ion Deluge	Electric	S	0	0	1	all	
+irondefense	Iron Defense	Steel	S	0	0	0	self	
+ironhead	Iron Head	Steel	P	80	100	0	normal	ct
+irontail	Iron Tail	Steel	P	100	75	0	normal	ct
+ivycudgel	Ivy Cudgel	Grass	P	100	100	0	normal	
+jawlock	Jaw Lock	Dark	P	80	100	0	normal	ct
+jetpunch	Jet Punch	Water	P	60	100	1	normal	ct
+judgment	Judgment	Normal	S	100	100	0	normal	
+jumpkick	Jump Kick	Fighting	P	100	95	0	normal	ct
+junglehealing	Jungle Healing	Grass	S	0	0	0	allies	
+karatechop	Karate Chop	Fighting	P	50	100	0	normal	ct
+kinesis	Kinesis	Psychic	S	0	80	0	normal	
+kingsshield	King's Shield	Steel	S	0	0	4	self	
+knockoff	Knock Off	Dark	P	65	100	0	normal	ct
+kowtowcleave	Kowtow Cleave	Dark	P	85	0	0	normal	ct
+landswrath	Land's Wrath	Ground	P	90	100	0	allAdjacentFoes	
+laserfocus	Laser Focus	Normal	S	0	0	0	self	
+lashout	Lash Out	Dark	P	75	100	0	normal	ct
+lastresort	Last Resort	Normal	P	140	100	0	normal	ct
+lastrespects	Last Respects	Ghost	P	50	100	0	normal	
+lavaplume	Lava Plume	Fire	S	80	100	0	allAdjacent	
+leafage	Leafage	Grass	P	40	100	0	normal	
+leafblade	Leaf Blade	Grass	P	90	100	0	normal	ct
+leafstorm	Leaf Storm	Grass	S	130	90	0	normal	
+leaftornado	Leaf Tornado	Grass	S	65	90	0	normal	
+leechlife	Leech Life	Bug	P	80	100	0	normal	ct
+leechseed	Leech Seed	Grass	S	0	90	0	normal	
+leer	Leer	Normal	S	0	100	0	allAdjacentFoes	
+lick	Lick	Ghost	P	30	100	0	normal	ct
+lifedew	Life Dew	Water	S	0	0	0	allies	
+lightofruin	Light of Ruin	Fairy	S	140	90	0	normal	
+lightscreen	Light Screen	Psychic	S	0	0	0	allySide	
+liquidation	Liquidation	Water	P	85	100	0	normal	ct
+lockon	Lock-On	Normal	S	0	0	0	normal	
+lovelykiss	Lovely Kiss	Normal	S	0	75	0	normal	
+lowkick	Low Kick	Fighting	P	0	100	0	normal	ct
+lowsweep	Low Sweep	Fighting	P	65	100	0	normal	ct
+luckychant	Lucky Chant	Normal	S	0	0	0	allySide	
+luminacrash	Lumina Crash	Psychic	S	80	100	0	normal	
+lunarblessing	Lunar Blessing	Psychic	S	0	0	0	allies	
+lunardance	Lunar Dance	Psychic	S	0	0	0	self	
+lunge	Lunge	Bug	P	80	100	0	normal	ct
+lusterpurge	Luster Purge	Psychic	S	95	100	0	normal	
+machpunch	Mach Punch	Fighting	P	40	100	1	normal	ct
+magicalleaf	Magical Leaf	Grass	S	60	0	0	normal	
+magicaltorque	Magical Torque	Fairy	P	100	100	0	normal	
+magiccoat	Magic Coat	Psychic	S	0	0	4	self	
+magicpowder	Magic Powder	Psychic	S	0	100	0	normal	
+magicroom	Magic Room	Psychic	S	0	0	0	all	
+magmastorm	Magma Storm	Fire	S	100	75	0	normal	
+magnetbomb	Magnet Bomb	Steel	P	60	0	0	normal	
+magneticflux	Magnetic Flux	Electric	S	0	0	0	allySide	
+magnetrise	Magnet Rise	Electric	S	0	0	0	self	
+magnitude	Magnitude	Ground	P	0	100	0	allAdjacent	
+makeitrain	Make It Rain	Steel	S	120	100	0	allAdjacentFoes	
+malignantchain	Malignant Chain	Poison	S	100	100	0	normal	
+matblock	Mat Block	Fighting	S	0	0	0	allySide	
+matchagotcha	Matcha Gotcha	Grass	S	80	90	0	allAdjacentFoes	
+meanlook	Mean Look	Normal	S	0	0	0	normal	
+meditate	Meditate	Psychic	S	0	0	0	self	
+mefirst	Me First	Normal	S	0	0	0	adjacentFoe	
+megadrain	Mega Drain	Grass	S	40	100	0	normal	
+megahorn	Megahorn	Bug	P	120	85	0	normal	ct
+megakick	Mega Kick	Normal	P	120	75	0	normal	ct
+megapunch	Mega Punch	Normal	P	80	85	0	normal	ct
+memento	Memento	Dark	S	0	100	0	normal	
+metalburst	Metal Burst	Steel	P	0	100	0	scripted	
+metalclaw	Metal Claw	Steel	P	50	95	0	normal	ct
+metalsound	Metal Sound	Steel	S	0	85	0	normal	
+meteorassault	Meteor Assault	Fighting	P	150	100	0	normal	
+meteorbeam	Meteor Beam	Rock	S	120	90	0	normal	
+meteormash	Meteor Mash	Steel	P	90	90	0	normal	ct
+metronome	Metronome	Normal	S	0	0	0	self	
+mightycleave	Mighty Cleave	Rock	P	95	100	0	normal	ct
+milkdrink	Milk Drink	Normal	S	0	0	0	self	
+mimic	Mimic	Normal	S	0	0	0	normal	
+mindblown	Mind Blown	Fire	S	150	100	0	allAdjacent	
+mindreader	Mind Reader	Normal	S	0	0	0	normal	
+minimize	Minimize	Normal	S	0	0	0	self	
+miracleeye	Miracle Eye	Psychic	S	0	0	0	normal	
+mirrorcoat	Mirror Coat	Psychic	S	0	100	-5	scripted	
+mirrormove	Mirror Move	Flying	S	0	0	0	normal	
+mirrorshot	Mirror Shot	Steel	S	65	85	0	normal	
+mist	Mist	Ice	S	0	0	0	allySide	
+mistball	Mist Ball	Psychic	S	95	100	0	normal	
+mistyexplosion	Misty Explosion	Fairy	S	100	100	0	allAdjacent	
+mistyterrain	Misty Terrain	Fairy	S	0	0	0	all	
+moonblast	Moonblast	Fairy	S	95	100	0	normal	
+moongeistbeam	Moongeist Beam	Ghost	S	100	100	0	normal	
+moonlight	Moonlight	Fairy	S	0	0	0	self	
+morningsun	Morning Sun	Normal	S	0	0	0	self	
+mortalspin	Mortal Spin	Poison	P	30	100	0	allAdjacentFoes	ct
+mountaingale	Mountain Gale	Ice	P	100	85	0	normal	
+mudbomb	Mud Bomb	Ground	S	65	85	0	normal	
+muddywater	Muddy Water	Water	S	90	85	0	allAdjacentFoes	
+mudshot	Mud Shot	Ground	S	55	95	0	normal	
+mudslap	Mud-Slap	Ground	S	20	100	0	normal	
+mudsport	Mud Sport	Ground	S	0	0	0	all	
+multiattack	Multi-Attack	Normal	P	120	100	0	normal	ct
+mysticalfire	Mystical Fire	Fire	S	75	100	0	normal	
+mysticalpower	Mystical Power	Psychic	S	70	90	0	normal	
+nastyplot	Nasty Plot	Dark	S	0	0	0	self	
+naturalgift	Natural Gift	Normal	P	0	100	0	normal	
+naturepower	Nature Power	Normal	S	0	0	0	normal	
+naturesmadness	Nature's Madness	Fairy	S	0	90	0	normal	
+needlearm	Needle Arm	Grass	P	60	100	0	normal	ct
+nightdaze	Night Daze	Dark	S	85	95	0	normal	
+nightmare	Nightmare	Ghost	S	0	100	0	normal	
+nightshade	Night Shade	Ghost	S	0	100	0	normal	fx
+nightslash	Night Slash	Dark	P	70	100	0	normal	ct
+nihillight	Nihil Light	Dragon	S	100	100	0	allAdjacentFoes	
+nobleroar	Noble Roar	Normal	S	0	100	0	normal	
+noretreat	No Retreat	Fighting	S	0	0	0	self	
+noxioustorque	Noxious Torque	Poison	P	100	100	0	normal	
+nuzzle	Nuzzle	Electric	P	20	100	0	normal	ct
+oblivionwing	Oblivion Wing	Flying	S	80	100	0	any	
+obstruct	Obstruct	Dark	S	0	100	4	self	
+octazooka	Octazooka	Water	S	65	85	0	normal	
+octolock	Octolock	Fighting	S	0	100	0	normal	
+odorsleuth	Odor Sleuth	Normal	S	0	0	0	normal	
+ominouswind	Ominous Wind	Ghost	S	60	100	0	normal	
+orderup	Order Up	Dragon	P	80	100	0	normal	
+originpulse	Origin Pulse	Water	S	110	85	0	allAdjacentFoes	
+outrage	Outrage	Dragon	P	120	100	0	randomNormal	ct
+overdrive	Overdrive	Electric	S	80	100	0	allAdjacentFoes	
+overheat	Overheat	Fire	S	130	90	0	normal	
+painsplit	Pain Split	Normal	S	0	0	0	normal	
+paraboliccharge	Parabolic Charge	Electric	S	65	100	0	allAdjacent	
+partingshot	Parting Shot	Dark	S	0	100	0	normal	sw
+payback	Payback	Dark	P	50	100	0	normal	ct
+payday	Pay Day	Normal	P	40	100	0	normal	
+peck	Peck	Flying	P	35	100	0	any	ct
+perishsong	Perish Song	Normal	S	0	0	0	all	
+petalblizzard	Petal Blizzard	Grass	P	90	100	0	allAdjacent	
+petaldance	Petal Dance	Grass	S	120	100	0	randomNormal	ct
+phantomforce	Phantom Force	Ghost	P	90	100	0	normal	ct
+photongeyser	Photon Geyser	Psychic	S	100	100	0	normal	
+pikapapow	Pika Papow	Electric	S	0	0	0	normal	
+pinmissile	Pin Missile	Bug	P	25	95	0	normal	mh
+plasmafists	Plasma Fists	Electric	P	100	100	0	normal	ct
+playnice	Play Nice	Normal	S	0	0	0	normal	
+playrough	Play Rough	Fairy	P	90	90	0	normal	ct
+pluck	Pluck	Flying	P	60	100	0	any	ct
+poisonfang	Poison Fang	Poison	P	50	100	0	normal	ct
+poisongas	Poison Gas	Poison	S	0	90	0	allAdjacentFoes	
+poisonjab	Poison Jab	Poison	P	80	100	0	normal	ct
+poisonpowder	Poison Powder	Poison	S	0	75	0	normal	
+poisonsting	Poison Sting	Poison	P	15	100	0	normal	
+poisontail	Poison Tail	Poison	P	50	100	0	normal	ct
+pollenpuff	Pollen Puff	Bug	S	90	100	0	normal	
+poltergeist	Poltergeist	Ghost	P	110	90	0	normal	
+populationbomb	Population Bomb	Normal	P	20	90	0	normal	mh,ct
+pounce	Pounce	Bug	P	50	100	0	normal	ct
+pound	Pound	Normal	P	40	100	0	normal	ct
+powder	Powder	Bug	S	0	100	1	normal	
+powdersnow	Powder Snow	Ice	S	40	100	0	allAdjacentFoes	
+powergem	Power Gem	Rock	S	80	100	0	normal	
+powershift	Power Shift	Normal	S	0	0	0	self	
+powersplit	Power Split	Psychic	S	0	0	0	normal	
+powerswap	Power Swap	Psychic	S	0	0	0	normal	
+powertrick	Power Trick	Psychic	S	0	0	0	self	
+powertrip	Power Trip	Dark	P	20	100	0	normal	ct
+poweruppunch	Power-Up Punch	Fighting	P	40	100	0	normal	ct
+powerwhip	Power Whip	Grass	P	120	85	0	normal	ct
+precipiceblades	Precipice Blades	Ground	P	120	85	0	allAdjacentFoes	
+present	Present	Normal	P	0	90	0	normal	
+prismaticlaser	Prismatic Laser	Psychic	S	160	100	0	normal	
+protect	Protect	Normal	S	0	0	4	self	
+psybeam	Psybeam	Psychic	S	65	100	0	normal	
+psyblade	Psyblade	Psychic	P	80	100	0	normal	ct
+psychic	Psychic	Psychic	S	90	100	0	normal	
+psychicfangs	Psychic Fangs	Psychic	P	85	100	0	normal	ct
+psychicnoise	Psychic Noise	Psychic	S	75	100	0	normal	
+psychicterrain	Psychic Terrain	Psychic	S	0	0	0	all	
+psychoboost	Psycho Boost	Psychic	S	140	90	0	normal	
+psychocut	Psycho Cut	Psychic	P	70	100	0	normal	
+psychoshift	Psycho Shift	Psychic	S	0	100	0	normal	
+psychup	Psych Up	Normal	S	0	0	0	normal	
+psyshieldbash	Psyshield Bash	Psychic	P	70	90	0	normal	ct
+psyshock	Psyshock	Psychic	S	80	100	0	normal	
+psystrike	Psystrike	Psychic	S	100	100	0	normal	
+psywave	Psywave	Psychic	S	0	100	0	normal	
+punishment	Punishment	Dark	P	0	100	0	normal	ct
+purify	Purify	Poison	S	0	0	0	normal	
+pursuit	Pursuit	Dark	P	40	100	0	normal	ct
+pyroball	Pyro Ball	Fire	P	120	90	0	normal	
+quash	Quash	Dark	S	0	100	0	normal	
+quickattack	Quick Attack	Normal	P	40	100	1	normal	ct
+quickguard	Quick Guard	Fighting	S	0	0	3	allySide	
+quiverdance	Quiver Dance	Bug	S	0	0	0	self	
+rage	Rage	Normal	P	20	100	0	normal	ct
+ragefist	Rage Fist	Ghost	P	50	100	0	normal	ct
+ragepowder	Rage Powder	Bug	S	0	0	2	self	
+ragingbull	Raging Bull	Normal	P	90	100	0	normal	ct
+ragingfury	Raging Fury	Fire	P	120	100	0	randomNormal	
+raindance	Rain Dance	Water	S	0	0	0	all	
+rapidspin	Rapid Spin	Normal	P	50	100	0	normal	ct
+razorleaf	Razor Leaf	Grass	P	55	95	0	allAdjacentFoes	
+razorshell	Razor Shell	Water	P	75	95	0	normal	ct
+razorwind	Razor Wind	Normal	S	80	100	0	allAdjacentFoes	
+recover	Recover	Normal	S	0	0	0	self	
+recycle	Recycle	Normal	S	0	0	0	self	
+reflect	Reflect	Psychic	S	0	0	0	allySide	
+reflecttype	Reflect Type	Normal	S	0	0	0	normal	
+refresh	Refresh	Normal	S	0	0	0	self	
+relicsong	Relic Song	Normal	S	75	100	0	allAdjacentFoes	
+rest	Rest	Psychic	S	0	0	0	self	
+retaliate	Retaliate	Normal	P	70	100	0	normal	ct
+return	Return	Normal	P	0	100	0	normal	ct
+revelationdance	Revelation Dance	Normal	S	90	100	0	normal	
+revenge	Revenge	Fighting	P	60	100	-4	normal	ct
+reversal	Reversal	Fighting	P	0	100	0	normal	ct
+revivalblessing	Revival Blessing	Normal	S	0	0	0	self	sw
+risingvoltage	Rising Voltage	Electric	S	70	100	0	normal	
+roar	Roar	Normal	S	0	0	-6	normal	
+roaroftime	Roar of Time	Dragon	S	150	90	0	normal	
+rockblast	Rock Blast	Rock	P	25	90	0	normal	mh
+rockclimb	Rock Climb	Normal	P	90	85	0	normal	ct
+rockpolish	Rock Polish	Rock	S	0	0	0	self	
+rockslide	Rock Slide	Rock	P	75	90	0	allAdjacentFoes	
+rocksmash	Rock Smash	Fighting	P	40	100	0	normal	ct
+rockthrow	Rock Throw	Rock	P	50	90	0	normal	
+rocktomb	Rock Tomb	Rock	P	60	95	0	normal	
+rockwrecker	Rock Wrecker	Rock	P	150	90	0	normal	
+roleplay	Role Play	Psychic	S	0	0	0	normal	
+rollingkick	Rolling Kick	Fighting	P	60	85	0	normal	ct
+rollout	Rollout	Rock	P	30	90	0	normal	ct
+roost	Roost	Flying	S	0	0	0	self	
+rototiller	Rototiller	Ground	S	0	0	0	all	
+round	Round	Normal	S	60	100	0	normal	
+ruination	Ruination	Dark	S	0	90	0	normal	
+sacredfire	Sacred Fire	Fire	P	100	95	0	normal	
+sacredsword	Sacred Sword	Fighting	P	90	100	0	normal	ct
+safeguard	Safeguard	Normal	S	0	0	0	allySide	
+saltcure	Salt Cure	Rock	P	40	100	0	normal	
+sandattack	Sand Attack	Ground	S	0	100	0	normal	
+sandsearstorm	Sandsear Storm	Ground	S	100	80	0	allAdjacentFoes	
+sandstorm	Sandstorm	Rock	S	0	0	0	all	
+sandtomb	Sand Tomb	Ground	P	35	85	0	normal	
+sappyseed	Sappy Seed	Grass	P	100	90	0	normal	
+scald	Scald	Water	S	80	100	0	normal	
+scaleshot	Scale Shot	Dragon	P	25	90	0	normal	mh
+scaryface	Scary Face	Normal	S	0	100	0	normal	
+scorchingsands	Scorching Sands	Ground	S	70	100	0	normal	
+scratch	Scratch	Normal	P	40	100	0	normal	ct
+screech	Screech	Normal	S	0	85	0	normal	
+searingshot	Searing Shot	Fire	S	100	100	0	allAdjacent	
+secretpower	Secret Power	Normal	P	70	100	0	normal	
+secretsword	Secret Sword	Fighting	S	85	100	0	normal	
+seedbomb	Seed Bomb	Grass	P	80	100	0	normal	
+seedflare	Seed Flare	Grass	S	120	85	0	normal	
+seismictoss	Seismic Toss	Fighting	P	0	100	0	normal	fx,ct
+selfdestruct	Self-Destruct	Normal	P	200	100	0	allAdjacent	
+shadowball	Shadow Ball	Ghost	S	80	100	0	normal	
+shadowbone	Shadow Bone	Ghost	P	85	100	0	normal	
+shadowclaw	Shadow Claw	Ghost	P	70	100	0	normal	ct
+shadowforce	Shadow Force	Ghost	P	120	100	0	normal	ct
+shadowpunch	Shadow Punch	Ghost	P	60	0	0	normal	ct
+shadowsneak	Shadow Sneak	Ghost	P	40	100	1	normal	ct
+sharpen	Sharpen	Normal	S	0	0	0	self	
+shedtail	Shed Tail	Normal	S	0	0	0	self	sw
+sheercold	Sheer Cold	Ice	S	0	30	0	normal	ko
+shellsidearm	Shell Side Arm	Poison	S	90	100	0	normal	
+shellsmash	Shell Smash	Normal	S	0	0	0	self	
+shelltrap	Shell Trap	Fire	S	150	100	-3	allAdjacentFoes	
+shelter	Shelter	Steel	S	0	0	0	self	
+shiftgear	Shift Gear	Steel	S	0	0	0	self	
+shockwave	Shock Wave	Electric	S	60	0	0	normal	
+shoreup	Shore Up	Ground	S	0	0	0	self	
+signalbeam	Signal Beam	Bug	S	75	100	0	normal	
+silktrap	Silk Trap	Bug	S	0	0	4	self	
+silverwind	Silver Wind	Bug	S	60	100	0	normal	
+simplebeam	Simple Beam	Normal	S	0	100	0	normal	
+sing	Sing	Normal	S	0	55	0	normal	
+sizzlyslide	Sizzly Slide	Fire	P	60	100	0	normal	ct
+sketch	Sketch	Normal	S	0	0	0	normal	
+skillswap	Skill Swap	Psychic	S	0	0	0	normal	
+skittersmack	Skitter Smack	Bug	P	70	90	0	normal	ct
+skullbash	Skull Bash	Normal	P	130	100	0	normal	ct
+skyattack	Sky Attack	Flying	P	140	90	0	any	
+skydrop	Sky Drop	Flying	P	60	100	0	any	ct
+skyuppercut	Sky Uppercut	Fighting	P	85	90	0	normal	ct
+slackoff	Slack Off	Normal	S	0	0	0	self	
+slam	Slam	Normal	P	80	75	0	normal	ct
+slash	Slash	Normal	P	70	100	0	normal	ct
+sleeppowder	Sleep Powder	Grass	S	0	75	0	normal	
+sleeptalk	Sleep Talk	Normal	S	0	0	0	self	
+sludge	Sludge	Poison	S	65	100	0	normal	
+sludgebomb	Sludge Bomb	Poison	S	90	100	0	normal	
+sludgewave	Sludge Wave	Poison	S	95	100	0	allAdjacent	
+smackdown	Smack Down	Rock	P	50	100	0	normal	
+smartstrike	Smart Strike	Steel	P	70	0	0	normal	ct
+smellingsalts	Smelling Salts	Normal	P	70	100	0	normal	ct
+smog	Smog	Poison	S	30	70	0	normal	
+smokescreen	Smokescreen	Normal	S	0	100	0	normal	
+snaptrap	Snap Trap	Grass	P	35	100	0	normal	ct
+snarl	Snarl	Dark	S	55	95	0	allAdjacentFoes	
+snatch	Snatch	Dark	S	0	0	4	self	
+snipeshot	Snipe Shot	Water	S	80	100	0	normal	
+snore	Snore	Normal	S	50	100	0	normal	
+snowscape	Snowscape	Ice	S	0	0	0	all	
+soak	Soak	Water	S	0	100	0	normal	
+softboiled	Soft-Boiled	Normal	S	0	0	0	self	
+solarbeam	Solar Beam	Grass	S	120	100	0	normal	
+solarblade	Solar Blade	Grass	P	125	100	0	normal	ct
+sonicboom	Sonic Boom	Normal	S	0	90	0	normal	fx
+spacialrend	Spacial Rend	Dragon	S	100	95	0	normal	
+spark	Spark	Electric	P	65	100	0	normal	ct
+sparklingaria	Sparkling Aria	Water	S	90	100	0	allAdjacent	
+sparklyswirl	Sparkly Swirl	Fairy	S	120	85	0	normal	
+spectralthief	Spectral Thief	Ghost	P	90	100	0	normal	ct
+speedswap	Speed Swap	Psychic	S	0	0	0	normal	
+spicyextract	Spicy Extract	Grass	S	0	0	0	normal	
+spiderweb	Spider Web	Bug	S	0	0	0	normal	
+spikecannon	Spike Cannon	Normal	P	20	100	0	normal	mh
+spikes	Spikes	Ground	S	0	0	0	foeSide	
+spikyshield	Spiky Shield	Grass	S	0	0	4	self	
+spinout	Spin Out	Steel	P	100	100	0	normal	ct
+spiritbreak	Spirit Break	Fairy	P	75	100	0	normal	ct
+spiritshackle	Spirit Shackle	Ghost	P	80	100	0	normal	
+spite	Spite	Ghost	S	0	100	0	normal	
+spitup	Spit Up	Normal	S	0	100	0	normal	
+splash	Splash	Normal	S	0	0	0	self	
+splishysplash	Splishy Splash	Water	S	90	100	0	allAdjacentFoes	
+spore	Spore	Grass	S	0	100	0	normal	
+spotlight	Spotlight	Normal	S	0	0	3	normal	
+springtidestorm	Springtide Storm	Fairy	S	100	80	0	allAdjacentFoes	
+stealthrock	Stealth Rock	Rock	S	0	0	0	foeSide	
+steameruption	Steam Eruption	Water	S	110	95	0	normal	
+steamroller	Steamroller	Bug	P	65	100	0	normal	ct
+steelbeam	Steel Beam	Steel	S	140	95	0	normal	
+steelroller	Steel Roller	Steel	P	130	100	0	normal	ct
+steelwing	Steel Wing	Steel	P	70	90	0	normal	ct
+stickyweb	Sticky Web	Bug	S	0	0	0	foeSide	
+stockpile	Stockpile	Normal	S	0	0	0	self	
+stomp	Stomp	Normal	P	65	100	0	normal	ct
+stompingtantrum	Stomping Tantrum	Ground	P	75	100	0	normal	ct
+stoneaxe	Stone Axe	Rock	P	65	90	0	normal	ct
+stoneedge	Stone Edge	Rock	P	100	80	0	normal	
+storedpower	Stored Power	Psychic	S	20	100	0	normal	
+stormthrow	Storm Throw	Fighting	P	60	100	0	normal	ct
+strangesteam	Strange Steam	Fairy	S	90	95	0	normal	
+strength	Strength	Normal	P	80	100	0	normal	ct
+strengthsap	Strength Sap	Grass	S	0	100	0	normal	
+stringshot	String Shot	Bug	S	0	95	0	allAdjacentFoes	
+struggle	Struggle	Normal	P	50	0	0	randomNormal	ct
+strugglebug	Struggle Bug	Bug	S	50	100	0	allAdjacentFoes	
+stuffcheeks	Stuff Cheeks	Normal	S	0	0	0	self	
+stunspore	Stun Spore	Grass	S	0	75	0	normal	
+submission	Submission	Fighting	P	80	80	0	normal	ct
+substitute	Substitute	Normal	S	0	0	0	self	
+suckerpunch	Sucker Punch	Dark	P	70	100	1	normal	ct
+sunnyday	Sunny Day	Fire	S	0	0	0	all	
+sunsteelstrike	Sunsteel Strike	Steel	P	100	100	0	normal	ct
+supercellslam	Supercell Slam	Electric	P	100	95	0	normal	ct
+superfang	Super Fang	Normal	P	0	90	0	normal	ct
+superpower	Superpower	Fighting	P	120	100	0	normal	ct
+supersonic	Supersonic	Normal	S	0	55	0	normal	
+surf	Surf	Water	S	90	100	0	allAdjacent	
+surgingstrikes	Surging Strikes	Water	P	25	100	0	normal	mh,ct
+swagger	Swagger	Normal	S	0	85	0	normal	
+swallow	Swallow	Normal	S	0	0	0	self	
+sweetkiss	Sweet Kiss	Fairy	S	0	75	0	normal	
+sweetscent	Sweet Scent	Normal	S	0	100	0	allAdjacentFoes	
+swift	Swift	Normal	S	60	0	0	allAdjacentFoes	
+switcheroo	Switcheroo	Dark	S	0	100	0	normal	
+swordsdance	Swords Dance	Normal	S	0	0	0	self	
+synchronoise	Synchronoise	Psychic	S	120	100	0	allAdjacent	
+synthesis	Synthesis	Grass	S	0	0	0	self	
+syrupbomb	Syrup Bomb	Grass	S	60	85	0	normal	
+tachyoncutter	Tachyon Cutter	Steel	S	50	0	0	normal	mh
+tackle	Tackle	Normal	P	40	100	0	normal	ct
+tailglow	Tail Glow	Bug	S	0	0	0	self	
+tailslap	Tail Slap	Normal	P	25	85	0	normal	mh,ct
+tailwhip	Tail Whip	Normal	S	0	100	0	allAdjacentFoes	
+tailwind	Tailwind	Flying	S	0	0	0	allySide	
+takedown	Take Down	Normal	P	90	85	0	normal	ct
+takeheart	Take Heart	Psychic	S	0	0	0	self	
+tarshot	Tar Shot	Rock	S	0	100	0	normal	
+taunt	Taunt	Dark	S	0	100	0	normal	
+tearfullook	Tearful Look	Normal	S	0	0	0	normal	
+teatime	Teatime	Normal	S	0	0	0	all	
+technoblast	Techno Blast	Normal	S	120	100	0	normal	
+teeterdance	Teeter Dance	Normal	S	0	100	0	allAdjacent	
+telekinesis	Telekinesis	Psychic	S	0	0	0	normal	
+teleport	Teleport	Psychic	S	0	0	-6	self	sw
+temperflare	Temper Flare	Fire	P	75	100	0	normal	ct
+terablast	Tera Blast	Normal	S	80	100	0	normal	
+terastarstorm	Tera Starstorm	Normal	S	120	100	0	normal	
+terrainpulse	Terrain Pulse	Normal	S	50	100	0	normal	
+thief	Thief	Dark	P	60	100	0	normal	ct
+thousandarrows	Thousand Arrows	Ground	P	90	100	0	allAdjacentFoes	
+thousandwaves	Thousand Waves	Ground	P	90	100	0	allAdjacentFoes	
+thrash	Thrash	Normal	P	120	100	0	randomNormal	ct
+throatchop	Throat Chop	Dark	P	80	100	0	normal	ct
+thunder	Thunder	Electric	S	110	70	0	normal	
+thunderbolt	Thunderbolt	Electric	S	90	100	0	normal	
+thundercage	Thunder Cage	Electric	S	80	90	0	normal	
+thunderclap	Thunderclap	Electric	S	70	100	1	normal	
+thunderfang	Thunder Fang	Electric	P	65	95	0	normal	ct
+thunderouskick	Thunderous Kick	Fighting	P	90	100	0	normal	ct
+thunderpunch	Thunder Punch	Electric	P	75	100	0	normal	ct
+thundershock	Thunder Shock	Electric	S	40	100	0	normal	
+thunderwave	Thunder Wave	Electric	S	0	90	0	normal	
+tickle	Tickle	Normal	S	0	100	0	normal	
+tidyup	Tidy Up	Normal	S	0	0	0	self	
+topsyturvy	Topsy-Turvy	Dark	S	0	0	0	normal	
+torchsong	Torch Song	Fire	S	80	100	0	normal	
+torment	Torment	Dark	S	0	100	0	normal	
+toxic	Toxic	Poison	S	0	90	0	normal	
+toxicspikes	Toxic Spikes	Poison	S	0	0	0	foeSide	
+toxicthread	Toxic Thread	Poison	S	0	100	0	normal	
+trailblaze	Trailblaze	Grass	P	50	100	0	normal	ct
+transform	Transform	Normal	S	0	0	0	normal	
+triattack	Tri Attack	Normal	S	80	100	0	normal	
+trick	Trick	Psychic	S	0	100	0	normal	
+trickortreat	Trick-or-Treat	Ghost	S	0	100	0	normal	
+trickroom	Trick Room	Psychic	S	0	0	-7	all	
+triplearrows	Triple Arrows	Fighting	P	90	100	0	normal	
+tripleaxel	Triple Axel	Ice	P	20	90	0	normal	mh,ct
+tripledive	Triple Dive	Water	P	30	95	0	normal	mh,ct
+triplekick	Triple Kick	Fighting	P	10	90	0	normal	mh,ct
+tropkick	Trop Kick	Grass	P	70	100	0	normal	ct
+trumpcard	Trump Card	Normal	S	0	0	0	normal	ct
+twinbeam	Twin Beam	Psychic	S	40	100	0	normal	mh
+twineedle	Twineedle	Bug	P	25	100	0	normal	mh
+twister	Twister	Dragon	S	40	100	0	allAdjacentFoes	
+upperhand	Upper Hand	Fighting	P	65	100	3	normal	ct
+uproar	Uproar	Normal	S	90	100	0	randomNormal	
+uturn	U-turn	Bug	P	70	100	0	normal	sw,ct
+vacuumwave	Vacuum Wave	Fighting	S	40	100	1	normal	
+vcreate	V-create	Fire	P	180	95	0	normal	ct
+veeveevolley	Veevee Volley	Normal	P	0	0	0	normal	ct
+venomdrench	Venom Drench	Poison	S	0	100	0	allAdjacentFoes	
+venoshock	Venoshock	Poison	S	65	100	0	normal	
+victorydance	Victory Dance	Fighting	S	0	0	0	self	
+vinewhip	Vine Whip	Grass	P	45	100	0	normal	ct
+visegrip	Vise Grip	Normal	P	55	100	0	normal	ct
+vitalthrow	Vital Throw	Fighting	P	70	0	-1	normal	ct
+voltswitch	Volt Switch	Electric	S	70	100	0	normal	sw
+volttackle	Volt Tackle	Electric	P	120	100	0	normal	ct
+wakeupslap	Wake-Up Slap	Fighting	P	70	100	0	normal	ct
+waterfall	Waterfall	Water	P	80	100	0	normal	ct
+watergun	Water Gun	Water	S	40	100	0	normal	
+waterpledge	Water Pledge	Water	S	80	100	0	normal	
+waterpulse	Water Pulse	Water	S	60	100	0	any	
+watershuriken	Water Shuriken	Water	S	15	100	1	normal	mh
+watersport	Water Sport	Water	S	0	0	0	all	
+waterspout	Water Spout	Water	S	150	100	0	allAdjacentFoes	
+wavecrash	Wave Crash	Water	P	120	100	0	normal	ct
+weatherball	Weather Ball	Normal	S	50	100	0	normal	
+whirlpool	Whirlpool	Water	S	35	85	0	normal	
+whirlwind	Whirlwind	Normal	S	0	0	-6	normal	
+wickedblow	Wicked Blow	Dark	P	75	100	0	normal	ct
+wickedtorque	Wicked Torque	Dark	P	80	100	0	normal	
+wideguard	Wide Guard	Rock	S	0	0	3	allySide	
+wildboltstorm	Wildbolt Storm	Electric	S	100	80	0	allAdjacentFoes	
+wildcharge	Wild Charge	Electric	P	90	100	0	normal	ct
+willowisp	Will-O-Wisp	Fire	S	0	85	0	normal	
+wingattack	Wing Attack	Flying	P	60	100	0	any	ct
+wish	Wish	Normal	S	0	0	0	self	
+withdraw	Withdraw	Water	S	0	0	0	self	
+wonderroom	Wonder Room	Psychic	S	0	0	0	all	
+woodhammer	Wood Hammer	Grass	P	120	100	0	normal	ct
+workup	Work Up	Normal	S	0	0	0	self	
+worryseed	Worry Seed	Grass	S	0	100	0	normal	
+wrap	Wrap	Normal	P	15	90	0	normal	ct
+wringout	Wring Out	Normal	S	0	100	0	normal	ct
+xscissor	X-Scissor	Bug	P	80	100	0	normal	ct
+yawn	Yawn	Normal	S	0	0	0	normal	
+zapcannon	Zap Cannon	Electric	S	120	50	0	normal	
+zenheadbutt	Zen Headbutt	Psychic	P	80	90	0	normal	ct
+zingzap	Zing Zap	Electric	P	80	100	0	normal	ct
+zippyzap	Zippy Zap	Electric	P	80	100	2	normal	ct
