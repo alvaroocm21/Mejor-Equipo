@@ -226,7 +226,7 @@ public final class ItemAdvisor {
         if (ab.equals("guts") || ab.equals("quickfeet") || ab.equals("marvelscale") || ab.equals("poisonheal")
                 || ab.equals("toxicboost") || ab.equals("flareboost"))
             add(out, ab.equals("flareboost") || ab.equals("guts") && physical ? "flameorb" : "toxicorb", 6.0,
-                    "su habilidad (" + p.ability + ") se activa con un estado alterado propio.");
+                    "su habilidad (" + Es.ability(p.ability) + ") se activa con un estado alterado propio.");
         if (bestStabType >= 0 && attacker)
             add(out, TYPE_ITEM[bestStabType], 3.6 + f.off * 0.6, "potencia un 20 % su ataque principal de tipo "
                     + Dex.TYPES_ES[bestStabType] + " (con STAB).");

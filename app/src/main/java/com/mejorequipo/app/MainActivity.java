@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mejorequipo.engine.Dex;
+import com.mejorequipo.engine.Es;
 import com.mejorequipo.engine.Gen6Save;
 import com.mejorequipo.engine.ItemAdvisor;
 import com.mejorequipo.engine.PokeSet;
@@ -411,6 +412,7 @@ public class MainActivity extends Activity {
             String p = new String(readStream(getAssets().open("pokedex.tsv")), StandardCharsets.UTF_8);
             String m = new String(readStream(getAssets().open("moves.tsv")), StandardCharsets.UTF_8);
             dex = Dex.load(p, m);
+            Es.load(new String(readStream(getAssets().open("es_names.tsv")), StandardCharsets.UTF_8));
         }
         return dex;
     }
@@ -660,7 +662,13 @@ public class MainActivity extends Activity {
             types.addView(c, lp);
         }
         right.addView(types);
-        right.addView(text(m.role + " · " + p.ability + " · " + p.nature, 11, MUTED, false));
+        right.addView(text(m.role + " · " + Es.ability(p.ability) + " · " + Es.nature(p.nature), 11, MUTED, false));
+        int bst = 0;
+        for (int b : p.species.base) bst += b;
+        TextView bt = text("Estadísticas base · total " + bst, 10, MUTED, true);
+        bt.setPadding(0, dp(6), 0, 0);
+        right.addView(bt);
+        right.addView(new Ui.StatBars(this, p.species.base), new LinearLayout.LayoutParams(-1, -2));
 
         // objeto recomendado
         LinearLayout itemRow = new LinearLayout(this);
@@ -684,7 +692,8 @@ public class MainActivity extends Activity {
 
         // movimientos
         Ui.Flow flow = new Ui.Flow(this, dp(4));
-        for (String mv : p.moveNames) flow.addView(chip(mv, CHIP, TXT, 10));
+        for (int i = 0; i < p.moveIds.size(); i++)
+            flow.addView(chip(Es.move(p.moveIds.get(i), p.moveNames.get(i), p.hiddenPowerType), CHIP, TXT, 10));
         LinearLayout.LayoutParams fl = new LinearLayout.LayoutParams(-1, -2);
         fl.topMargin = dp(6);
         right.addView(flow, fl);

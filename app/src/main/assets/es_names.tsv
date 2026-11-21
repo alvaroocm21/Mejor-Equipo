@@ -1,0 +1,833 @@
+m	pound	Destructor
+m	karatechop	Golpe Kárate
+m	doubleslap	Doble Bofetón
+m	cometpunch	Puño Cometa
+m	megapunch	Megapuño
+m	payday	Día de Pago
+m	firepunch	Puño Fuego
+m	icepunch	Puño Hielo
+m	thunderpunch	Puño Trueno
+m	scratch	Arañazo
+m	visegrip	Agarre
+m	guillotine	Guillotina
+m	razorwind	Viento Cortante
+m	swordsdance	Danza Espada
+m	cut	Corte
+m	gust	Tornado
+m	wingattack	Ataque Ala
+m	whirlwind	Remolino
+m	fly	Vuelo
+m	bind	Atadura
+m	slam	Atizar
+m	vinewhip	Látigo Cepa
+m	stomp	Pisotón
+m	doublekick	Doble Patada
+m	megakick	Megapatada
+m	jumpkick	Patada Salto
+m	rollingkick	Patada Giro
+m	sandattack	Ataque Arena
+m	headbutt	Golpe Cabeza
+m	hornattack	Cornada
+m	furyattack	Ataque Furia
+m	horndrill	Perforador
+m	tackle	Placaje
+m	bodyslam	Golpe Cuerpo
+m	wrap	Constricción
+m	takedown	Derribo
+m	thrash	Saña
+m	doubleedge	Doble Filo
+m	tailwhip	Agitacola
+m	poisonsting	Picotazo Veneno
+m	twineedle	Doble Ataque
+m	pinmissile	Pin Misil
+m	leer	Malicioso
+m	bite	Mordisco
+m	growl	Gruñido
+m	roar	Rugido
+m	sing	Canto
+m	supersonic	Supersónico
+m	sonicboom	Bomba Sónica
+m	disable	Anulación
+m	acid	Ácido
+m	ember	Ascuas
+m	flamethrower	Lanzallamas
+m	mist	Neblina
+m	watergun	Pistola Agua
+m	hydropump	Hidrobomba
+m	surf	Surf
+m	icebeam	Rayo Hielo
+m	blizzard	Ventisca
+m	psybeam	Psicorrayo
+m	bubblebeam	Rayo Burbuja
+m	aurorabeam	Rayo Aurora
+m	hyperbeam	Hiperrayo
+m	peck	Picotazo
+m	drillpeck	Pico Taladro
+m	submission	Sumisión
+m	lowkick	Patada Baja
+m	counter	Contraataque
+m	seismictoss	Sísmico
+m	strength	Fuerza
+m	absorb	Absorber
+m	megadrain	Megaagotar
+m	leechseed	Drenadoras
+m	growth	Desarrollo
+m	razorleaf	Hoja Afilada
+m	solarbeam	Rayo Solar
+m	poisonpowder	Polvo Veneno
+m	stunspore	Paralizador
+m	sleeppowder	Somnífero
+m	petaldance	Danza Pétalo
+m	stringshot	Disparo Demora
+m	dragonrage	Furia Dragón
+m	firespin	Giro Fuego
+m	thundershock	Impactrueno
+m	thunderbolt	Rayo
+m	thunderwave	Onda Trueno
+m	thunder	Trueno
+m	rockthrow	Lanzarrocas
+m	earthquake	Terremoto
+m	fissure	Fisura
+m	dig	Excavar
+m	toxic	Tóxico
+m	confusion	Confusión
+m	psychic	Psíquico
+m	hypnosis	Hipnosis
+m	meditate	Meditación
+m	agility	Agilidad
+m	quickattack	Ataque Rápido
+m	rage	Furia
+m	teleport	Teletransporte
+m	nightshade	Tinieblas
+m	mimic	Mimético
+m	screech	Chirrido
+m	doubleteam	Doble Equipo
+m	recover	Recuperación
+m	harden	Fortaleza
+m	minimize	Reducción
+m	smokescreen	Pantalla de Humo
+m	confuseray	Rayo Confuso
+m	withdraw	Refugio
+m	defensecurl	Rizo Defensa
+m	barrier	Barrera
+m	lightscreen	Pantalla de Luz
+m	haze	Niebla
+m	reflect	Reflejo
+m	focusenergy	Foco Energía
+m	bide	Venganza
+m	metronome	Metrónomo
+m	mirrormove	Espejo
+m	selfdestruct	Autodestrucción
+m	eggbomb	Bomba Huevo
+m	lick	Lengüetazo
+m	smog	Polución
+m	sludge	Residuos
+m	boneclub	Hueso Palo
+m	fireblast	Llamarada
+m	waterfall	Cascada
+m	clamp	Tenaza
+m	swift	Meteoros
+m	skullbash	Cabezazo
+m	spikecannon	Clavo Cañón
+m	constrict	Restricción
+m	amnesia	Amnesia
+m	kinesis	Kinético
+m	softboiled	Ovocuración
+m	highjumpkick	Pat. Salto Alta
+m	glare	Deslumbrar
+m	dreameater	Comesueños
+m	poisongas	Gas Venenoso
+m	barrage	Bombardeo
+m	leechlife	Chupavidas
+m	lovelykiss	Beso Amoroso
+m	skyattack	Ataque Aéreo
+m	transform	Transformación
+m	bubble	Burbuja
+m	dizzypunch	Puño Mareo
+m	spore	Espora
+m	flash	Destello
+m	psywave	Psicoonda
+m	splash	Salpicadura
+m	acidarmor	Armadura Ácida
+m	crabhammer	Martillazo
+m	explosion	Explosión
+m	furyswipes	Golpes Furia
+m	bonemerang	Huesomerang
+m	rest	Descanso
+m	rockslide	Avalancha
+m	hyperfang	Hipercolmillo
+m	sharpen	Afilar
+m	conversion	Conversión
+m	triattack	Triataque
+m	superfang	Superdiente
+m	slash	Cuchillada
+m	substitute	Sustituto
+m	struggle	Forcejeo
+m	sketch	Esquema
+m	triplekick	Triple Patada
+m	thief	Ladrón
+m	spiderweb	Telaraña
+m	mindreader	Telépata
+m	nightmare	Pesadilla
+m	flamewheel	Rueda Fuego
+m	snore	Ronquido
+m	curse	Maldición
+m	flail	Azote
+m	conversion2	Conversión 2
+m	aeroblast	Aerochorro
+m	cottonspore	Esporagodón
+m	reversal	Inversión
+m	spite	Rencor
+m	powdersnow	Nieve Polvo
+m	protect	Protección
+m	machpunch	Ultrapuño
+m	scaryface	Cara Susto
+m	feintattack	Finta
+m	sweetkiss	Beso Dulce
+m	bellydrum	Tambor
+m	sludgebomb	Bomba Lodo
+m	mudslap	Bofetón Lodo
+m	octazooka	Pulpocañón
+m	spikes	Púas
+m	zapcannon	Electrocañón
+m	foresight	Profecía
+m	destinybond	Mismo Destino
+m	perishsong	Canto Mortal
+m	icywind	Viento Hielo
+m	detect	Detección
+m	bonerush	Ataque Óseo
+m	lockon	Fijar Blanco
+m	outrage	Enfado
+m	sandstorm	Tormenta Arena
+m	gigadrain	Gigadrenado
+m	endure	Aguante
+m	charm	Encanto
+m	rollout	Rodar
+m	falseswipe	Falso Tortazo
+m	swagger	Contoneo
+m	milkdrink	Batido
+m	spark	Chispa
+m	furycutter	Corte Furia
+m	steelwing	Ala de Acero
+m	meanlook	Mal de Ojo
+m	attract	Atracción
+m	sleeptalk	Sonámbulo
+m	healbell	Cascabel Cura
+m	return	Retribución
+m	present	Presente
+m	frustration	Frustración
+m	safeguard	Velo Sagrado
+m	painsplit	Divide Dolor
+m	sacredfire	Fuego Sagrado
+m	magnitude	Magnitud
+m	dynamicpunch	Puño Dinámico
+m	megahorn	Megacuerno
+m	dragonbreath	Dragoaliento
+m	batonpass	Relevo
+m	encore	Otra Vez
+m	pursuit	Persecución
+m	rapidspin	Giro Rápido
+m	sweetscent	Dulce Aroma
+m	irontail	Cola Férrea
+m	metalclaw	Garra Metal
+m	vitalthrow	Llave Vital
+m	morningsun	Sol Matinal
+m	synthesis	Fotosíntesis
+m	moonlight	Luz Lunar
+m	hiddenpower	Poder Oculto
+m	crosschop	Tajo Cruzado
+m	twister	Ciclón
+m	raindance	Danza Lluvia
+m	sunnyday	Día Soleado
+m	crunch	Triturar
+m	mirrorcoat	Manto Espejo
+m	psychup	Autosugestión
+m	extremespeed	Veloc. Extrema
+m	ancientpower	Poder Pasado
+m	shadowball	Bola Sombra
+m	futuresight	Premonición
+m	rocksmash	Golpe Roca
+m	whirlpool	Torbellino
+m	beatup	Paliza
+m	fakeout	Sorpresa
+m	uproar	Alboroto
+m	stockpile	Reserva
+m	spitup	Escupir
+m	swallow	Tragar
+m	heatwave	Onda Ígnea
+m	hail	Granizo
+m	torment	Tormento
+m	flatter	Camelo
+m	willowisp	Fuego Fatuo
+m	memento	Legado
+m	facade	Imagen
+m	focuspunch	Puño Certero
+m	smellingsalts	Estímulo
+m	followme	Señuelo
+m	naturepower	Adaptación
+m	charge	Carga
+m	taunt	Mofa
+m	helpinghand	Refuerzo
+m	trick	Truco
+m	roleplay	Imitación
+m	wish	Deseo
+m	assist	Ayuda
+m	ingrain	Arraigo
+m	superpower	Fuerza Bruta
+m	magiccoat	Capa Mágica
+m	recycle	Reciclaje
+m	revenge	Desquite
+m	brickbreak	Demolición
+m	yawn	Bostezo
+m	knockoff	Desarme
+m	endeavor	Esfuerzo
+m	eruption	Estallido
+m	skillswap	Intercambio
+m	imprison	Sellar
+m	refresh	Alivio
+m	grudge	Rabia
+m	snatch	Robo
+m	secretpower	Daño Secreto
+m	dive	Buceo
+m	armthrust	Empujón
+m	camouflage	Camuflaje
+m	tailglow	Luminicola
+m	lusterpurge	Resplandor
+m	mistball	Bola Neblina
+m	featherdance	Danza Pluma
+m	teeterdance	Danza Caos
+m	blazekick	Patada Ígnea
+m	mudsport	Chapoteo Lodo
+m	iceball	Bola Hielo
+m	needlearm	Brazo Pincho
+m	slackoff	Relajo
+m	hypervoice	Vozarrón
+m	poisonfang	Colmillo Veneno
+m	crushclaw	Garra Brutal
+m	blastburn	Anillo Ígneo
+m	hydrocannon	Hidrocañón
+m	meteormash	Puño Meteoro
+m	astonish	Impresionar
+m	weatherball	Meteorobola
+m	aromatherapy	Aromaterapia
+m	faketears	Llanto Falso
+m	aircutter	Aire Afilado
+m	overheat	Sofoco
+m	odorsleuth	Rastreo
+m	rocktomb	Tumba Rocas
+m	silverwind	Viento Plata
+m	metalsound	Eco Metálico
+m	grasswhistle	Silbato
+m	tickle	Cosquillas
+m	cosmicpower	Masa Cósmica
+m	waterspout	Salpicar
+m	signalbeam	Rayo Señal
+m	shadowpunch	Puño Sombra
+m	extrasensory	Paranormal
+m	skyuppercut	Gancho Alto
+m	sandtomb	Bucle Arena
+m	sheercold	Frío Polar
+m	muddywater	Agua Lodosa
+m	bulletseed	Semilladora
+m	aerialace	Golpe Aéreo
+m	iciclespear	Carámbano
+m	irondefense	Defensa Férrea
+m	block	Bloqueo
+m	howl	Aullido
+m	dragonclaw	Garra Dragón
+m	frenzyplant	Planta Feroz
+m	bulkup	Corpulencia
+m	bounce	Bote
+m	mudshot	Disparo Lodo
+m	poisontail	Cola Veneno
+m	covet	Antojo
+m	volttackle	Placaje Eléc
+m	magicalleaf	Hoja Mágica
+m	watersport	Hidrochorro
+m	calmmind	Paz Mental
+m	leafblade	Hoja Aguda
+m	dragondance	Danza Dragón
+m	rockblast	Pedrada
+m	shockwave	Onda Voltio
+m	waterpulse	Hidropulso
+m	doomdesire	Deseo Oculto
+m	psychoboost	Psicoataque
+m	roost	Respiro
+m	gravity	Gravedad
+m	miracleeye	Gran Ojo
+m	wakeupslap	Espabila
+m	hammerarm	Machada
+m	gyroball	Giro Bola
+m	healingwish	Deseo Cura
+m	brine	Salmuera
+m	naturalgift	Don Natural
+m	feint	Amago
+m	pluck	Picoteo
+m	tailwind	Viento Afín
+m	acupressure	Acupresión
+m	metalburst	Represión Metal
+m	uturn	Ida y Vuelta
+m	closecombat	A Bocajarro
+m	payback	Vendetta
+m	assurance	Buena Baza
+m	embargo	Embargo
+m	fling	Lanzamiento
+m	psychoshift	Psicocambio
+m	trumpcard	As Oculto
+m	healblock	Anticura
+m	wringout	Estrujón
+m	powertrick	Truco Fuerza
+m	gastroacid	Bilis
+m	luckychant	Conjuro
+m	mefirst	Yo Primero
+m	copycat	Copión
+m	powerswap	Cambiafuerza
+m	guardswap	Cambiadefensa
+m	punishment	Castigo
+m	lastresort	Última Baza
+m	worryseed	Abatidoras
+m	suckerpunch	Golpe Bajo
+m	toxicspikes	Púas Tóxicas
+m	heartswap	Cambiaalmas
+m	aquaring	Acua Aro
+m	magnetrise	Levitón
+m	flareblitz	Envite Ígneo
+m	forcepalm	Palmeo
+m	aurasphere	Esfera Aural
+m	rockpolish	Pulimento
+m	poisonjab	Puya Nociva
+m	darkpulse	Pulso Umbrío
+m	nightslash	Tajo Umbrío
+m	aquatail	Acua Cola
+m	seedbomb	Bomba Germen
+m	airslash	Tajo Aéreo
+m	xscissor	Tijera X
+m	bugbuzz	Zumbido
+m	dragonpulse	Pulso Dragón
+m	dragonrush	Carga Dragón
+m	powergem	Joya de Luz
+m	drainpunch	Puño Drenaje
+m	vacuumwave	Onda Vacío
+m	focusblast	Onda Certera
+m	energyball	Energibola
+m	bravebird	Pájaro Osado
+m	earthpower	Tierra Viva
+m	switcheroo	Trapicheo
+m	gigaimpact	Gigaimpacto
+m	nastyplot	Maquinación
+m	bulletpunch	Puño Bala
+m	avalanche	Alud
+m	iceshard	Esquirla Helada
+m	shadowclaw	Garra Umbría
+m	thunderfang	Colmillo Rayo
+m	icefang	Colmillo Hielo
+m	firefang	Colmillo Ígneo
+m	shadowsneak	Sombra Vil
+m	mudbomb	Bomba Fango
+m	psychocut	Psicocorte
+m	zenheadbutt	Cabezazo Zen
+m	mirrorshot	Disparo Espejo
+m	flashcannon	Cañón Resplandor
+m	rockclimb	Treparrocas
+m	defog	Despejar
+m	trickroom	Espacio Raro
+m	dracometeor	Cometa Draco
+m	discharge	Chispazo
+m	lavaplume	Humareda
+m	leafstorm	Lluevehojas
+m	powerwhip	Latigazo
+m	rockwrecker	Romperrocas
+m	crosspoison	Veneno X
+m	gunkshot	Lanzamugre
+m	ironhead	Cabeza de Hierro
+m	magnetbomb	Bomba Imán
+m	stoneedge	Roca Afilada
+m	captivate	Seducción
+m	stealthrock	Trampa Rocas
+m	grassknot	Hierba Lazo
+m	chatter	Cháchara
+m	judgment	Sentencia
+m	bugbite	Picadura
+m	chargebeam	Rayo Carga
+m	woodhammer	Mazazo
+m	aquajet	Acua Jet
+m	attackorder	Al Ataque
+m	defendorder	A Defender
+m	healorder	Auxilio
+m	headsmash	Testarazo
+m	doublehit	Doble Golpe
+m	roaroftime	Distorsión
+m	spacialrend	Corte Vacío
+m	lunardance	Danza Lunar
+m	crushgrip	Agarrón
+m	magmastorm	Lluvia Ígnea
+m	darkvoid	Brecha Negra
+m	seedflare	Fulgor Semilla
+m	ominouswind	Viento Aciago
+m	shadowforce	Golpe Umbrío
+m	honeclaws	Afilagarras
+m	wideguard	Vasta Guardia
+m	guardsplit	Isoguardia
+m	powersplit	Isofuerza
+m	wonderroom	Zona Extraña
+m	psyshock	Psicocarga
+m	venoshock	Carga Tóxica
+m	autotomize	Aligerar
+m	ragepowder	Polvo Ira
+m	telekinesis	Telequinesis
+m	magicroom	Zona Mágica
+m	smackdown	Antiaéreo
+m	stormthrow	Llave Corsé
+m	flameburst	Pirotecnia
+m	sludgewave	Onda Tóxica
+m	quiverdance	Danza Aleteo
+m	heavyslam	Cuerpo Pesado
+m	synchronoise	Sincrorruido
+m	electroball	Bola Voltio
+m	soak	Empapar
+m	flamecharge	Nitrocarga
+m	coil	Enrosque
+m	lowsweep	Puntapié
+m	acidspray	Bomba Ácida
+m	foulplay	Juego Sucio
+m	simplebeam	Onda Simple
+m	entrainment	Danza Amiga
+m	afteryou	Cede Paso
+m	round	Canon
+m	echoedvoice	Eco Voz
+m	chipaway	Guardia Baja
+m	clearsmog	Niebla Clara
+m	storedpower	Poder Reserva
+m	quickguard	Anticipo
+m	allyswitch	Cambio de Banda
+m	scald	Escaldar
+m	shellsmash	Rompecoraza
+m	healpulse	Pulso Cura
+m	hex	Infortunio
+m	skydrop	Caída Libre
+m	shiftgear	Cambio de Marcha
+m	circlethrow	Llave Giro
+m	incinerate	Calcinación
+m	quash	Último Lugar
+m	acrobatics	Acróbata
+m	reflecttype	Clonatipo
+m	retaliate	Represalia
+m	finalgambit	Sacrificio
+m	bestow	Ofrenda
+m	inferno	Infierno
+m	waterpledge	Voto Agua
+m	firepledge	Voto Fuego
+m	grasspledge	Voto Planta
+m	voltswitch	Voltiocambio
+m	strugglebug	Estoicismo
+m	bulldoze	Terratemblor
+m	frostbreath	Vaho Gélido
+m	dragontail	Cola Dragón
+m	workup	Avivar
+m	electroweb	Electrotela
+m	wildcharge	Voltio Cruel
+m	drillrun	Taladradora
+m	dualchop	Golpe Bis
+m	heartstamp	Arrumaco
+m	hornleech	Asta Drenaje
+m	sacredsword	Espada Santa
+m	razorshell	Concha Filo
+m	heatcrash	Golpe Calor
+m	leaftornado	Ciclón de Hojas
+m	steamroller	Rodillo de Púas
+m	cottonguard	Rizo Algodón
+m	nightdaze	Pulso Noche
+m	psystrike	Onda Mental
+m	tailslap	Plumerazo
+m	hurricane	Vendaval
+m	headcharge	Ariete
+m	geargrind	Rueda Doble
+m	searingshot	Bomba Ígnea
+m	technoblast	Tecno Shock
+m	relicsong	Canto Arcaico
+m	secretsword	Sable Místico
+m	glaciate	Mundo Gélido
+m	boltstrike	Ataque Fulgor
+m	blueflare	Llama Azul
+m	fierydance	Danza Llama
+m	freezeshock	Rayo Gélido
+m	iceburn	Llama Gélida
+m	snarl	Alarido
+m	iciclecrash	Chuzos
+m	vcreate	V de Fuego
+m	fusionflare	Llama Fusión
+m	fusionbolt	Rayo Fusión
+m	flyingpress	Plancha Voladora
+m	matblock	Escudo Tatami
+m	belch	Eructo
+m	rototiller	Fertilizante
+m	stickyweb	Red Viscosa
+m	fellstinger	Aguijón Letal
+m	phantomforce	Golpe Fantasma
+m	trickortreat	Halloween
+m	nobleroar	Rugido de Guerra
+m	iondeluge	Cortina Plasma
+m	paraboliccharge	Carga Parábola
+m	forestscurse	Condena Silvana
+m	petalblizzard	Tormenta Floral
+m	freezedry	Liofilización
+m	disarmingvoice	Voz Cautivadora
+m	partingshot	Última Palabra
+m	topsyturvy	Reversión
+m	drainingkiss	Beso Drenaje
+m	craftyshield	Truco Defensa
+m	flowershield	Defensa Floral
+m	grassyterrain	Campo de Hierba
+m	mistyterrain	Campo de Niebla
+m	electrify	Electrificación
+m	playrough	Carantoña
+m	fairywind	Viento Feérico
+m	moonblast	Fuerza Lunar
+m	boomburst	Estruendo
+m	fairylock	Cerrojo Feérico
+m	kingsshield	Escudo Real
+m	playnice	Camaradería
+m	confide	Confidencia
+m	diamondstorm	Torm. Diamantes
+m	steameruption	Chorro de Vapor
+m	hyperspacehole	Paso Dimensional
+m	watershuriken	Shuriken de Agua
+m	mysticalfire	Llama Embrujada
+m	spikyshield	Barrera Espinosa
+m	aromaticmist	Niebla Aromática
+m	eerieimpulse	Onda Anómala
+m	venomdrench	Trampa Venenosa
+m	powder	Polvo Explosivo
+m	geomancy	Geocontrol
+m	magneticflux	Aura Magnética
+m	happyhour	Paga Extra
+m	electricterrain	Campo Eléctrico
+m	dazzlinggleam	Brillo Mágico
+m	celebrate	Celebración
+m	holdhands	Manos Juntas
+m	babydolleyes	Ojitos Tiernos
+m	nuzzle	Moflete Estático
+m	holdback	Clemencia
+m	infestation	Acoso
+m	poweruppunch	Puño Incremento
+m	oblivionwing	Ala Mortífera
+m	thousandarrows	Mil Flechas
+m	thousandwaves	Mil Temblores
+m	landswrath	Fuerza Telúrica
+m	lightofruin	Luz Aniquiladora
+a	stench	Hedor
+a	drizzle	Llovizna
+a	speedboost	Impulso
+a	battlearmor	Armadura Batalla
+a	sturdy	Robustez
+a	damp	Humedad
+a	limber	Flexibilidad
+a	sandveil	Velo Arena
+a	static	Elec. Estática
+a	voltabsorb	Absorbe Elec
+a	waterabsorb	Absorbe Agua
+a	oblivious	Despiste
+a	cloudnine	Aclimatación
+a	compoundeyes	Ojo Compuesto
+a	insomnia	Insomnio
+a	colorchange	Cambio Color
+a	immunity	Inmunidad
+a	flashfire	Absorbe Fuego
+a	shielddust	Polvo Escudo
+a	owntempo	Ritmo Propio
+a	suctioncups	Ventosas
+a	intimidate	Intimidación
+a	shadowtag	Sombra Trampa
+a	roughskin	Piel Tosca
+a	wonderguard	Superguarda
+a	levitate	Levitación
+a	effectspore	Efecto Espora
+a	synchronize	Sincronía
+a	clearbody	Cuerpo Puro
+a	naturalcure	Cura Natural
+a	lightningrod	Pararrayos
+a	serenegrace	Dicha
+a	swiftswim	Nado Rápido
+a	chlorophyll	Clorofila
+a	illuminate	Iluminación
+a	trace	Calco
+a	hugepower	Potencia
+a	poisonpoint	Punto Tóxico
+a	innerfocus	Fuerza Mental
+a	magmaarmor	Escudo Magma
+a	waterveil	Velo Agua
+a	magnetpull	Imán
+a	soundproof	Insonorizar
+a	raindish	Cura Lluvia
+a	sandstream	Chorro Arena
+a	pressure	Presión
+a	thickfat	Sebo
+a	earlybird	Madrugar
+a	flamebody	Cuerpo Llama
+a	runaway	Fuga
+a	keeneye	Vista Lince
+a	hypercutter	Corte Fuerte
+a	pickup	Recogida
+a	truant	Pereza
+a	hustle	Entusiasmo
+a	cutecharm	Gran Encanto
+a	plus	Más
+a	minus	Menos
+a	forecast	Predicción
+a	stickyhold	Viscosidad
+a	shedskin	Mudar
+a	guts	Agallas
+a	marvelscale	Escama Especial
+a	liquidooze	Viscosecreción
+a	overgrow	Espesura
+a	blaze	Mar Llamas
+a	torrent	Torrente
+a	swarm	Enjambre
+a	rockhead	Cabeza Roca
+a	drought	Sequía
+a	arenatrap	Trampa Arena
+a	vitalspirit	Espíritu Vital
+a	whitesmoke	Humo Blanco
+a	purepower	Energía Pura
+a	shellarmor	Caparazón
+a	airlock	Esclusa de Aire
+a	tangledfeet	Tumbos
+a	motordrive	Electromotor
+a	rivalry	Rivalidad
+a	steadfast	Impasible
+a	snowcloak	Manto Níveo
+a	gluttony	Gula
+a	angerpoint	Irascible
+a	unburden	Liviano
+a	heatproof	Ignífugo
+a	simple	Simple
+a	dryskin	Piel Seca
+a	download	Descarga
+a	ironfist	Puño Férreo
+a	poisonheal	Antídoto
+a	adaptability	Adaptable
+a	skilllink	Encadenado
+a	hydration	Hidratación
+a	solarpower	Poder Solar
+a	quickfeet	Pies Rápidos
+a	normalize	Normalidad
+a	sniper	Francotirador
+a	magicguard	Muro Mágico
+a	noguard	Indefenso
+a	stall	Rezagado
+a	technician	Experto
+a	leafguard	Defensa Hoja
+a	klutz	Zoquete
+a	moldbreaker	Rompemoldes
+a	superluck	Afortunado
+a	aftermath	Detonación
+a	anticipation	Anticipación
+a	forewarn	Alerta
+a	unaware	Ignorante
+a	tintedlens	Cromolente
+a	filter	Filtro
+a	slowstart	Inicio Lento
+a	scrappy	Intrépido
+a	stormdrain	Colector
+a	icebody	Gélido
+a	solidrock	Roca Sólida
+a	snowwarning	Nevada
+a	honeygather	Recogemiel
+a	frisk	Cacheo
+a	reckless	Audaz
+a	multitype	Multitipo
+a	flowergift	Don Floral
+a	baddreams	Mal Sueño
+a	pickpocket	Hurto
+a	sheerforce	Potencia Bruta
+a	contrary	Respondón
+a	unnerve	Nerviosismo
+a	defiant	Competitivo
+a	defeatist	Flaqueza
+a	cursedbody	Cuerpo Maldito
+a	healer	Alma Cura
+a	friendguard	Compiescolta
+a	weakarmor	Armadura Frágil
+a	heavymetal	Metal Pesado
+a	lightmetal	Metal Liviano
+a	multiscale	Multiescamas
+a	toxicboost	Ímpetu Tóxico
+a	flareboost	Ímpetu Ardiente
+a	harvest	Cosecha
+a	telepathy	Telepatía
+a	moody	Veleta
+a	overcoat	Funda
+a	poisontouch	Toque Tóxico
+a	regenerator	Regeneración
+a	bigpecks	Sacapecho
+a	sandrush	Ímpetu Arena
+a	wonderskin	Piel Milagro
+a	analytic	Cálculo Final
+a	illusion	Ilusión
+a	imposter	Impostor
+a	infiltrator	Allanamiento
+a	mummy	Momia
+a	moxie	Autoestima
+a	justified	Justiciero
+a	rattled	Cobardía
+a	magicbounce	Espejo Mágico
+a	sapsipper	Herbívoro
+a	prankster	Bromista
+a	sandforce	Poder Arena
+a	ironbarbs	Punta Acero
+a	zenmode	Modo Daruma
+a	victorystar	Tinovictoria
+a	turboblaze	Turbollama
+a	teravolt	Terravoltaje
+a	aromaveil	Velo Aroma
+a	flowerveil	Velo Flor
+a	cheekpouch	Carrillo
+a	protean	Mutatipo
+a	furcoat	Pelaje Recio
+a	magician	Prestidigitador
+a	bulletproof	Antibalas
+a	competitive	Tenacidad
+a	strongjaw	Mandíbula Fuerte
+a	refrigerate	Piel Helada
+a	sweetveil	Velo Dulce
+a	stancechange	Cambio Táctico
+a	galewings	Alas Vendaval
+a	megalauncher	Megadisparador
+a	grasspelt	Manto Frondoso
+a	symbiosis	Simbiosis
+a	toughclaws	Garra Dura
+a	pixilate	Piel Feérica
+a	gooey	Baba
+a	aerilate	Piel Celeste
+a	parentalbond	Amor Filial
+a	darkaura	Aura Oscura
+a	fairyaura	Aura Feérica
+a	aurabreak	Rompeaura
+a	primordialsea	Mar del Albor
+a	desolateland	Tierra del Ocaso
+a	deltastream	Ráfaga Delta
+n	hardy	Fuerte
+n	lonely	Huraña
+n	brave	Audaz
+n	adamant	Firme
+n	naughty	Pícara
+n	bold	Osada
+n	docile	Dócil
+n	relaxed	Plácida
+n	impish	Agitada
+n	lax	Floja
+n	timid	Miedosa
+n	hasty	Activa
+n	serious	Seria
+n	jolly	Alegre
+n	naive	Ingenua
+n	modest	Modesta
+n	mild	Afable
+n	quiet	Mansa
+n	bashful	Tímida
+n	rash	Alocada
+n	calm	Serena
+n	gentle	Amable
+n	sassy	Grosera
+n	careful	Cauta
+n	quirky	Rara

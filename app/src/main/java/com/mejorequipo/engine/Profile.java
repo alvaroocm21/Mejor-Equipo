@@ -27,7 +27,7 @@ final class Profile {
     Dex.Species sp;
     final float[] def = new float[18];
     float[] cov;
-    double off, bulk, speed, util, score;
+    double off, bulk, speed, util, score, baseTotal;
     boolean physAttacker, specAttacker;
     int nPhys, nSpec;
     long roles;
@@ -159,7 +159,10 @@ final class Profile {
         // ----- velocidad -----
         double spe = p.stats[5] * 100.0 / p.level;
         if (it.equals("choicescarf")) spe *= 1.5;
-        f.speed = Math.min(1, spe / 350.0);
+        f.speed = 0.5 * Math.min(1, spe / 350.0) + 0.5 * Math.min(1, f.sp.base[5] / 130.0);
+        int bst = 0;
+        for (int b : f.sp.base) bst += b;
+        f.baseTotal = Math.max(0, Math.min(1, (bst - 300) / 300.0)); // 300 -> 0, 600+ -> 1
 
         // ----- roles por objeto/habilidad -----
         if (it.startsWith("choice")) f.roles |= CHOICE;
@@ -176,7 +179,7 @@ final class Profile {
                 | ELEC_T | GRASS_T | MISTY_T | PSY_T);
         f.util = Math.min(1, 0.34 * Long.bitCount(util));
         f.analyzeNature(dex);
-        f.score = 0.45 * f.off + 0.30 * f.bulk + 0.15 * f.speed + 0.10 * f.util - f.naturePenalty;
+        f.score = 0.40 * f.off + 0.25 * f.bulk + 0.12 * f.speed + 0.08 * f.util + 0.15 * f.baseTotal - f.naturePenalty;
         f.label(util);
         f.moveNotes(dex);
         return f;
@@ -312,7 +315,7 @@ final class Profile {
             naturePenalty += 0.04;
             if (sug == null) sug = "baja la Velocidad de un Pokémon base " + sp.base[5] + " (¿lo usas en Trick Room?)";
         }
-        if (sug != null) notes.add("Naturaleza " + p.nature + ": " + sug);
+        if (sug != null) notes.add("Naturaleza " + Es.nature(p.nature) + ": " + sug);
         int evSum = 0;
         for (int e : p.evs) evSum += e;
         if (evSum == 0) notes.add("Sin EVs definidos: estadísticas infravaloradas.");
@@ -323,7 +326,7 @@ final class Profile {
         boolean phys = physAttacker || (!specAttacker && sp.base[1] >= sp.base[3]);
         boolean fast = sp.base[5] >= 80 && (roles & SLOW) == 0;
         String n = phys ? (fast ? "Jolly" : "Adamant") : (fast ? "Timid" : "Modest");
-        return "prueba " + n + " (usa más movimientos " + (phys ? "físicos" : "especiales") + ").";
+        return "prueba " + Es.nature(n) + " (usa más movimientos " + (phys ? "físicos" : "especiales") + ").";
     }
 
     private boolean hasId(String id) {
@@ -361,6 +364,18 @@ final class Profile {
                 if (sp.hasType(moveType(m, p))) stab = true;
             }
         }
+        int bst = 0;
+        for (int b : sp.base) bst += b;
+        String bases = "Ataque base " + sp.base[1] + ", At. Esp. base " + sp.base[3];
+        if (nPhys >= 2 && sp.base[3] >= sp.base[1] + 25) {
+            naturePenalty += 0.08;
+            notes.add("Usa sobre todo ataques físicos pero rinde más con especiales (" + bases + ").");
+        } else if (nSpec >= 2 && sp.base[1] >= sp.base[3] + 25) {
+            naturePenalty += 0.08;
+            notes.add("Usa sobre todo ataques especiales pero rinde más con físicos (" + bases + ").");
+        }
+        if (sp.canEvolve) notes.add("Puede evolucionar: sus stats base actuales suman " + bst + " y mejorarán al evolucionar.");
+        else if (bst < 400) notes.add("Stats base bajos (total " + bst + "): le costará en combates fuertes.");
         if (p.moveIds.size() < 4) notes.add("Solo tiene " + p.moveIds.size() + " movimientos definidos.");
         if (dmg > 0 && !stab && off >= 0.2) notes.add("Ningún ataque con STAB (mismo tipo).");
     }

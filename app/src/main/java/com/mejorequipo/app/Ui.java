@@ -157,4 +157,44 @@ final class Ui {
             }
         }
     }
+
+    // ------------------------------------------------------------------ barras de estadísticas base
+    static final class StatBars extends View {
+        private static final String[] LABELS = {"PS", "Atq", "Def", "AtE", "DeE", "Vel"};
+        private final int[] base;
+        private final Paint bar = new Paint(Paint.ANTI_ALIAS_FLAG), tp = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final RectF r = new RectF();
+        private final float d;
+
+        StatBars(Context c, int[] base) {
+            super(c);
+            this.base = base;
+            d = c.getResources().getDisplayMetrics().density;
+            tp.setTextAlign(Paint.Align.CENTER);
+            tp.setTextSize(9 * d);
+        }
+
+        @Override
+        protected void onMeasure(int w, int h) {
+            setMeasuredDimension(MeasureSpec.getSize(w), (int) (54 * d));
+        }
+
+        @Override
+        protected void onDraw(Canvas c) {
+            float colW = getWidth() / 6f, top = 12 * d, bottom = getHeight() - 12 * d;
+            for (int i = 0; i < 6; i++) {
+                float cx = colW * i + colW / 2, bw = colW * 0.42f;
+                float frac = Math.min(1f, base[i] / 160f);
+                bar.setColor(base[i] >= 100 ? 0xFF6EE7A0 : base[i] >= 70 ? 0xFFFFD166 : 0xFFFF8A5B);
+                r.set(cx - bw / 2, bottom - (bottom - top) * frac, cx + bw / 2, bottom);
+                c.drawRoundRect(r, 3 * d, 3 * d, bar);
+                tp.setColor(0xFFECEFF4);
+                tp.setFakeBoldText(true);
+                c.drawText(String.valueOf(base[i]), cx, r.top - 2 * d, tp);
+                tp.setColor(0xFF9AA3B2);
+                tp.setFakeBoldText(false);
+                c.drawText(LABELS[i], cx, getHeight() - 2 * d, tp);
+            }
+        }
+    }
 }
