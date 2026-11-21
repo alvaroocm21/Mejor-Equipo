@@ -43,9 +43,9 @@ public class SaveTest {
         w16(save,0x400+4,idx(nm.items,"Choice Scarf")); w16(save,0x400+6,1);
         w16(save,0x400+0xA70,idx(nm.items,"Occa Berry")); w16(save,0x400+0xA72,3);
         Gen6Save.Result r=Gen6Save.read(save,nm);
-        Files.write(Paths.get("/tmp/g6.txt"), r.text().getBytes(StandardCharsets.UTF_8)); System.out.println("dead="+r.dead+" ignored="+r.ignoredBoxes);System.out.println("party="+r.party+" box="+r.boxed+" bag="+r.bag+" warn="+r.warnings);
+        java.util.Set<Integer> ign=r.defaultIgnored(); Files.write(Paths.get("/tmp/g6.txt"), r.text(ign).getBytes(StandardCharsets.UTF_8)); System.out.println("ignored="+ign+" names="+r.boxNames[3]+"/"+r.boxNames[30]+" dead="+r.ignoredCount(ign)+" party="+r.party()+" boxed="+r.boxed(ign)+" bag="+r.bag+" warn="+r.warnings);
         Dex dex=Dex.load(rd.apply("pokedex.tsv"),rd.apply("moves.tsv"));
-        List<String> w=new ArrayList<>(); List<PokeSet> box3=ShowdownParser.parse(dex,r.text(),w);
+        List<String> w=new ArrayList<>(); List<PokeSet> box3=ShowdownParser.parse(dex,r.text(ign),w);
         for(PokeSet p:box3) System.out.println(p.species.name+" lvl "+p.level+" "+p.ability+" "+Arrays.toString(p.stats)+" "+p.moveIds+" hp="+p.hiddenPowerType);
         System.out.println("warn "+w);
     }

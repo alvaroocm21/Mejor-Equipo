@@ -31,15 +31,45 @@ public final class Gen6Save {
     }
 
     public static final class Result {
-        public final List<String> sets = new ArrayList<>();
+        public final List<String> partySets = new ArrayList<>();
+        public final List<List<String>> boxSets = new ArrayList<>();
+        public final String[] boxNames = new String[31];
         public final Map<String, Integer> bag = new HashMap<>();
         public final List<String> warnings = new ArrayList<>();
-        public int party, boxed, dead;
-        /** Cajas ignoradas por ser de Pokémon muertos (nombre de la caja). */
-        public final List<String> ignoredBoxes = new ArrayList<>();
-        public String text() {
+
+        public int party() { return partySets.size(); }
+
+        public int boxCount(int box) { return boxSets.get(box).size(); }
+
+        /** Cajas de muertos por defecto: las que se llaman "muertos"...; si no hay ninguna, la última caja. */
+        public java.util.Set<Integer> defaultIgnored() {
+            java.util.Set<Integer> s = new java.util.HashSet<>();
+            for (int i = 0; i < 31; i++) if (isDeadBox(boxNames[i])) s.add(i);
+            if (s.isEmpty()) s.add(30);
+            return s;
+        }
+
+        public int boxed(java.util.Set<Integer> ignored) {
+            int n = 0;
+            for (int i = 0; i < 31; i++) if (!ignored.contains(i)) n += boxCount(i);
+            return n;
+        }
+
+        public int ignoredCount(java.util.Set<Integer> ignored) {
+            int n = 0;
+            for (int i : ignored) if (i >= 0 && i < 31) n += boxCount(i);
+            return n;
+        }
+
+        public List<String> sets(java.util.Set<Integer> ignored) {
+            List<String> all = new ArrayList<>(partySets);
+            for (int i = 0; i < 31; i++) if (!ignored.contains(i)) all.addAll(boxSets.get(i));
+            return all;
+        }
+
+        public String text(java.util.Set<Integer> ignored) {
             StringBuilder b = new StringBuilder();
-            for (String s : sets) b.append(s).append("\n\n");
+            for (String s : sets(ignored)) b.append(s).append("\n\n");
             return b.toString();
         }
     }
@@ -141,6 +171,7 @@ public final class Gen6Save {
 
     public static Result read(byte[] d, Names nm) {
         Result r = new Result();
+        for (int i = 0; i < 31; i++) { r.boxNames[i] = ""; r.boxSets.add(new ArrayList<String>()); }
         if (!isSave(d)) {
             r.warnings.add("El archivo no tiene el tamaño de un guardado de Rubí Omega / Zafiro Alfa (483328 bytes).");
             return r;
@@ -149,29 +180,23 @@ public final class Gen6Save {
         if (partyCount > 6) partyCount = 6;
         for (int i = 0; i < partyCount; i++) {
             String s = convert(decrypt(d, PARTY + i * SIZE_PARTY, SIZE_PARTY), true, nm);
-            if (s != null) { r.sets.add(s); r.party++; }
+            if (s != null) r.partySets.add(s);
         }
         for (int b = 0; b < 31; b++) {
-            String boxName = boxName(d, b);
-            boolean deadBox = isDeadBox(boxName);
+            r.boxNames[b] = boxName(d, b);
+            List<String> list = new ArrayList<>();
             for (int sl = 0; sl < 30; sl++) {
                 int off = BOX + SIZE_STORED * (b * 30 + sl);
                 if (u32(d, off) == 0 && u16(d, off + 8) == 0) continue; // hueco vacío
                 String s = convert(decrypt(d, off, SIZE_STORED), false, nm);
-                if (s == null) continue;
-                if (deadBox) {
-                    r.dead++;
-                    if (!r.ignoredBoxes.contains(boxName)) r.ignoredBoxes.add(boxName);
-                } else {
-                    r.sets.add(s);
-                    r.boxed++;
-                }
+                if (s != null) list.add(s);
             }
+            r.boxSets.set(b, list);
         }
         // mochila: bolsillo de objetos (400 huecos) y bayas (72), cada hueco = id u16 + cantidad u16
         readPouch(d, BAG + 0x000, 400, nm, r.bag);
         readPouch(d, BAG + 0xA70, 72, nm, r.bag);
-        if (r.sets.isEmpty())
+        if (r.partySets.isEmpty() && r.boxed(new java.util.HashSet<Integer>()) == 0)
             r.warnings.add("Guardado leído pero no encuentro Pokémon (¿es de Rubí Omega / Zafiro Alfa?).");
         return r;
     }

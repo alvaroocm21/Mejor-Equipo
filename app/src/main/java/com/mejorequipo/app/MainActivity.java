@@ -1,6 +1,7 @@
 package com.mejorequipo.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -40,8 +41,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends Activity {
     private static final int REQ_FOLDER = 42;
@@ -66,6 +69,7 @@ public class MainActivity extends Activity {
     private int nTeams, tab; // tab 0 = combate fuerte, 1 = aventura
     private List<TeamBuilder.TeamResult> strongTeams, advTeams;
     private List<String> lastWarnings = new ArrayList<>();
+    private volatile Gen6Save.Result lastSave;
 
     // ------------------------------------------------------------------ ciclo de vida
     @Override
@@ -263,6 +267,11 @@ public class MainActivity extends Activity {
         l.leftMargin = dp(12);
         r3.addView(swVariety, l);
         s.addView(r3);
+        Button btnBoxes = button("☠  Cajas ignoradas (muertos)", CHIP);
+        LinearLayout.LayoutParams lb = new LinearLayout.LayoutParams(-1, dp(42));
+        lb.topMargin = dp(10);
+        s.addView(btnBoxes, lb);
+        btnBoxes.setOnClickListener(v -> showBoxDialog());
         minus.setOnClickListener(v -> { if (nTeams > 1) { nTeams--; saveAndRefresh(); } });
         plus.setOnClickListener(v -> { if (nTeams < 15) { nTeams++; saveAndRefresh(); } });
         swVariety.setOnCheckedChangeListener((v, c) -> { variety = c; saveAndRefresh(); });
@@ -290,6 +299,49 @@ public class MainActivity extends Activity {
         prefs.edit().putBoolean("doubles", doubles).putInt("nTeams", nTeams).putBoolean("variety", variety).apply();
         updateControls();
         refresh();
+    }
+
+    // ------------------------------------------------------------------ cajas ignoradas (muertos)
+    private Set<Integer> currentIgnored(Gen6Save.Result gr) {
+        if (prefs.getBoolean("customIgnore", false)) {
+            Set<Integer> s = new HashSet<>();
+            for (String x : prefs.getStringSet("ignored", new HashSet<String>())) {
+                try { s.add(Integer.parseInt(x)); } catch (NumberFormatException ignored) { }
+            }
+            return s;
+        }
+        return gr.defaultIgnored();
+    }
+
+    private void showBoxDialog() {
+        final Gen6Save.Result gr = lastSave;
+        if (gr == null) {
+            Toast.makeText(this, "Primero carga un guardado de Rubí Omega / Zafiro Alfa", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Set<Integer> cur = currentIgnored(gr);
+        String[] items = new String[31];
+        final boolean[] checked = new boolean[31];
+        for (int i = 0; i < 31; i++) {
+            String n = gr.boxNames[i] == null || gr.boxNames[i].isEmpty() ? "(sin nombre)" : gr.boxNames[i];
+            items[i] = "Caja " + (i + 1) + " · " + n + " · " + gr.boxCount(i) + " Pokémon";
+            checked[i] = cur.contains(i);
+        }
+        new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                .setTitle("☠ Cajas que NO se usan (muertos)")
+                .setMultiChoiceItems(items, checked, (d, which, isChecked) -> checked[which] = isChecked)
+                .setPositiveButton("Guardar", (d, w) -> {
+                    Set<String> out = new HashSet<>();
+                    for (int i = 0; i < 31; i++) if (checked[i]) out.add(String.valueOf(i));
+                    prefs.edit().putBoolean("customIgnore", true).putStringSet("ignored", out).apply();
+                    refresh();
+                })
+                .setNeutralButton("Automático", (d, w) -> {
+                    prefs.edit().putBoolean("customIgnore", false).apply();
+                    refresh();
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     // ------------------------------------------------------------------ carpeta
@@ -460,11 +512,18 @@ public class MainActivity extends Activity {
                     Map<String, Integer> saveBag = null;
                     if (Gen6Save.isSave(raw)) {
                         Gen6Save.Result gr = Gen6Save.read(raw, loadNames());
-                        text = gr.text();
+                        Set<Integer> ign = currentIgnored(gr);
+                        lastSave = gr;
+                        text = gr.text(ign);
                         saveBag = gr.bag;
                         warnings.addAll(gr.warnings);
-                        kind = " · Rubí Omega/Zafiro Alfa (" + gr.party + " equipo + " + gr.boxed + " cajas)"
-                                + (gr.dead > 0 ? "\n☠ Ignorados " + gr.dead + " Pokémon muertos (caja " + gr.ignoredBoxes + ")" : "");
+                        kind = " · Rubí Omega/Zafiro Alfa (" + gr.party() + " equipo + " + gr.boxed(ign) + " cajas)";
+                        StringBuilder skipped = new StringBuilder();
+                        for (int bi : new java.util.TreeSet<>(ign))
+                            if (gr.boxCount(bi) > 0)
+                                skipped.append(skipped.length() > 0 ? ", " : "").append("caja ").append(bi + 1)
+                                        .append(" «").append(gr.boxNames[bi]).append("» (").append(gr.boxCount(bi)).append(")");
+                        if (skipped.length() > 0) kind += "\n☠ Ignoradas: " + skipped + ". Cámbialo en ⚙ → Cajas ignoradas.";
                     } else {
                         text = new String(raw, StandardCharsets.UTF_8);
                     }
