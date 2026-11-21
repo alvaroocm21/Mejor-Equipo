@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mejorequipo.engine.Dex;
+import com.mejorequipo.engine.Gen6Save;
 import com.mejorequipo.engine.ItemAdvisor;
 import com.mejorequipo.engine.PokeSet;
 import com.mejorequipo.engine.ShowdownParser;
@@ -273,14 +274,31 @@ public class MainActivity extends Activity {
         return exact != null ? exact : (prefix != null ? prefix : anyTxt);
     }
 
-    private String readAll(Uri uri) throws Exception {
+    private byte[] readBytes(Uri uri) throws Exception {
         try (InputStream in = getContentResolver().openInputStream(uri)) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            byte[] buf = new byte[16384];
+            byte[] buf = new byte[65536];
             int n;
             while (in != null && (n = in.read(buf)) > 0) out.write(buf, 0, n);
-            return new String(out.toByteArray(), StandardCharsets.UTF_8);
+            return out.toByteArray();
         }
+    }
+
+    private String readAll(Uri uri) throws Exception {
+        return new String(readBytes(uri), StandardCharsets.UTF_8);
+    }
+
+    private static Gen6Save.Names names;
+
+    private synchronized Gen6Save.Names loadNames() throws Exception {
+        if (names == null) {
+            String[] f = {"species", "moves", "abilities", "items", "growth"};
+            String[] t = new String[5];
+            for (int i = 0; i < 5; i++)
+                t[i] = new String(readStream(getAssets().open("gen6_" + f[i] + ".txt")), StandardCharsets.UTF_8);
+            names = Gen6Save.Names.load(t[0], t[1], t[2], t[3], t[4]);
+        }
+        return names;
     }
 
     private void writeResults(Uri tree, String content) {
@@ -353,27 +371,47 @@ public class MainActivity extends Activity {
                     msg = "No encuentro el archivo \"main\" en la carpeta" + (seen.isEmpty() ? " (está vacía)."
                             : ". Archivos: " + seen) + "\nDebe llamarse main.txt (o main).";
                 } else {
-                    String text = readAll(f.uri);
+                    byte[] raw = readBytes(f.uri);
+                    String text;
+                    String kind = "";
+                    Map<String, Integer> saveBag = null;
+                    if (Gen6Save.isSave(raw)) {
+                        Gen6Save.Result gr = Gen6Save.read(raw, loadNames());
+                        text = gr.text();
+                        saveBag = gr.bag;
+                        warnings.addAll(gr.warnings);
+                        kind = " (guardado de Rubí Omega/Zafiro Alfa: " + gr.party + " en equipo, " + gr.boxed + " en cajas)";
+                    } else {
+                        text = new String(raw, StandardCharsets.UTF_8);
+                    }
                     Dex d = loadDex();
                     List<PokeSet> box = ShowdownParser.parse(d, text, warnings);
                     count = box.size();
                     if (box.isEmpty()) {
-                        msg = f.name + " no contiene Pokémon reconocibles (formato Showdown).";
+                        boolean binary = false;
+                        for (int q = 0; q < Math.min(raw.length, 2000); q++) if (raw[q] == 0) { binary = true; break; }
+                        msg = binary ? f.name + " es un guardado binario de " + raw.length + " bytes que no reconozco. "
+                                + "Solo leo guardados de Rubí Omega/Zafiro Alfa (483328 bytes) o texto en formato Showdown."
+                                : f.name + " no contiene Pokémon reconocibles (formato Showdown).";
+                        warnings.clear();
                     } else {
                         TeamBuilder.Options o = new TeamBuilder.Options();
                         o.doubles = dbl;
                         o.nTeams = n;
                         o.minDiff = var ? 2 : 1;
                         int bagCount = 0;
-                        if (bagFile != null) {
+                        if (saveBag != null) {
+                            o.bag = saveBag;
+                        } else if (bagFile != null) {
                             o.bag = ItemAdvisor.parseBag(readAll(bagFile.uri));
-                            for (int q : o.bag.values()) bagCount += q;
                         }
+                        for (int q : o.bag.values()) bagCount += q;
                         teams = TeamBuilder.build(d, box, o);
                         String when = f.modified > 0 ? " · modificado " + DateUtils.getRelativeTimeSpanString(
                                 f.modified, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) : "";
-                        msg = "✔ " + f.name + " · " + count + " Pokémon" + when + "\n"
-                                + (bagFile != null ? "🎒 " + bagFile.name + " · " + bagCount + " objetos"
+                        msg = "✔ " + f.name + kind + " · " + count + " Pokémon" + when + "\n"
+                                + (saveBag != null ? "🎒 Mochila leída del guardado · " + bagCount + " objetos"
+                                : bagFile != null ? "🎒 " + bagFile.name + " · " + bagCount + " objetos"
                                 : "🎒 Sin mochila.txt: solo uso los objetos que llevan tus Pokémon");
                         writeResults(tree, formatAll(teams));
                     }

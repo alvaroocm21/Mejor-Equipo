@@ -10,7 +10,8 @@ const P = [];
 for (const [id, s] of Object.entries(dex)) {
   if (s.isNonstandard === 'CAP' || s.isNonstandard === 'Custom' || !s.types || !s.baseStats) continue;
   const b = s.baseStats;
-  P.push([id, s.name, s.types.join('/'), [b.hp, b.atk, b.def, b.spa, b.spd, b.spe].join(','), Object.values(s.abilities).join('|'), s.evos && s.evos.length ? 1 : 0].join('\t'));
+  P.push([id, s.name, s.types.join('/'), [b.hp, b.atk, b.def, b.spa, b.spd, b.spe].join(','), Object.values(s.abilities).join('|'), s.evos && s.evos.length ? 1 : 0,
+    /^(Mega|Primal)/.test(s.forme || '') ? (s.requiredItem || '') : '', /^(Mega|Primal)/.test(s.forme || '') ? (s.baseSpecies || '') : ''].join('\t'));
 }
 fs.writeFileSync(path.join(out, 'pokedex.tsv'), P.join('\n') + '\n');
 const M = [];

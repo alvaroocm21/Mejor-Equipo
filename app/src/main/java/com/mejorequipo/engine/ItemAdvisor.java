@@ -142,6 +142,11 @@ public final class ItemAdvisor {
         String ab = Dex.toId(p.ability);
         String cur = canon(p.item);
         List<Cand> out = new ArrayList<>();
+        if (!sp.requiredItem.isEmpty()) { // Mega: debe conservar su piedra
+            ITEMS.putIfAbsent(sp.requiredItem, new Item(p.item, null));
+            out.add(new Cand(sp.requiredItem, 50, "Megaevolución: la piedra es lo que le permite evolucionar en combate."));
+            return out;
+        }
         int nStatus = 0, nDmg = f.nPhys + f.nSpec;
         double bestPw = 0;
         int bestType = -1, bestStabType = -1;

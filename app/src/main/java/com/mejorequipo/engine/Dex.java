@@ -51,6 +51,7 @@ public final class Dex {
     }
 
     public static String toId(String s) {
+        s = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD);
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
             char c = Character.toLowerCase(s.charAt(i));
@@ -65,6 +66,8 @@ public final class Dex {
         public int[] base = new int[6];
         public String[] abilities;
         public boolean canEvolve;
+        /** Solo Megas/Primal: id de la Megapiedra/orbe necesaria y especie base. */
+        public String requiredItem = "", baseSpecies = "";
 
         public boolean hasType(int t) {
             for (int x : types) if (x == t) return true;
@@ -81,6 +84,8 @@ public final class Dex {
 
     public final Map<String, Species> species = new HashMap<>();
     public final Map<String, Move> moves = new HashMap<>();
+    /** id de Megapiedra + id de especie base -> especie Mega. */
+    public final Map<String, Species> megas = new HashMap<>();
     /** Combinaciones de tipos distintas (índices) que existen en el dex. */
     public final List<int[]> typeCombos = new ArrayList<>();
 
@@ -106,7 +111,12 @@ public final class Dex {
             for (int i = 0; i < 6; i++) s.base[i] = Integer.parseInt(bs[i]);
             s.abilities = f[4].split("\\|");
             s.canEvolve = f.length > 5 && f[5].equals("1");
+            if (f.length > 7 && !f[6].isEmpty()) {
+                s.requiredItem = toId(f[6]);
+                s.baseSpecies = toId(f[7]);
+            }
             d.species.put(s.id, s);
+            if (!s.requiredItem.isEmpty()) d.megas.put(s.requiredItem + "|" + s.baseSpecies, s);
             String key = java.util.Arrays.toString(s.types);
             if (seen.add(key)) d.typeCombos.add(s.types);
         }

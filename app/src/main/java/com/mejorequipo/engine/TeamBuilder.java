@@ -431,6 +431,9 @@ public final class TeamBuilder {
         }
         if (tc[1] > 0 && tc[2] > 0 && tc[4] > 0) s += 1.5;      // núcleo Fuego-Agua-Planta
         if (tc[14] > 0 && tc[16] > 0 && tc[17] > 0) s += 1;     // Dragón-Acero-Hada
+        int megas = 0;
+        for (int i = 0; i < len; i++) if (!pr[idx[i]].sp.requiredItem.isEmpty()) megas++;
+        if (megas > 1) s -= 6 * (megas - 1); // solo una Mega por combate
         int choice = cnt(idx, len, CHOICE);
         if (choice > 3) s -= 2 * (choice - 3);
         return s;
@@ -531,6 +534,9 @@ public final class TeamBuilder {
         List<String> stack = new ArrayList<>();
         for (int t = 0; t < 18; t++) if (tc[t] > 2) stack.add(Dex.TYPES_ES[t] + " ×" + tc[t]);
         if (!stack.isEmpty()) r.bad.add("Tipos repetidos: " + join(stack) + ".");
+        int megaCount = 0;
+        for (int x : idx) if (!pr[x].sp.requiredItem.isEmpty()) megaCount++;
+        if (megaCount > 1) r.bad.add("Llevas " + megaCount + " Megas pero solo una puede megaevolucionar por combate.");
         if (k < 6) r.bad.add("Solo hay " + k + " Pokémon válidos en tu main (faltan " + (6 - k) + ").");
 
         // desglose

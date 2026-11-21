@@ -22,7 +22,13 @@ Para cada Pokémon del equipo recomienda un objeto, explica por qué y de dónde
   (priorizando los que no van en el equipo).
 - Ejemplo en `sample/mochila.txt`. El `equipos_generados.txt` ya incluye los objetos recomendados.
 
-## Formato del main
+## Guardado de Rubí Omega / Zafiro Alfa (3DS)
+Si el `main` de la carpeta es el guardado binario de ORAS (483328 bytes, p. ej. copiado con Checkpoint), la app lo
+lee directamente: equipo, cajas (nivel, naturaleza, EVs, IVs, habilidad, movimientos, objeto, Hidden Power) y mochila.
+Un Pokémon que lleva su Megapiedra se evalúa como Mega (y se penaliza llevar más de una Mega por equipo).
+Prueba interna en `engine-test/SaveTest.java` (guardado sintético cifrado con el algoritmo inverso).
+
+## Formato del main (texto)
 Un archivo `main.txt` (o `main`) con sets de Showdown separados por línea en blanco. Ejemplo en `sample/main.txt`.
 
 ## Desarrollo

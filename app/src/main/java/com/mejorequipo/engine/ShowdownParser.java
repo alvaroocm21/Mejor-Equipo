@@ -141,6 +141,11 @@ public final class ShowdownParser {
             warnings.add("Pokémon desconocido, se ignora: \"" + p.speciesName + "\"");
             return;
         }
+        Dex.Species mega = dex.megas.get(Dex.toId(p.item) + "|" + sp.id);
+        if (mega != null) { // lleva su Megapiedra: se evalúa como Mega
+            sp = mega;
+            p.ability = mega.abilities[0];
+        }
         p.species = sp;
         if (p.ability.isEmpty()) p.ability = sp.abilities[0];
         for (String id : p.moveIds)
