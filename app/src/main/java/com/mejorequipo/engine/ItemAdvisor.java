@@ -136,7 +136,19 @@ public final class ItemAdvisor {
     }
 
     // ------------------------------------------------------------ valoración
-    static List<Cand> candidates(Dex dex, Profile f) {
+    /** Objetos de un solo uso (se gastan): solo para combates importantes. */
+    static boolean isConsumable(String id) {
+        if (id.equals("sitrusberry") || id.equals("oranberry") || id.equals("lumberry") || id.equals("focussash")
+                || id.equals("weaknesspolicy") || id.equals("airballoon")) return true;
+        for (String b : RESIST_BERRY) if (b.equals(id)) return true;
+        return id.endsWith("berry");
+    }
+
+    public static boolean consumable(String name) {
+        return isConsumable(canon(name));
+    }
+
+    static List<Cand> candidates(Dex dex, Profile f, boolean adventure) {
         PokeSet p = f.p;
         Dex.Species sp = f.sp;
         String ab = Dex.toId(p.ability);
@@ -227,7 +239,7 @@ public final class ItemAdvisor {
 
         // bonus por mantener lo que ya lleva (evita cambios inútiles)
         List<Cand> res = new ArrayList<>();
-        for (Cand c : out) res.add(c.id.equals(cur) ? new Cand(c.id, c.value + 0.8, c.why) : c);
+        for (Cand c : out) if (!(adventure && isConsumable(c.id))) res.add(c.id.equals(cur) ? new Cand(c.id, c.value + 0.8, c.why) : c);
         Collections.sort(res, (a, b) -> Double.compare(b.value, a.value));
         return res;
     }

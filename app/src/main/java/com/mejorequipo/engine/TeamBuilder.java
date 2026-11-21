@@ -20,6 +20,8 @@ public final class TeamBuilder {
         public int nTeams = 5;
         /** Mínimo de Pokémon distintos entre dos equipos de la lista (1 = ranking puro). */
         public int minDiff = 2;
+        /** 0 = combate fuerte (vale gastar objetos de un solo uso), 1 = aventura (solo objetos que no se gastan). */
+        public int mode = 0;
         /** Mochila: id canónico de objeto -> cantidad (se suma a los que llevan los Pokémon del main). */
         public Map<String, Integer> bag = new HashMap<>();
     }
@@ -288,7 +290,7 @@ public final class TeamBuilder {
         // ---- jugadores individuales
         double ms = 0;
         for (int i = 0; i < len; i++) ms += pr[idx[i]].score;
-        double sMem = ms / len * 30;
+        double sMem = ms / len * 30 * (opt.mode == 1 ? 1.25 : 1.0);
 
         // ---- defensa
         double pen = 0, bonus = 0;
@@ -321,7 +323,7 @@ public final class TeamBuilder {
         double sCov = 25 * (0.75 * fr * fr + 0.25 * (1 - walled / (double) combos));
 
         // ---- roles
-        double r = roles(idx, len);
+        double r = roles(idx, len) * (opt.mode == 1 ? 0.7 : 1.0);
 
         // ---- sinergia
         double sSyn = synergy(idx, len);
@@ -363,6 +365,7 @@ public final class TeamBuilder {
             if (cnt(idx, len, PHAZE) >= 1) r += 1;
             if (cnt(idx, len, CLERIC) >= 1) r += 1;
         }
+        if (opt.mode == 1) r += Math.min(2, rec) * 1.2 + (intim >= 1 ? 1 : 0); // aventura: aguantar muchos combates seguidos
         if (cnt(idx, len, SCREENS) >= 1) r += 1.5;
         if (cnt(idx, len, PRIORITY) >= 1) r += D ? 1.5 : 2;
         if (cnt(idx, len, STATUS) >= 1) r += 1.5;
@@ -453,7 +456,7 @@ public final class TeamBuilder {
         r.score = Math.min(100, eval(idx, k) / 1.25);
         double ms = 0;
         for (int x : idx) ms += pr[x].score;
-        r.sMembers = ms / k * 30;
+        r.sMembers = ms / k * 30 * (opt.mode == 1 ? 1.25 : 1.0);
         for (int i = 0; i < k; i++) {
             MemberInfo mi = new MemberInfo();
             mi.poke = pr[idx[i]].p;
@@ -542,7 +545,7 @@ public final class TeamBuilder {
         // desglose
         r.sDef = defScore(idx, k);
         r.sCov = covScore(idx, k);
-        r.sRoles = roles(idx, k);
+        r.sRoles = roles(idx, k) * (opt.mode == 1 ? 0.7 : 1.0);
         r.sSyn = synergy(idx, k);
         return r;
     }
@@ -564,7 +567,7 @@ public final class TeamBuilder {
         List<List<ItemAdvisor.Cand>> cands = new ArrayList<>();
         List<double[]> triples = new ArrayList<>(); // {miembro, índice cand, valor}
         for (int m = 0; m < k; m++) {
-            List<ItemAdvisor.Cand> c = ItemAdvisor.candidates(dex, pr[idx[m]]);
+            List<ItemAdvisor.Cand> c = ItemAdvisor.candidates(dex, pr[idx[m]], opt.mode == 1);
             cands.add(c);
             for (int j = 0; j < c.size(); j++)
                 if (total.containsKey(c.get(j).id)) triples.add(new double[]{m, j, c.get(j).value});

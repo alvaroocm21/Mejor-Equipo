@@ -32,6 +32,7 @@ public class RunTest {
         TeamBuilder.Options o = new TeamBuilder.Options();
         String bagPath = System.getProperty("bag");
         if (bagPath != null) o.bag = ItemAdvisor.parseBag(new String(Files.readAllBytes(Paths.get(bagPath)), StandardCharsets.UTF_8));
+        o.mode = Integer.getInteger("mode", 0);
         o.doubles = a.length > 2 && a[2].equals("dobles");
         long t0 = System.currentTimeMillis();
         List<TeamBuilder.TeamResult> res = TeamBuilder.build(dex, box, o);

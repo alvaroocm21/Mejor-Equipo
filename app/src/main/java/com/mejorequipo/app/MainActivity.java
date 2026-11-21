@@ -7,17 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -37,30 +39,32 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity {
     private static final int REQ_FOLDER = 42;
     private static final String OUT_NAME = "equipos_generados.txt";
 
-    private static final int BG = 0xFF121317, CARD = 0xFF1E2028, TXT = 0xFFECEFF4, MUTED = 0xFF9AA3B2,
-            ACCENT = 0xFFFF4D4D, GOOD = 0xFF6EE7A0, BAD = 0xFFFFB454, CHIP = 0xFF2A2D38;
+    private static final int BG = 0xFF0F1015, CARD = 0xFF1A1C25, CARD2 = 0xFF232632, TXT = 0xFFECEFF4,
+            MUTED = 0xFF9AA3B2, ACCENT = 0xFFFF4D4D, GOOD = 0xFF6EE7A0, BAD = 0xFFFFB454, CHIP = 0xFF2A2D3A;
 
     private SharedPreferences prefs;
     private static Dex dex;
+    private static Gen6Save.Names names;
+    private Ui.Sprites sprites;
 
-    private TextView status;
-    private LinearLayout results;
+    private TextView status, tabInfo, txtN;
+    private LinearLayout results, settings;
     private ProgressBar progress;
-    private Button btnSingles, btnDoubles, btnRefresh;
-    private TextView txtN;
+    private Button btnSingles, btnDoubles, tabStrong, tabAdv;
     private Switch swVariety;
     private volatile boolean running = false;
 
-    private boolean doubles;
-    private int nTeams;
-    private boolean variety;
+    private boolean doubles, variety;
+    private int nTeams, tab; // tab 0 = combate fuerte, 1 = aventura
+    private List<TeamBuilder.TeamResult> strongTeams, advTeams;
+    private List<String> lastWarnings = new ArrayList<>();
 
     // ------------------------------------------------------------------ ciclo de vida
     @Override
@@ -70,6 +74,8 @@ public class MainActivity extends Activity {
         doubles = prefs.getBoolean("doubles", false);
         nTeams = prefs.getInt("nTeams", 5);
         variety = prefs.getBoolean("variety", true);
+        tab = prefs.getInt("tab", 0);
+        sprites = new Ui.Sprites(this);
         getWindow().setStatusBarColor(BG);
         getWindow().setNavigationBarColor(BG);
         buildUi();
@@ -78,11 +84,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Cada vez que se abre la app se vuelve a leer el main de la carpeta.
-        refresh();
+        refresh(); // cada vez que se abre la app se vuelve a leer el main
     }
 
-    // ------------------------------------------------------------------ interfaz
+    // ------------------------------------------------------------------ helpers de UI
     private int dp(int v) {
         return (int) (v * getResources().getDisplayMetrics().density + 0.5f);
     }
@@ -108,102 +113,181 @@ public class MainActivity extends Activity {
         bt.setText(s);
         bt.setAllCaps(false);
         bt.setTextColor(TXT);
-        bt.setBackground(round(bg, 10));
-        bt.setPadding(dp(14), 0, dp(14), 0);
+        bt.setBackground(round(bg, 12));
+        bt.setPadding(dp(12), 0, dp(12), 0);
+        bt.setStateListAnimator(null);
         return bt;
     }
 
+    private TextView chip(String s, int bg, int fg, int sp) {
+        TextView t = text(s, sp, fg, true);
+        t.setBackground(round(bg, 20));
+        t.setPadding(dp(8), dp(2), dp(8), dp(2));
+        t.setSingleLine(true);
+        return t;
+    }
+
+    private LinearLayout card(int color) {
+        LinearLayout l = new LinearLayout(this);
+        l.setOrientation(LinearLayout.VERTICAL);
+        l.setBackground(round(color, 18));
+        l.setPadding(dp(14), dp(12), dp(14), dp(12));
+        return l;
+    }
+
+    private LinearLayout.LayoutParams lpMatch(int top, int bottom) {
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2);
+        lp.topMargin = dp(top);
+        lp.bottomMargin = dp(bottom);
+        return lp;
+    }
+
+    // ------------------------------------------------------------------ construcción de pantalla
     private void buildUi() {
         ScrollView sv = new ScrollView(this);
         sv.setBackgroundColor(BG);
         sv.setFillViewport(true);
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dp(16), dp(36), dp(16), dp(24));
+        root.setPadding(dp(14), dp(30), dp(14), dp(24));
         sv.addView(root, new ViewGroup.LayoutParams(-1, -2));
 
-        root.addView(text("Mejor Equipo", 26, TXT, true));
-        TextView sub = text("Lee el main de tu carpeta y arma los mejores equipos con tus Pokémon.", 13, MUTED, false);
-        sub.setPadding(0, dp(2), 0, dp(12));
-        root.addView(sub);
+        // cabecera
+        LinearLayout head = new LinearLayout(this);
+        head.setOrientation(LinearLayout.HORIZONTAL);
+        head.setGravity(Gravity.CENTER_VERTICAL);
+        GradientDrawable hg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFB3262E, 0xFF5B1A3D, 0xFF1A1C25});
+        hg.setCornerRadius(dp(20));
+        head.setBackground(hg);
+        head.setPadding(dp(16), dp(14), dp(16), dp(14));
+        ImageView logo = new ImageView(this);
+        logo.setImageResource(R.drawable.ic_launcher);
+        head.addView(logo, new LinearLayout.LayoutParams(dp(52), dp(52)));
+        LinearLayout ht = new LinearLayout(this);
+        ht.setOrientation(LinearLayout.VERTICAL);
+        ht.setPadding(dp(12), 0, 0, 0);
+        ht.addView(text("Mejor Equipo", 24, 0xFFFFFFFF, true));
+        ht.addView(text("Tu partida, tus Pokémon, el mejor equipo posible", 12, 0xCCFFFFFF, false));
+        head.addView(ht, new LinearLayout.LayoutParams(0, -2, 1f));
+        root.addView(head, lpMatch(0, 10));
 
+        // tarjeta de estado + botones
+        LinearLayout stat = card(CARD);
         LinearLayout row1 = new LinearLayout(this);
         row1.setOrientation(LinearLayout.HORIZONTAL);
-        Button btnFolder = button("📁  Elegir carpeta", ACCENT);
-        btnRefresh = button("⟳  Actualizar", CHIP);
-        row1.addView(btnFolder, new LinearLayout.LayoutParams(0, dp(46), 1f));
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(46), 1f);
-        lp.leftMargin = dp(8);
-        row1.addView(btnRefresh, lp);
-        root.addView(row1);
+        Button btnFolder = button("📁  Carpeta", ACCENT);
+        Button btnRefresh = button("⟳  Actualizar", CHIP);
+        Button btnSet = button("⚙", CHIP);
+        row1.addView(btnFolder, new LinearLayout.LayoutParams(0, dp(44), 1.2f));
+        LinearLayout.LayoutParams l2 = new LinearLayout.LayoutParams(0, dp(44), 1.2f);
+        l2.leftMargin = dp(8);
+        row1.addView(btnRefresh, l2);
+        LinearLayout.LayoutParams l3 = new LinearLayout.LayoutParams(0, dp(44), 0.5f);
+        l3.leftMargin = dp(8);
+        row1.addView(btnSet, l3);
+        stat.addView(row1);
+        status = text("Elige la carpeta donde está tu archivo \"main\".", 13, MUTED, false);
+        status.setPadding(0, dp(10), 0, 0);
+        stat.addView(status);
+        progress = new ProgressBar(this);
+        progress.setVisibility(View.GONE);
+        LinearLayout.LayoutParams pl = new LinearLayout.LayoutParams(dp(30), dp(30));
+        pl.gravity = Gravity.CENTER_HORIZONTAL;
+        pl.topMargin = dp(8);
+        stat.addView(progress, pl);
+        settings = new LinearLayout(this);
+        settings.setOrientation(LinearLayout.VERTICAL);
+        settings.setVisibility(View.GONE);
+        settings.setPadding(0, dp(10), 0, 0);
+        buildSettings(settings);
+        stat.addView(settings);
+        root.addView(stat, lpMatch(0, 12));
         btnFolder.setOnClickListener(v -> pickFolder());
         btnRefresh.setOnClickListener(v -> refresh());
+        btnSet.setOnClickListener(v -> settings.setVisibility(settings.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
 
-        status = text("Elige la carpeta donde tienes el archivo \"main\" (formato Showdown).", 13, MUTED, false);
-        status.setPadding(0, dp(10), 0, dp(6));
-        root.addView(status);
+        // pestañas
+        LinearLayout tabs = new LinearLayout(this);
+        tabs.setOrientation(LinearLayout.HORIZONTAL);
+        tabs.setBackground(round(CARD, 16));
+        tabs.setPadding(dp(4), dp(4), dp(4), dp(4));
+        tabStrong = button("⚔️  Combate fuerte", CARD);
+        tabAdv = button("🌿  Aventura", CARD);
+        tabs.addView(tabStrong, new LinearLayout.LayoutParams(0, dp(46), 1f));
+        tabs.addView(tabAdv, new LinearLayout.LayoutParams(0, dp(46), 1f));
+        root.addView(tabs, lpMatch(0, 6));
+        tabStrong.setOnClickListener(v -> setTab(0));
+        tabAdv.setOnClickListener(v -> setTab(1));
+        tabInfo = text("", 12, MUTED, false);
+        tabInfo.setPadding(dp(4), 0, dp(4), dp(8));
+        root.addView(tabInfo);
 
-        // formato
-        LinearLayout row2 = new LinearLayout(this);
-        row2.setOrientation(LinearLayout.HORIZONTAL);
-        row2.setGravity(Gravity.CENTER_VERTICAL);
+        results = new LinearLayout(this);
+        results.setOrientation(LinearLayout.VERTICAL);
+        root.addView(results);
+        setContentView(sv);
+        updateControls();
+    }
+
+    private void buildSettings(LinearLayout s) {
+        LinearLayout r2 = new LinearLayout(this);
+        r2.setOrientation(LinearLayout.HORIZONTAL);
         btnSingles = button("Singles", CHIP);
-        btnDoubles = button("Dobles (VGC)", CHIP);
-        row2.addView(btnSingles, new LinearLayout.LayoutParams(0, dp(42), 1f));
-        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(0, dp(42), 1f);
-        lp2.leftMargin = dp(8);
-        row2.addView(btnDoubles, lp2);
-        root.addView(row2);
+        btnDoubles = button("Dobles", CHIP);
+        r2.addView(btnSingles, new LinearLayout.LayoutParams(0, dp(40), 1f));
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(40), 1f);
+        lp.leftMargin = dp(8);
+        r2.addView(btnDoubles, lp);
+        s.addView(r2);
         btnSingles.setOnClickListener(v -> { doubles = false; saveAndRefresh(); });
         btnDoubles.setOnClickListener(v -> { doubles = true; saveAndRefresh(); });
 
-        LinearLayout row3 = new LinearLayout(this);
-        row3.setOrientation(LinearLayout.HORIZONTAL);
-        row3.setGravity(Gravity.CENTER_VERTICAL);
-        row3.setPadding(0, dp(8), 0, 0);
-        row3.addView(text("Equipos:", 14, TXT, false));
+        LinearLayout r3 = new LinearLayout(this);
+        r3.setOrientation(LinearLayout.HORIZONTAL);
+        r3.setGravity(Gravity.CENTER_VERTICAL);
+        r3.setPadding(0, dp(8), 0, 0);
+        r3.addView(text("Equipos:", 14, TXT, false));
         Button minus = button("−", CHIP), plus = button("+", CHIP);
         txtN = text(String.valueOf(nTeams), 16, TXT, true);
         txtN.setGravity(Gravity.CENTER);
-        row3.addView(minus, new LinearLayout.LayoutParams(dp(44), dp(40)));
-        row3.addView(txtN, new LinearLayout.LayoutParams(dp(36), -2));
-        row3.addView(plus, new LinearLayout.LayoutParams(dp(44), dp(40)));
+        r3.addView(minus, new LinearLayout.LayoutParams(dp(42), dp(38)));
+        r3.addView(txtN, new LinearLayout.LayoutParams(dp(34), -2));
+        r3.addView(plus, new LinearLayout.LayoutParams(dp(42), dp(38)));
         swVariety = new Switch(this);
         swVariety.setText("Variar equipos");
         swVariety.setTextColor(TXT);
         swVariety.setChecked(variety);
-        LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(0, -2, 1f);
-        lp3.leftMargin = dp(12);
-        row3.addView(swVariety, lp3);
-        root.addView(row3);
+        LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(0, -2, 1f);
+        l.leftMargin = dp(12);
+        r3.addView(swVariety, l);
+        s.addView(r3);
         minus.setOnClickListener(v -> { if (nTeams > 1) { nTeams--; saveAndRefresh(); } });
         plus.setOnClickListener(v -> { if (nTeams < 15) { nTeams++; saveAndRefresh(); } });
         swVariety.setOnCheckedChangeListener((v, c) -> { variety = c; saveAndRefresh(); });
-        updateModeButtons();
-
-        progress = new ProgressBar(this);
-        progress.setVisibility(View.GONE);
-        LinearLayout.LayoutParams pl = new LinearLayout.LayoutParams(dp(36), dp(36));
-        pl.gravity = Gravity.CENTER_HORIZONTAL;
-        pl.topMargin = dp(16);
-        root.addView(progress, pl);
-
-        results = new LinearLayout(this);
-        results.setOrientation(LinearLayout.VERTICAL);
-        results.setPadding(0, dp(12), 0, 0);
-        root.addView(results);
-        setContentView(sv);
     }
 
-    private void updateModeButtons() {
-        btnSingles.setBackground(round(doubles ? CHIP : ACCENT, 10));
-        btnDoubles.setBackground(round(doubles ? ACCENT : CHIP, 10));
+    private void updateControls() {
+        btnSingles.setBackground(round(doubles ? CHIP : ACCENT, 12));
+        btnDoubles.setBackground(round(doubles ? ACCENT : CHIP, 12));
         txtN.setText(String.valueOf(nTeams));
+        tabStrong.setBackground(round(tab == 0 ? ACCENT : CARD, 12));
+        tabAdv.setBackground(round(tab == 1 ? 0xFF2F9E6B : CARD, 12));
+        tabInfo.setText(tab == 0
+                ? "Para jefes, líderes, Alto Mando y rivales clave. Aquí SÍ se usan bayas y objetos de un solo uso."
+                : "Para el recorrido normal. Solo objetos que no se gastan: las bayas y consumibles se reservan para los combates fuertes.");
+    }
+
+    private void setTab(int t) {
+        tab = t;
+        prefs.edit().putInt("tab", tab).apply();
+        updateControls();
+        showTeams();
     }
 
     private void saveAndRefresh() {
         prefs.edit().putBoolean("doubles", doubles).putInt("nTeams", nTeams).putBoolean("variety", variety).apply();
-        updateModeButtons();
+        updateControls();
         refresh();
     }
 
@@ -288,19 +372,6 @@ public class MainActivity extends Activity {
         return new String(readBytes(uri), StandardCharsets.UTF_8);
     }
 
-    private static Gen6Save.Names names;
-
-    private synchronized Gen6Save.Names loadNames() throws Exception {
-        if (names == null) {
-            String[] f = {"species", "moves", "abilities", "items", "growth"};
-            String[] t = new String[5];
-            for (int i = 0; i < 5; i++)
-                t[i] = new String(readStream(getAssets().open("gen6_" + f[i] + ".txt")), StandardCharsets.UTF_8);
-            names = Gen6Save.Names.load(t[0], t[1], t[2], t[3], t[4]);
-        }
-        return names;
-    }
-
     private void writeResults(Uri tree, String content) {
         try {
             String treeId = DocumentsContract.getTreeDocumentId(tree);
@@ -324,16 +395,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    // ------------------------------------------------------------------ cálculo
-    private synchronized Dex loadDex() throws Exception {
-        if (dex == null) {
-            String p = new String(readStream(getAssets().open("pokedex.tsv")), StandardCharsets.UTF_8);
-            String m = new String(readStream(getAssets().open("moves.tsv")), StandardCharsets.UTF_8);
-            dex = Dex.load(p, m);
-        }
-        return dex;
-    }
-
+    // ------------------------------------------------------------------ datos
     private static byte[] readStream(InputStream in) throws Exception {
         try (InputStream i = in) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -344,32 +406,51 @@ public class MainActivity extends Activity {
         }
     }
 
+    private synchronized Dex loadDex() throws Exception {
+        if (dex == null) {
+            String p = new String(readStream(getAssets().open("pokedex.tsv")), StandardCharsets.UTF_8);
+            String m = new String(readStream(getAssets().open("moves.tsv")), StandardCharsets.UTF_8);
+            dex = Dex.load(p, m);
+        }
+        return dex;
+    }
+
+    private synchronized Gen6Save.Names loadNames() throws Exception {
+        if (names == null) {
+            String[] f = {"species", "moves", "abilities", "items", "growth"};
+            String[] t = new String[5];
+            for (int i = 0; i < 5; i++)
+                t[i] = new String(readStream(getAssets().open("gen6_" + f[i] + ".txt")), StandardCharsets.UTF_8);
+            names = Gen6Save.Names.load(t[0], t[1], t[2], t[3], t[4]);
+        }
+        return names;
+    }
+
+    // ------------------------------------------------------------------ cálculo
     private void refresh() {
         if (running || status == null) return;
         String treeStr = prefs.getString("tree", null);
         if (treeStr == null) {
-            status.setText("Elige la carpeta donde tienes el archivo \"main\" (formato Showdown).");
+            status.setText("Elige la carpeta donde está tu archivo \"main\".");
             return;
         }
         running = true;
         progress.setVisibility(View.VISIBLE);
-        results.removeAllViews();
         status.setText("Leyendo main y calculando equipos…");
         final boolean dbl = doubles;
         final int n = nTeams;
         final boolean var = variety;
         new Thread(() -> {
             String msg;
-            List<TeamBuilder.TeamResult> teams = null;
+            List<TeamBuilder.TeamResult> strong = null, adv = null;
             List<String> warnings = new ArrayList<>();
-            int count = 0;
             try {
                 Uri tree = Uri.parse(treeStr);
                 List<String> seen = new ArrayList<>();
                 FoundFile f = findMain(tree, seen);
                 if (f == null) {
                     msg = "No encuentro el archivo \"main\" en la carpeta" + (seen.isEmpty() ? " (está vacía)."
-                            : ". Archivos: " + seen) + "\nDebe llamarse main.txt (o main).";
+                            : ". Archivos: " + seen) + "\nDebe llamarse main (o main.txt).";
                 } else {
                     byte[] raw = readBytes(f.uri);
                     String text;
@@ -380,13 +461,12 @@ public class MainActivity extends Activity {
                         text = gr.text();
                         saveBag = gr.bag;
                         warnings.addAll(gr.warnings);
-                        kind = " (guardado de Rubí Omega/Zafiro Alfa: " + gr.party + " en equipo, " + gr.boxed + " en cajas)";
+                        kind = " · Rubí Omega/Zafiro Alfa (" + gr.party + " equipo + " + gr.boxed + " cajas)";
                     } else {
                         text = new String(raw, StandardCharsets.UTF_8);
                     }
                     Dex d = loadDex();
                     List<PokeSet> box = ShowdownParser.parse(d, text, warnings);
-                    count = box.size();
                     if (box.isEmpty()) {
                         boolean binary = false;
                         for (int q = 0; q < Math.min(raw.length, 2000); q++) if (raw[q] == 0) { binary = true; break; }
@@ -395,25 +475,34 @@ public class MainActivity extends Activity {
                                 : f.name + " no contiene Pokémon reconocibles (formato Showdown).";
                         warnings.clear();
                     } else {
+                        Map<String, Integer> bag;
+                        if (saveBag != null) bag = saveBag;
+                        else if (bagFile != null) bag = ItemAdvisor.parseBag(readAll(bagFile.uri));
+                        else bag = new java.util.HashMap<>();
+                        int bagCount = 0;
+                        for (int q : bag.values()) bagCount += q;
                         TeamBuilder.Options o = new TeamBuilder.Options();
                         o.doubles = dbl;
                         o.nTeams = n;
                         o.minDiff = var ? 2 : 1;
-                        int bagCount = 0;
-                        if (saveBag != null) {
-                            o.bag = saveBag;
-                        } else if (bagFile != null) {
-                            o.bag = ItemAdvisor.parseBag(readAll(bagFile.uri));
-                        }
-                        for (int q : o.bag.values()) bagCount += q;
-                        teams = TeamBuilder.build(d, box, o);
+                        o.bag = bag;
+                        o.mode = 0;
+                        strong = TeamBuilder.build(d, box, o);
+                        TeamBuilder.Options o2 = new TeamBuilder.Options();
+                        o2.doubles = dbl;
+                        o2.nTeams = n;
+                        o2.minDiff = var ? 2 : 1;
+                        o2.bag = bag;
+                        o2.mode = 1;
+                        adv = TeamBuilder.build(d, box, o2);
                         String when = f.modified > 0 ? " · modificado " + DateUtils.getRelativeTimeSpanString(
                                 f.modified, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) : "";
-                        msg = "✔ " + f.name + kind + " · " + count + " Pokémon" + when + "\n"
+                        msg = "✔ " + f.name + kind + " · " + box.size() + " Pokémon" + when + "\n"
                                 + (saveBag != null ? "🎒 Mochila leída del guardado · " + bagCount + " objetos"
                                 : bagFile != null ? "🎒 " + bagFile.name + " · " + bagCount + " objetos"
                                 : "🎒 Sin mochila.txt: solo uso los objetos que llevan tus Pokémon");
-                        writeResults(tree, formatAll(teams));
+                        writeResults(tree, "######## COMBATE FUERTE ########\n\n" + formatAll(strong)
+                                + "\n######## AVENTURA ########\n\n" + formatAll(adv));
                     }
                 }
             } catch (SecurityException se) {
@@ -422,13 +511,16 @@ public class MainActivity extends Activity {
                 msg = "Error: " + t;
             }
             final String fmsg = msg;
-            final List<TeamBuilder.TeamResult> fteams = teams;
-            final List<String> fwarn = warnings;
+            final List<TeamBuilder.TeamResult> fs = strong, fa = adv;
+            final List<String> fw = warnings;
             runOnUiThread(() -> {
                 running = false;
                 progress.setVisibility(View.GONE);
                 status.setText(fmsg);
-                showTeams(fteams, fwarn);
+                strongTeams = fs;
+                advTeams = fa;
+                lastWarnings = fw;
+                showTeams();
             });
         }).start();
     }
@@ -445,100 +537,164 @@ public class MainActivity extends Activity {
     private String formatAll(List<TeamBuilder.TeamResult> teams) {
         StringBuilder b = new StringBuilder();
         int i = 1;
-        for (TeamBuilder.TeamResult t : teams) {
+        for (TeamBuilder.TeamResult t : teams)
             b.append("=== Equipo #").append(i++).append(" · ").append(String.format("%.1f", t.score))
                     .append(" (").append(rating(t.score)).append(") ===\n\n").append(t.showdownText()).append("\n");
-        }
         return b.toString();
     }
 
-    private void showTeams(List<TeamBuilder.TeamResult> teams, List<String> warnings) {
+    private void showTeams() {
         results.removeAllViews();
-        if (!warnings.isEmpty()) {
+        if (!lastWarnings.isEmpty()) {
             StringBuilder w = new StringBuilder("Avisos al leer el main:");
-            for (int i = 0; i < Math.min(8, warnings.size()); i++) w.append("\n• ").append(warnings.get(i));
-            if (warnings.size() > 8) w.append("\n• … y ").append(warnings.size() - 8).append(" más");
+            for (int i = 0; i < Math.min(6, lastWarnings.size()); i++) w.append("\n• ").append(lastWarnings.get(i));
+            if (lastWarnings.size() > 6) w.append("\n• … y ").append(lastWarnings.size() - 6).append(" más");
             TextView tv = text(w.toString(), 12, BAD, false);
-            tv.setPadding(0, 0, 0, dp(10));
+            tv.setPadding(dp(4), 0, 0, dp(10));
             results.addView(tv);
         }
+        List<TeamBuilder.TeamResult> teams = tab == 0 ? strongTeams : advTeams;
         if (teams == null) return;
         int rank = 1;
         for (TeamBuilder.TeamResult t : teams) results.addView(teamCard(rank++, t));
     }
 
-    private View teamCard(int rank, TeamBuilder.TeamResult t) {
-        LinearLayout card = new LinearLayout(this);
-        card.setOrientation(LinearLayout.VERTICAL);
-        card.setBackground(round(CARD, 16));
-        card.setPadding(dp(14), dp(12), dp(14), dp(12));
-        LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(-1, -2);
-        cp.bottomMargin = dp(12);
-        card.setLayoutParams(cp);
+    private ImageView spriteView(PokeSet p, int sizeDp) {
+        ImageView iv = new ImageView(this);
+        iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        int c = Ui.TYPE_COLORS[p.species.types[0]];
+        iv.setBackground(round((c & 0x00FFFFFF) | 0x55000000, sizeDp));
+        Bitmap b = sprites.pokemon(p.species);
+        if (b != null) iv.setImageBitmap(b);
+        iv.setPadding(dp(2), dp(2), dp(2), dp(2));
+        return iv;
+    }
 
+    private View teamCard(int rank, TeamBuilder.TeamResult t) {
+        LinearLayout card = card(CARD);
+        card.setLayoutParams(lpMatch(0, 12));
+
+        // cabecera: anillo + título
         LinearLayout head = new LinearLayout(this);
         head.setOrientation(LinearLayout.HORIZONTAL);
         head.setGravity(Gravity.CENTER_VERTICAL);
-        TextView r = text("#" + rank, 22, rank == 1 ? ACCENT : TXT, true);
-        head.addView(r);
-        TextView sc = text("  " + String.format("%.1f", t.score) + " · " + rating(t.score), 15, TXT, true);
-        head.addView(sc, new LinearLayout.LayoutParams(0, -2, 1f));
-        TextView arrow = text(rank == 1 ? "▲" : "▼", 14, MUTED, false);
+        head.addView(new Ui.ScoreRing(this, t.score), new LinearLayout.LayoutParams(dp(58), dp(58)));
+        LinearLayout ht = new LinearLayout(this);
+        ht.setOrientation(LinearLayout.VERTICAL);
+        ht.setPadding(dp(12), 0, 0, 0);
+        String medal = rank == 1 ? "🥇 " : rank == 2 ? "🥈 " : rank == 3 ? "🥉 " : "";
+        ht.addView(text(medal + "Equipo #" + rank, 17, TXT, true));
+        ht.addView(text(rating(t.score), 13, Ui.scoreColor(t.score), true));
+        ht.addView(text(String.format("Def %.0f · Cob %.0f · Roles %.0f · Sin %.0f", t.sDef, t.sCov, t.sRoles, t.sSyn),
+                11, MUTED, false));
+        head.addView(ht, new LinearLayout.LayoutParams(0, -2, 1f));
+        final TextView arrow = text(rank == 1 ? "▲" : "▼", 14, MUTED, false);
         head.addView(arrow);
         card.addView(head);
 
+        // tira de sprites
+        LinearLayout strip = new LinearLayout(this);
+        strip.setOrientation(LinearLayout.HORIZONTAL);
+        strip.setPadding(0, dp(12), 0, 0);
         for (TeamBuilder.MemberInfo m : t.info) {
-            LinearLayout row = new LinearLayout(this);
-            row.setOrientation(LinearLayout.VERTICAL);
-            row.setPadding(0, dp(8), 0, 0);
-            PokeSet p = m.poke;
-            StringBuilder types = new StringBuilder();
-            for (int ty : p.species.types) types.append(types.length() > 0 ? "/" : "").append(Dex.TYPES_ES[ty]);
-            row.addView(text(p.species.name + "  ·  " + types, 15, TXT, true));
-            StringBuilder sub = new StringBuilder();
-            if (!p.item.isEmpty()) sub.append(p.item).append(" · ");
-            sub.append(p.ability).append(" · ").append(p.nature);
-            row.addView(text(sub.toString(), 12, MUTED, false));
-            StringBuilder mv = new StringBuilder();
-            for (String s : p.moveNames) mv.append(mv.length() > 0 ? " / " : "").append(s);
-            row.addView(text(mv.toString(), 12, MUTED, false));
-            row.addView(text(m.role, 12, GOOD, false));
-            if (!m.recItem.isEmpty()) {
-                TextView it = text("🎒 " + m.recItem + (m.recChanged ? "  ← cambio" : ""), 13, TXT, true);
-                it.setPadding(0, dp(4), 0, 0);
-                row.addView(it);
-                row.addView(text("Por qué: " + m.recWhy, 12, MUTED, false));
-                row.addView(text("Origen: " + m.recSource, 12, m.recChanged ? BAD : MUTED, false));
-            } else {
-                TextView it = text("🎒 Sin objeto: " + m.recWhy, 12, MUTED, false);
-                it.setPadding(0, dp(4), 0, 0);
-                row.addView(it);
-            }
-            card.addView(row);
+            LinearLayout cell = new LinearLayout(this);
+            cell.setOrientation(LinearLayout.VERTICAL);
+            cell.setGravity(Gravity.CENTER_HORIZONTAL);
+            cell.addView(spriteView(m.poke, 30), new LinearLayout.LayoutParams(dp(50), dp(50)));
+            TextView nm = text(m.poke.species.name.replace("-Mega", " M."), 9, MUTED, false);
+            nm.setSingleLine(true);
+            nm.setEllipsize(TextUtils.TruncateAt.END);
+            nm.setGravity(Gravity.CENTER);
+            cell.addView(nm, new LinearLayout.LayoutParams(-1, -2));
+            strip.addView(cell, new LinearLayout.LayoutParams(0, -2, 1f));
         }
+        card.addView(strip);
 
         final LinearLayout details = new LinearLayout(this);
         details.setOrientation(LinearLayout.VERTICAL);
-        details.setPadding(0, dp(12), 0, 0);
-        fillDetails(details, t);
+        details.setPadding(0, dp(10), 0, 0);
+        for (TeamBuilder.MemberInfo m : t.info) details.addView(memberRow(m));
+        fillAnalysis(details, t);
         details.setVisibility(rank == 1 ? View.VISIBLE : View.GONE);
         card.addView(details);
 
-        head.setOnClickListener(v -> {
+        View.OnClickListener toggle = v -> {
             boolean show = details.getVisibility() != View.VISIBLE;
             details.setVisibility(show ? View.VISIBLE : View.GONE);
             arrow.setText(show ? "▲" : "▼");
-        });
+        };
+        head.setOnClickListener(toggle);
+        strip.setOnClickListener(toggle);
         return card;
     }
 
-    private void fillDetails(LinearLayout d, TeamBuilder.TeamResult t) {
-        d.addView(text(String.format("Miembros %.0f · Defensa %.0f · Cobertura %.0f · Roles %.0f · Sinergia %.0f",
-                t.sMembers, t.sDef, t.sCov, t.sRoles, t.sSyn), 12, MUTED, false));
+    private View memberRow(TeamBuilder.MemberInfo m) {
+        PokeSet p = m.poke;
+        LinearLayout box = new LinearLayout(this);
+        box.setOrientation(LinearLayout.HORIZONTAL);
+        box.setBackground(round(CARD2, 14));
+        box.setPadding(dp(10), dp(10), dp(10), dp(10));
+        box.setLayoutParams(lpMatch(0, 8));
 
-        // tabla de tipos
-        TextView h = text("Tipos de ataque que recibes (▲ débiles · ▼ resisten)", 12, MUTED, false);
-        h.setPadding(0, dp(10), 0, dp(4));
+        LinearLayout left = new LinearLayout(this);
+        left.setOrientation(LinearLayout.VERTICAL);
+        left.setGravity(Gravity.CENTER_HORIZONTAL);
+        left.addView(spriteView(p, 34), new LinearLayout.LayoutParams(dp(64), dp(64)));
+        TextView lv = text("Nv. " + p.level, 11, MUTED, true);
+        lv.setGravity(Gravity.CENTER);
+        left.addView(lv);
+        box.addView(left, new LinearLayout.LayoutParams(dp(68), -2));
+
+        LinearLayout right = new LinearLayout(this);
+        right.setOrientation(LinearLayout.VERTICAL);
+        right.setPadding(dp(8), 0, 0, 0);
+        right.addView(text(p.species.name, 16, TXT, true));
+
+        LinearLayout types = new LinearLayout(this);
+        types.setOrientation(LinearLayout.HORIZONTAL);
+        types.setPadding(0, dp(3), 0, dp(3));
+        for (int ty : p.species.types) {
+            TextView c = chip(Dex.TYPES_ES[ty], Ui.TYPE_COLORS[ty], 0xFF101218, 10);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-2, -2);
+            lp.rightMargin = dp(4);
+            types.addView(c, lp);
+        }
+        right.addView(types);
+        right.addView(text(m.role + " · " + p.ability + " · " + p.nature, 11, MUTED, false));
+
+        // objeto recomendado
+        LinearLayout itemRow = new LinearLayout(this);
+        itemRow.setOrientation(LinearLayout.HORIZONTAL);
+        itemRow.setGravity(Gravity.CENTER_VERTICAL);
+        itemRow.setPadding(0, dp(6), 0, 0);
+        if (!m.recItem.isEmpty()) {
+            ImageView ii = new ImageView(this);
+            Bitmap ib = sprites.item(m.recEn);
+            if (ib != null) ii.setImageBitmap(ib);
+            itemRow.addView(ii, new LinearLayout.LayoutParams(dp(26), dp(26)));
+            TextView in = text(m.recItem + (m.recChanged ? "  ← cambio" : ""), 13, TXT, true);
+            in.setPadding(dp(6), 0, 0, 0);
+            itemRow.addView(in, new LinearLayout.LayoutParams(0, -2, 1f));
+            right.addView(itemRow);
+            right.addView(text("Por qué: " + m.recWhy, 11, MUTED, false));
+            right.addView(text("Origen: " + m.recSource, 11, m.recChanged ? BAD : MUTED, false));
+        } else {
+            right.addView(text("🎒 Sin objeto: " + m.recWhy, 11, MUTED, false));
+        }
+
+        // movimientos
+        Ui.Flow flow = new Ui.Flow(this, dp(4));
+        for (String mv : p.moveNames) flow.addView(chip(mv, CHIP, TXT, 10));
+        LinearLayout.LayoutParams fl = new LinearLayout.LayoutParams(-1, -2);
+        fl.topMargin = dp(6);
+        right.addView(flow, fl);
+        box.addView(right, new LinearLayout.LayoutParams(0, -2, 1f));
+        return box;
+    }
+
+    private void fillAnalysis(LinearLayout d, TeamBuilder.TeamResult t) {
+        TextView h = text("Ataques que recibes   ▲ débiles · ▼ resisten", 12, MUTED, true);
+        h.setPadding(0, dp(6), 0, dp(4));
         d.addView(h);
         for (int rowI = 0; rowI < 3; rowI++) {
             LinearLayout row = new LinearLayout(this);
@@ -549,28 +705,27 @@ public class MainActivity extends Activity {
                 int bg = net >= 2 ? 0xFF7A2E2E : (net == 1 ? 0xFF5A4A24 : (net <= -1 ? 0xFF24523A : CHIP));
                 TextView cell = text(Dex.TYPES_ES[ty] + "\n▲" + t.weak[ty] + " ▼" + t.resist[ty], 10, TXT, false);
                 cell.setGravity(Gravity.CENTER);
-                cell.setBackground(round(bg, 6));
-                cell.setPadding(0, dp(3), 0, dp(3));
+                cell.setBackground(round(bg, 8));
+                cell.setPadding(0, dp(4), 0, dp(4));
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, -2, 1f);
                 lp.setMargins(dp(1), dp(1), dp(1), dp(1));
                 row.addView(cell, lp);
             }
             d.addView(row);
         }
-
         for (String s : t.good) d.addView(line("✔ " + s, GOOD));
         for (String s : t.bad) d.addView(line("⚠ " + s, BAD));
         for (TeamBuilder.MemberInfo m : t.info)
             for (String n : m.notes) d.addView(line("✎ " + m.poke.species.name + ": " + n, MUTED));
 
-        Button copy = button("Copiar equipo (Showdown)", CHIP);
+        Button copy = button("📋  Copiar equipo (Showdown)", CHIP);
         copy.setOnClickListener(v -> {
             ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             if (cm != null) cm.setPrimaryClip(ClipData.newPlainText("equipo", t.showdownText()));
             Toast.makeText(this, "Equipo copiado", Toast.LENGTH_SHORT).show();
         });
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, dp(44));
-        lp.topMargin = dp(10);
+        lp.topMargin = dp(12);
         d.addView(copy, lp);
     }
 

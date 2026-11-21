@@ -14,6 +14,12 @@ Fake Out, redirección, Trick Room/Tailwind, setup, prioridad…), sinergias de 
 físico/especial, objetos repetidos, tipos apilados y naturalezas que no encajan con los movimientos.
 Modo **Singles** o **Dobles (VGC)**, número de equipos y opción de variar los equipos (mínimo 2 Pokémon distintos).
 
+## Dos secciones
+- **⚔️ Combate fuerte:** para jefes, líderes y Alto Mando. Puede usar bayas y objetos de un solo uso (Baya Zidra,
+  bayas de resistencia, Banda Focus, Seguro Debilidad, Globo Helio…).
+- **🌿 Aventura:** para el recorrido. Solo objetos que no se gastan; da más peso a la resistencia y la recuperación.
+Cada Pokémon se muestra con su sprite, tipos, objeto con icono y movimientos. Sprites e iconos de PokeAPI/sprites.
+
 ## Objetos (Randomlocke)
 Para cada Pokémon del equipo recomienda un objeto, explica por qué y de dónde sale. Las cantidades son reales:
 - Objetos disponibles = los de tu **mochila** (`mochila.txt` en la misma carpeta, ej. `Restos x2`, `2x Vidasfera`,
