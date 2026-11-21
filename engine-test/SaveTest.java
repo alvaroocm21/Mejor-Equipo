@@ -37,11 +37,13 @@ public class SaveTest {
         System.arraycopy(box,0,save,0x33000+232*(3*30+5),232);
         byte[] box2=encrypt(pk(nm,"Nidoran-M",0,null,"Poison Point",0,ev,iv,new String[]{"Peck"},1000L,0x00000777,232),232);
         System.arraycopy(box2,0,save,0x33000+232*(30*30+29),232);
+        String dn="MUERTOS"; for(int i=0;i<dn.length();i++) w16(save,0x4400+3*0x22+2*i,dn.charAt(i));
+        String ok="Equipo"; for(int i=0;i<ok.length();i++) w16(save,0x4400+30*0x22+2*i,ok.charAt(i));
         w16(save,0x400+0,idx(nm.items,"Leftovers")); w16(save,0x400+2,2);
         w16(save,0x400+4,idx(nm.items,"Choice Scarf")); w16(save,0x400+6,1);
         w16(save,0x400+0xA70,idx(nm.items,"Occa Berry")); w16(save,0x400+0xA72,3);
         Gen6Save.Result r=Gen6Save.read(save,nm);
-        Files.write(Paths.get("/tmp/g6.txt"), r.text().getBytes(StandardCharsets.UTF_8)); System.out.println("party="+r.party+" box="+r.boxed+" bag="+r.bag+" warn="+r.warnings);
+        Files.write(Paths.get("/tmp/g6.txt"), r.text().getBytes(StandardCharsets.UTF_8)); System.out.println("dead="+r.dead+" ignored="+r.ignoredBoxes);System.out.println("party="+r.party+" box="+r.boxed+" bag="+r.bag+" warn="+r.warnings);
         Dex dex=Dex.load(rd.apply("pokedex.tsv"),rd.apply("moves.tsv"));
         List<String> w=new ArrayList<>(); List<PokeSet> box3=ShowdownParser.parse(dex,r.text(),w);
         for(PokeSet p:box3) System.out.println(p.species.name+" lvl "+p.level+" "+p.ability+" "+Arrays.toString(p.stats)+" "+p.moveIds+" hp="+p.hiddenPowerType);

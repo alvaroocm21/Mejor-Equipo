@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public final class Gen6Save {
     public static final int SIZE_ORAS = 0x76000;
-    private static final int PARTY = 0x14200, BOX = 0x33000, BAG = 0x400;
+    private static final int PARTY = 0x14200, BOX = 0x33000, BAG = 0x400, BOX_NAMES = 0x4400, BOX_NAME_LEN = 0x22;
     private static final int SIZE_STORED = 0xE8, SIZE_PARTY = 0x104;
 
     public static final class Names {
@@ -34,7 +34,9 @@ public final class Gen6Save {
         public final List<String> sets = new ArrayList<>();
         public final Map<String, Integer> bag = new HashMap<>();
         public final List<String> warnings = new ArrayList<>();
-        public int party, boxed;
+        public int party, boxed, dead;
+        /** Cajas ignoradas por ser de Pokémon muertos (nombre de la caja). */
+        public final List<String> ignoredBoxes = new ArrayList<>();
         public String text() {
             StringBuilder b = new StringBuilder();
             for (String s : sets) b.append(s).append("\n\n");
@@ -149,19 +151,46 @@ public final class Gen6Save {
             String s = convert(decrypt(d, PARTY + i * SIZE_PARTY, SIZE_PARTY), true, nm);
             if (s != null) { r.sets.add(s); r.party++; }
         }
-        for (int b = 0; b < 31; b++)
+        for (int b = 0; b < 31; b++) {
+            String boxName = boxName(d, b);
+            boolean deadBox = isDeadBox(boxName);
             for (int sl = 0; sl < 30; sl++) {
                 int off = BOX + SIZE_STORED * (b * 30 + sl);
                 if (u32(d, off) == 0 && u16(d, off + 8) == 0) continue; // hueco vacío
                 String s = convert(decrypt(d, off, SIZE_STORED), false, nm);
-                if (s != null) { r.sets.add(s); r.boxed++; }
+                if (s == null) continue;
+                if (deadBox) {
+                    r.dead++;
+                    if (!r.ignoredBoxes.contains(boxName)) r.ignoredBoxes.add(boxName);
+                } else {
+                    r.sets.add(s);
+                    r.boxed++;
+                }
             }
+        }
         // mochila: bolsillo de objetos (400 huecos) y bayas (72), cada hueco = id u16 + cantidad u16
         readPouch(d, BAG + 0x000, 400, nm, r.bag);
         readPouch(d, BAG + 0xA70, 72, nm, r.bag);
         if (r.sets.isEmpty())
             r.warnings.add("Guardado leído pero no encuentro Pokémon (¿es de Rubí Omega / Zafiro Alfa?).");
         return r;
+    }
+
+    static String boxName(byte[] d, int box) {
+        int o = BOX_NAMES + box * BOX_NAME_LEN;
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < BOX_NAME_LEN / 2; i++) {
+            int c = u16(d, o + 2 * i);
+            if (c == 0 || c == 0xFFFF) break;
+            b.append((char) c);
+        }
+        return b.toString();
+    }
+
+    /** Cajas de Pokémon muertos del Nuzlocke ("MUERTOS", "Muerto", "Los muertos"...). */
+    static boolean isDeadBox(String name) {
+        String n = Dex.toId(name);
+        return n.contains("muert") || n.equals("dead") || n.contains("graveyard") || n.contains("cementerio");
     }
 
     private static void readPouch(byte[] d, int base, int slots, Names nm, Map<String, Integer> bag) {

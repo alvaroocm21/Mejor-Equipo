@@ -463,7 +463,8 @@ public class MainActivity extends Activity {
                         text = gr.text();
                         saveBag = gr.bag;
                         warnings.addAll(gr.warnings);
-                        kind = " · Rubí Omega/Zafiro Alfa (" + gr.party + " equipo + " + gr.boxed + " cajas)";
+                        kind = " · Rubí Omega/Zafiro Alfa (" + gr.party + " equipo + " + gr.boxed + " cajas)"
+                                + (gr.dead > 0 ? "\n☠ Ignorados " + gr.dead + " Pokémon muertos (caja " + gr.ignoredBoxes + ")" : "");
                     } else {
                         text = new String(raw, StandardCharsets.UTF_8);
                     }
